@@ -1,0 +1,486 @@
+$primary: #1c3095;
+$subtleblue: #170b40;
+$semiblue: #2a66e2;
+$background: #f3f4f8;
+$orange: #ff9e53;
+$link: #599ec6;
+$text: #404040;
+
+$font: "Poppins", sans-serif;
+
+$semibold: 600;
+$reguler: 400;
+
+body {
+  font-family: $font;
+  background-color: $background;
+  h1 {
+    font-family: $font;
+    font-weight: $semibold;
+    font-size: 30px;
+  }
+  h2 {
+    font-family: $font;
+    font-weight: $semibold;
+    font-size: 24px;
+  }
+  h3 {
+    font-family: $font;
+    font-weight: $semibold;
+    font-size: 18px;
+  }
+  h4 {
+    font-family: $font;
+    font-weight: $semibold;
+    font-size: 16px;
+  }
+  p {
+    font-family: $font;
+    font-size: 16px;
+    font-weight: $reguler;
+    color: $text;
+  }
+  .paragraph-2 {
+    font-family: $font;
+    font-size: 14px;
+  }
+  .paragraph-3 {
+    font-family: $font;
+    font-size: 12px;
+  }
+  a {
+    color: $link;
+  }
+  .btn-primary {
+    background: $primary;
+    border: none;
+    &:hover {
+      background: $semiblue;
+    }
+  }
+  .btn-outline-primary {
+    border-color: $semiblue;
+    color: $semiblue;
+    &:hover {
+      background: $semiblue;
+    }
+  }
+  .overflow-ellipsis {
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:hover {
+      overflow: visible;
+      white-space: normal;
+    }
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: auto;
+  }
+}
+
+.nav-custom {
+  padding: 30px 0;
+  max-height: 100px !important;
+  .container-fluid {
+    background-color: white;
+  }
+  .navbar-brand {
+    img {
+      max-height: 40px;
+    }
+  }
+  .btn-login {
+    border-radius: 200px !important;
+    padding: 5px;
+    background-color: $primary;
+    &:hover {
+      background-color: $semiblue;
+    }
+    @media screen {
+      padding: 5px 10px;
+    }
+  }
+  .nav-item {
+    margin-right: 15px !important;
+  }
+  .avatar {
+    img {
+      max-height: 45px;
+      width: auto;
+      vertical-align: middle;
+      border-radius: 200px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .avatar {
+      img {
+        visibility: hidden;
+        display: none;
+      }
+    }
+  }
+}
+
+// Landing Page
+header {
+  padding: 180px 0 165px;
+  background-image: url("../Images/Banner-Hero.png");
+  background-size: cover;
+  h1,
+  p {
+    color: #fff;
+  }
+  .btn-get-started {
+    background-color: $primary;
+    color: #fff;
+    &:hover {
+      color: #fff;
+      background-color: $semiblue;
+    }
+  }
+}
+
+.section-informasi {
+  padding-top: 55px;
+  padding-bottom: 25px;
+  .info-image {
+    img {
+      width: 450px;
+      height: 250px;
+      object-fit: cover;
+    }
+  }
+}
+
+.section-berita-kegiatan {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: #f6f9ff;
+  .main-berita {
+    img {
+      width: 355px;
+      height: 250px;
+      object-fit: cover;
+    }
+  }
+  .secondary-berita {
+    img {
+      width: 250px;
+      height: 130px;
+      object-fit: cover;
+    }
+  }
+  i {
+    font-size: 5rem;
+    text-align: center;
+  }
+  .btn-berita {
+    background-color: $primary;
+    color: #fff;
+    &:hover {
+      color: #fff;
+      background-color: $semiblue;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .secondary-berita {
+      margin-top: 25px;
+      img {
+        // padding-right: 20px;
+        padding-left: 20px;
+        width: 355px;
+        height: 175px;
+        object-fit: cover;
+      }
+    }
+    i {
+      font-size: 4rem;
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+  }
+}
+
+.section-wisata {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: $subtleblue;
+  .swiper {
+    width: auto;
+    height: auto;
+  }
+  .wisata-image {
+    img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  h1 {
+    color: white;
+  }
+  i {
+    font-size: 6rem;
+    text-align: center;
+  }
+  .btn-wisata {
+    background-color: $primary;
+    a {
+      text-decoration: none;
+    }
+    &:hover {
+      background-color: $semiblue;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .wisata-image {
+      img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.section-intro-donasi {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  img {
+    max-height: 500;
+    max-width: 310;
+    object-fit: cover;
+  }
+}
+
+.section-donasi {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: $subtleblue;
+  .swiper {
+    width: auto;
+    height: auto;
+  }
+  .image-terumbu {
+    img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  h1 {
+    color: white;
+  }
+  i {
+    font-size: 6rem;
+    text-align: center;
+  }
+  .btn-donasi {
+    background-color: $primary;
+    a {
+      text-decoration: none;
+    }
+    &:hover {
+      background-color: $semiblue;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .image-terumbu {
+      img {
+        height: 277px;
+        width: 390px;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.section-register {
+  margin-top: 25px;
+  .btn-register {
+    background-color: $primary;
+    a {
+      text-decoration: none;
+    }
+    &:hover {
+      background-color: $semiblue;
+    }
+  }
+}
+
+.section-footer {
+  a {
+    text-decoration: none;
+  }
+}
+
+// Eksplor Wisata
+.banner-wisata {
+  padding: 110px 0 165px;
+  background-image: url("../Images/Banner-Eksplor-Wisata.png");
+  background-size: cover;
+}
+.eksplor-wisata {
+  img {
+    object-fit: cover;
+  }
+}
+
+// Eksplor Donasi
+.banner-terumbu {
+  padding: 110px 0 165px;
+  background-image: url("../Images/Banner-Eksplor-Terumbu.png");
+  background-size: cover;
+}
+.eksplor-terumbu {
+  .card-donasi {
+    img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+  }
+}
+
+// Detail Object
+.section-detail {
+  background-color: $subtleblue;
+  padding: 30px 0;
+  .breadcrumb {
+    color: white;
+    h4 {
+      color: white;
+      font-weight: 400;
+    }
+    @media screen and (max-width: 600px) {
+      h4 {
+        font-size: 12px;
+      }
+    }
+  }
+  .breadcrumb-item {
+    &.active {
+      font-weight: $semibold;
+      color: white;
+    }
+  }
+}
+.gallery {
+  .xzoom-container {
+    display: block;
+
+    .xzoom {
+      width: 100%;
+      box-shadow: none;
+      margin-bottom: 10px;
+    }
+
+    .xactive {
+      border: 2px solid #1abc9c;
+      box-shadow: none;
+    }
+  }
+}
+.side-card {
+  .informasi-paket {
+    th {
+      font-family: $font;
+      font-weight: 300;
+      font-size: 14px;
+      color: #071c4d;
+    }
+    td {
+      font-family: $font;
+      font-weight: 300;
+      font-size: 14px;
+      color: #b1b1b1;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: $text;
+  }
+}
+.avatar-circle {
+  img {
+    width: 125px;
+    border-radius: 100%;
+  }
+}
+.section-detail-card {
+  margin-top: -25px;
+  .main-card {
+    img {
+      object-fit: cover;
+    }
+  }
+  .checkout-image {
+    img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+  }
+  .swiper {
+    width: 100%;
+    height: auto;
+  }
+  .swiper-slide {
+    img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+  }
+  .btn-join-now {
+    background-color: $primary;
+    color: white;
+    border-radius: 0 0 5px 5px;
+    &:hover {
+      color: #fff;
+      background-color: $semiblue;
+    }
+  }
+  .btn-wisata-lainnya {
+    background-color: $orange;
+    color: white;
+    border-radius: 0 0 5px 5px;
+    &:hover {
+      color: #fff;
+      background-color: #fbab3d;
+    }
+  }
+}
+
+// Success Payment
+.success-payment {
+  img {
+    object-fit: cover;
+    width: 350px;
+  }
+  .btn-primary {
+    background: $primary;
+    border: none;
+    &:hover {
+      background: $semiblue;
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+}
+input[type="file"] {
+  display: none;
+}
+
+.icon-dashboard {
+  i {
+    font-size: 2.5em;
+  }
+}
