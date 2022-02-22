@@ -1,0 +1,514 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f3f4f8;
+}
+
+body h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+body h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+body h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+body h4 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+body p {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #404040;
+}
+
+body .paragraph-2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
+
+body .paragraph-3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+}
+
+body a {
+  color: #599ec6;
+}
+
+body .btn-primary {
+  background: #1c3095;
+  border: none;
+}
+
+body .btn-primary:hover {
+  background: #2a66e2;
+}
+
+body .btn-outline-primary {
+  border-color: #2a66e2;
+  color: #2a66e2;
+}
+
+body .btn-outline-primary:hover {
+  background: #2a66e2;
+}
+
+body .overflow-ellipsis {
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body .overflow-ellipsis:hover {
+  overflow: visible;
+  white-space: normal;
+}
+
+body input[type="number"]::-webkit-inner-spin-button,
+body input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: auto;
+}
+
+.nav-custom {
+  padding: 30px 0;
+  max-height: 100px !important;
+}
+
+.nav-custom .container-fluid {
+  background-color: white;
+}
+
+.nav-custom .navbar-brand img {
+  max-height: 40px;
+}
+
+.nav-custom .btn-login {
+  border-radius: 200px !important;
+  padding: 5px;
+  background-color: #1c3095;
+}
+
+.nav-custom .btn-login:hover {
+  background-color: #2a66e2;
+}
+
+@media screen {
+  .nav-custom .btn-login {
+    padding: 5px 10px;
+  }
+}
+
+.nav-custom .nav-item {
+  margin-right: 15px !important;
+}
+
+.nav-custom .avatar img {
+  max-height: 45px;
+  width: auto;
+  vertical-align: middle;
+  border-radius: 200px;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-custom .avatar img {
+    visibility: hidden;
+    display: none;
+  }
+}
+
+header {
+  padding: 180px 0 165px;
+  background-image: url("../Images/Banner-Hero.png");
+  background-size: cover;
+}
+
+header h1,
+header p {
+  color: #fff;
+}
+
+header .btn-get-started {
+  background-color: #1c3095;
+  color: #fff;
+}
+
+header .btn-get-started:hover {
+  color: #fff;
+  background-color: #2a66e2;
+}
+
+.section-informasi {
+  padding-top: 55px;
+  padding-bottom: 25px;
+}
+
+.section-informasi .info-image img {
+  width: 450px;
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-berita-kegiatan {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: #f6f9ff;
+}
+
+.section-berita-kegiatan .main-berita img {
+  width: 355px;
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-berita-kegiatan .secondary-berita img {
+  width: 250px;
+  height: 130px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-berita-kegiatan i {
+  font-size: 5rem;
+  text-align: center;
+}
+
+.section-berita-kegiatan .btn-berita {
+  background-color: #1c3095;
+  color: #fff;
+}
+
+.section-berita-kegiatan .btn-berita:hover {
+  color: #fff;
+  background-color: #2a66e2;
+}
+
+@media screen and (max-width: 600px) {
+  .section-berita-kegiatan .secondary-berita {
+    margin-top: 25px;
+  }
+  .section-berita-kegiatan .secondary-berita img {
+    padding-left: 20px;
+    width: 355px;
+    height: 175px;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .section-berita-kegiatan i {
+    font-size: 4rem;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+.section-wisata {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: #170b40;
+}
+
+.section-wisata .swiper {
+  width: auto;
+  height: auto;
+}
+
+.section-wisata .wisata-image img {
+  height: 200px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-wisata h1 {
+  color: white;
+}
+
+.section-wisata i {
+  font-size: 6rem;
+  text-align: center;
+}
+
+.section-wisata .btn-wisata {
+  background-color: #1c3095;
+}
+
+.section-wisata .btn-wisata a {
+  text-decoration: none;
+}
+
+.section-wisata .btn-wisata:hover {
+  background-color: #2a66e2;
+}
+
+@media screen and (max-width: 600px) {
+  .section-wisata .wisata-image img {
+    height: 200px;
+    width: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+
+.section-intro-donasi {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.section-intro-donasi img {
+  max-height: 500;
+  max-width: 310;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-donasi {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: #170b40;
+}
+
+.section-donasi .swiper {
+  width: auto;
+  height: auto;
+}
+
+.section-donasi .image-terumbu img {
+  height: 200px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-donasi h1 {
+  color: white;
+}
+
+.section-donasi i {
+  font-size: 6rem;
+  text-align: center;
+}
+
+.section-donasi .btn-donasi {
+  background-color: #1c3095;
+}
+
+.section-donasi .btn-donasi a {
+  text-decoration: none;
+}
+
+.section-donasi .btn-donasi:hover {
+  background-color: #2a66e2;
+}
+
+@media screen and (max-width: 600px) {
+  .section-donasi .image-terumbu img {
+    height: 277px;
+    width: 390px;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+
+.section-register {
+  margin-top: 25px;
+}
+
+.section-register .btn-register {
+  background-color: #1c3095;
+}
+
+.section-register .btn-register a {
+  text-decoration: none;
+}
+
+.section-register .btn-register:hover {
+  background-color: #2a66e2;
+}
+
+.section-footer a {
+  text-decoration: none;
+}
+
+.banner-wisata {
+  padding: 110px 0 165px;
+  background-image: url("../Images/Banner-Eksplor-Wisata.png");
+  background-size: cover;
+}
+
+.eksplor-wisata img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.banner-terumbu {
+  padding: 110px 0 165px;
+  background-image: url("../Images/Banner-Eksplor-Terumbu.png");
+  background-size: cover;
+}
+
+.eksplor-terumbu .card-donasi img {
+  width: 100%;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-detail {
+  background-color: #170b40;
+  padding: 30px 0;
+}
+
+.section-detail .breadcrumb {
+  color: white;
+}
+
+.section-detail .breadcrumb h4 {
+  color: white;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 600px) {
+  .section-detail .breadcrumb h4 {
+    font-size: 12px;
+  }
+}
+
+.section-detail .breadcrumb-item.active {
+  font-weight: 600;
+  color: white;
+}
+
+.gallery .xzoom-container {
+  display: block;
+}
+
+.gallery .xzoom-container .xzoom {
+  width: 100%;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin-bottom: 10px;
+}
+
+.gallery .xzoom-container .xactive {
+  border: 2px solid #1abc9c;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.side-card .informasi-paket th {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: #071c4d;
+}
+
+.side-card .informasi-paket td {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: #b1b1b1;
+}
+
+.side-card a {
+  text-decoration: none;
+  color: #404040;
+}
+
+.avatar-circle img {
+  width: 125px;
+  border-radius: 100%;
+}
+
+.section-detail-card {
+  margin-top: -25px;
+}
+
+.section-detail-card .main-card img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-detail-card .checkout-image img {
+  width: 100%;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-detail-card .swiper {
+  width: 100%;
+  height: auto;
+}
+
+.section-detail-card .swiper-slide img {
+  width: 100%;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-detail-card .btn-join-now {
+  background-color: #1c3095;
+  color: white;
+  border-radius: 0 0 5px 5px;
+}
+
+.section-detail-card .btn-join-now:hover {
+  color: #fff;
+  background-color: #2a66e2;
+}
+
+.section-detail-card .btn-wisata-lainnya {
+  background-color: #ff9e53;
+  color: white;
+  border-radius: 0 0 5px 5px;
+}
+
+.section-detail-card .btn-wisata-lainnya:hover {
+  color: #fff;
+  background-color: #fbab3d;
+}
+
+.success-payment img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 350px;
+}
+
+.success-payment .btn-primary {
+  background: #1c3095;
+  border: none;
+}
+
+.success-payment .btn-primary:hover {
+  background: #2a66e2;
+}
+
+.success-payment a {
+  text-decoration: none;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.icon-dashboard i {
+  font-size: 2.5em;
+}
+/*# sourceMappingURL=main.css.map */
