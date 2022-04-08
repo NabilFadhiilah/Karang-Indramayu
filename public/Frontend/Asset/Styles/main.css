@@ -157,70 +157,21 @@ header .btn-get-started:hover {
   padding-bottom: 25px;
 }
 
+.section-informasi a {
+  text-decoration: none;
+}
+
 .section-informasi .info-image img {
   width: 450px;
-  height: 250px;
+  height: 350px;
   -o-object-fit: cover;
      object-fit: cover;
-}
-
-.section-berita-kegiatan {
-  padding-top: 25px;
-  padding-bottom: 25px;
-  background-color: #f6f9ff;
-}
-
-.section-berita-kegiatan .main-berita img {
-  width: 355px;
-  height: 250px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.section-berita-kegiatan .secondary-berita img {
-  width: 250px;
-  height: 130px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.section-berita-kegiatan i {
-  font-size: 5rem;
-  text-align: center;
-}
-
-.section-berita-kegiatan .btn-berita {
-  background-color: #1c3095;
-  color: #fff;
-}
-
-.section-berita-kegiatan .btn-berita:hover {
-  color: #fff;
-  background-color: #2a66e2;
-}
-
-@media screen and (max-width: 600px) {
-  .section-berita-kegiatan .secondary-berita {
-    margin-top: 25px;
-  }
-  .section-berita-kegiatan .secondary-berita img {
-    padding-left: 20px;
-    width: 355px;
-    height: 175px;
-    -o-object-fit: cover;
-       object-fit: cover;
-  }
-  .section-berita-kegiatan i {
-    font-size: 4rem;
-    padding-right: 20px;
-    padding-left: 20px;
-  }
 }
 
 .section-wisata {
   padding-top: 25px;
   padding-bottom: 25px;
-  background-color: #170b40;
+  background-color: #f0eeef;
 }
 
 .section-wisata .swiper {
@@ -265,71 +216,12 @@ header .btn-get-started:hover {
   }
 }
 
-.section-intro-donasi {
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
-.section-intro-donasi img {
-  max-height: 500;
-  max-width: 310;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.section-donasi {
-  padding-top: 25px;
-  padding-bottom: 25px;
-  background-color: #170b40;
-}
-
-.section-donasi .swiper {
-  width: auto;
-  height: auto;
-}
-
-.section-donasi .image-terumbu img {
-  height: 200px;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.section-donasi h1 {
-  color: white;
-}
-
-.section-donasi i {
-  font-size: 6rem;
-  text-align: center;
-}
-
-.section-donasi .btn-donasi {
-  background-color: #1c3095;
-}
-
-.section-donasi .btn-donasi a {
-  text-decoration: none;
-}
-
-.section-donasi .btn-donasi:hover {
-  background-color: #2a66e2;
-}
-
-@media screen and (max-width: 600px) {
-  .section-donasi .image-terumbu img {
-    height: 277px;
-    width: 390px;
-    -o-object-fit: cover;
-       object-fit: cover;
-  }
-}
-
 .section-register {
   margin-top: 25px;
 }
 
 .section-register .btn-register {
+  border-radius: 20px;
   background-color: #1c3095;
 }
 
@@ -352,19 +244,6 @@ header .btn-get-started:hover {
 }
 
 .eksplor-wisata img {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.banner-terumbu {
-  padding: 110px 0 165px;
-  background-image: url("../Images/Banner-Eksplor-Terumbu.png");
-  background-size: cover;
-}
-
-.eksplor-terumbu .card-donasi img {
-  width: 100%;
-  height: 200px;
   -o-object-fit: cover;
      object-fit: cover;
 }
