@@ -23,6 +23,23 @@ class FrontendController extends Controller
         # code...
         return view('wisata');
     }
+
+    public function invest()
+    {
+        # code...
+        return view('eksplor-invest');
+    }
+    public function InvestWisata()
+    {
+        # code...
+        return view('detail-invest');
+    }
+    public function pembayaraninvest()
+    {
+        # code...
+        return view('pembayaran');
+    }
+
     public function checkout()
     {
         # code...

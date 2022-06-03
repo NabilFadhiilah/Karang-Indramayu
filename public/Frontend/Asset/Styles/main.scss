@@ -50,6 +50,7 @@ body {
     }
     a {
         color: $link;
+        font-family: $font;
     }
     .btn-primary {
         background: $primary;
@@ -159,6 +160,21 @@ header {
     }
 }
 
+.section-investasi {
+    padding-top: 55px;
+    padding-bottom: 25px;
+    a {
+        text-decoration: none;
+    }
+    .card {
+        img {
+            width: auto;
+            height: 200px;
+            object-fit: cover;
+        }
+    }
+}
+
 .section-wisata {
     padding-top: 25px;
     padding-bottom: 25px;
@@ -228,7 +244,21 @@ header {
     background-image: url("../Images/Banner-Eksplor-Wisata.png");
     background-size: cover;
 }
-.eksplor-wisata {
+.card-investment {
+    img {
+        width: auto;
+        height: 150px;
+        object-fit: cover;
+    }
+}
+
+// Eksplor Investment
+.banner-investment {
+    padding: 110px 0 165px;
+    background-image: url("../Images/Banner-Eksplor-Wisata.png");
+    background-size: cover;
+}
+.eksplor-investment {
     img {
         object-fit: cover;
     }

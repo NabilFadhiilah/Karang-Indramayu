@@ -46,6 +46,7 @@ body .paragraph-3 {
 
 body a {
   color: #599ec6;
+  font-family: "Poppins", sans-serif;
 }
 
 body .btn-primary {
@@ -168,6 +169,22 @@ header .btn-get-started:hover {
      object-fit: cover;
 }
 
+.section-investasi {
+  padding-top: 55px;
+  padding-bottom: 25px;
+}
+
+.section-investasi a {
+  text-decoration: none;
+}
+
+.section-investasi .card img {
+  width: auto;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .section-wisata {
   padding-top: 25px;
   padding-bottom: 25px;
@@ -243,7 +260,20 @@ header .btn-get-started:hover {
   background-size: cover;
 }
 
-.eksplor-wisata img {
+.card-investment img {
+  width: auto;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.banner-investment {
+  padding: 110px 0 165px;
+  background-image: url("../Images/Banner-Eksplor-Wisata.png");
+  background-size: cover;
+}
+
+.eksplor-investment img {
   -o-object-fit: cover;
      object-fit: cover;
 }

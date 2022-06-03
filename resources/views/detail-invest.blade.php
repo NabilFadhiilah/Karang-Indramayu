@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-lg-3 px-1">
                     <div class="bg-white rounded-top p-3 side-card">
-                        <h3>Informasi Paket Wisata</h3>
+                        <h3>Informasi Pengembangan Wisata</h3>
                         <table class="informasi-paket">
                             <tr>
                                 <th width="50%">Durasi Wisata</th>
@@ -93,95 +93,17 @@
                                 <td width="50%" class="text-end">Rp 123.123.123 / orang</td>
                             </tr>
                         </table>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Jumlah Investasi"
+                                aria-label="Jumlah Investasi" aria-describedby="basic-addon1">
+                        </div>
                     </div>
-                    <a href="{{ route('checkout') }}" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
+                    <a href="{{ route('pembayaran-invest') }}"
+                        class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Investasi
                         Sekarang</a>
                 </div>
             </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-12 pt-3">
-                    <h3>Wisata Dalam Paket Ini</h3>
-                </div>
-                <div class="swiper">
-                    <div class="col-lg-10 swiper-wrapper">
-                        <!--Card Wisata Lainnya-->
-                        <div class="swiper-slide col-lg-3 bg-white rounded-3 mt-2 mx-1">
-                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}"
-                                class="rounded-top" alt="">
-                            <div class="p-2">
-                                <h3>Wisata Mercusuar</h3>
-                                <p class="paragraph-2">Mercusuar dibangun pada tahun 1872 oleh pemerintah
-                                    belanda
-                                    kala masih
-                                    menjajah Indonesia, sampai saat ini usianya telah mencapai 184 tahun.</p>
-                            </div>
-                            <a href="{{ route('detail-wisata') }}"
-                                class="btn btn-block btn-wisata-lainnya py-2 col-lg-12 col-12">Lihat
-                                Wisata</a>
-                        </div>
-                        <!--Card Wisata Lainnya-->
-                        <div class="swiper-slide col-lg-3 bg-white rounded-3 mt-2 mx-1">
-                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}"
-                                class="rounded-top" alt="">
-                            <div class="p-2">
-                                <h3>Wisata Mercusuar</h3>
-                                <p class="paragraph-2">Mercusuar dibangun pada tahun 1872 oleh pemerintah
-                                    belanda
-                                    kala masih
-                                    menjajah Indonesia, sampai saat ini usianya telah mencapai 184 tahun.</p>
-                            </div>
-                            <a href="{{ route('detail-wisata') }}"
-                                class="btn btn-block btn-wisata-lainnya py-2 col-lg-12 col-12">Lihat
-                                Wisata</a>
-                        </div>
-                        <!--Card Wisata Lainnya-->
-                        <div class="swiper-slide col-lg-3 bg-white rounded-3 mt-2 mx-1">
-                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}"
-                                class="rounded-top" alt="">
-                            <div class="p-2">
-                                <h3>Wisata Mercusuar</h3>
-                                <p class="paragraph-2">Mercusuar dibangun pada tahun 1872 oleh pemerintah
-                                    belanda
-                                    kala masih
-                                    menjajah Indonesia, sampai saat ini usianya telah mencapai 184 tahun.</p>
-                            </div>
-                            <a href="{{ route('detail-wisata') }}"
-                                class="btn btn-block btn-wisata-lainnya py-2 col-lg-12 col-12">Lihat
-                                Wisata</a>
-                        </div>
-                        <!--Card Wisata Lainnya-->
-                        <div class="swiper-slide col-lg-3 bg-white rounded-3 mt-2 mx-1">
-                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}"
-                                class="rounded-top" alt="">
-                            <div class="p-2">
-                                <h3>Wisata Mercusuar</h3>
-                                <p class="paragraph-2">Mercusuar dibangun pada tahun 1872 oleh pemerintah
-                                    belanda
-                                    kala masih
-                                    menjajah Indonesia, sampai saat ini usianya telah mencapai 184 tahun.</p>
-                            </div>
-                            <a href="{{ route('detail-wisata') }}"
-                                class="btn btn-block btn-wisata-lainnya py-2 col-lg-12 col-12">Lihat
-                                Wisata</a>
-                        </div>
-                        <!--Card Wisata Lainnya-->
-                        <div class="swiper-slide col-lg-3 bg-white rounded-3 mt-2 mx-1">
-                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}"
-                                class="rounded-top" alt="">
-                            <div class="p-2">
-                                <h3>Wisata Mercusuar</h3>
-                                <p class="paragraph-2">Mercusuar dibangun pada tahun 1872 oleh pemerintah
-                                    belanda
-                                    kala masih
-                                    menjajah Indonesia, sampai saat ini usianya telah mencapai 184 tahun.</p>
-                            </div>
-                            <a href="{{ route('detail-wisata') }}"
-                                class="btn btn-block btn-wisata-lainnya py-2 col-lg-12 col-12">Lihat
-                                Wisata</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </section>
 @endsection

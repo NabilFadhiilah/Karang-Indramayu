@@ -68,8 +68,8 @@
                                 kegiatan wisata atau
                                 rekreasi yang aktivitasnya
                                 dilakukan di kawasan laut, baik itu di pantai, pulau, atau bawah...</p>
-                            <a href="Checkout-WIsata.html" class="btn btn-primary py-1">Reservasi Wisata</a>
-                            <a href="Detail-Wisata.html" class="btn btn-outline-primary py-1">Lihat Detail
+                            <a href="{{ route('checkout') }}" class="btn btn-primary py-1">Reservasi Wisata</a>
+                            <a href="{{ route('detail-wisata') }}" class="btn btn-outline-primary py-1">Lihat Detail
                                 Wisata</a>
                         </div>
                     </div>
@@ -87,8 +87,8 @@
                             <p class="parahraph-2">
                                 Mercusuar dibangun pada tahun 1872 oleh pemerintah belanda kala masih menjajah
                                 Indonesia, sampai saat ini usianya telah mencapai 184 tahun.</p>
-                            <a href="Checkout-WIsata.html" class="btn btn-primary py-1">Reservasi Wisata</a>
-                            <a href="Detail-Wisata.html" class="btn btn-outline-primary py-1">Lihat Detail
+                            <a href="{{ route('checkout') }}" class="btn btn-primary py-1">Reservasi Wisata</a>
+                            <a href="{{ route('detail-wisata') }}" class="btn btn-outline-primary py-1">Lihat Detail
                                 Wisata</a>
                         </div>
                     </div>
@@ -107,8 +107,8 @@
                                 Wisata Pantai berarti sebuah kegiatan yang dilakukan secara sendiri atau
                                 bersama-sama untuk beraktivitas sekaligus menikmati indahnya suasana di sekitar
                                 pantai</p>
-                            <a href="Checkout-WIsata.html" class="btn btn-primary py-1">Reservasi Wisata</a>
-                            <a href="Detail-Wisata.html" class="btn btn-outline-primary py-1">Lihat Detail
+                            <a href="{{ route('checkout') }}" class="btn btn-primary py-1">Reservasi Wisata</a>
+                            <a href="{{ route('detail-wisata') }}" class="btn btn-outline-primary py-1">Lihat Detail
                                 Wisata</a>
                         </div>
                     </div>
@@ -126,8 +126,8 @@
                             <p class="parahraph-2">
                                 Mempunyai kemiripan dengan pulau Komodo yang dihuni oleh satwa komodo, pulau Biawak
                                 digadang-gadang sebagai alternatif wisata murah bagi wisatawan.</p>
-                            <a href="Checkout-WIsata.html" class="btn btn-primary py-1">Reservasi Wisata</a>
-                            <a href="Detail-Wisata.html" class="btn btn-outline-primary py-1">Lihat Detail
+                            <a href="{{ route('checkout') }}" class="btn btn-primary py-1">Reservasi Wisata</a>
+                            <a href="{{ route('detail-wisata') }}" class="btn btn-outline-primary py-1">Lihat Detail
                                 Wisata</a>
                         </div>
                     </div>

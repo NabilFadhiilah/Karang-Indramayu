@@ -10,7 +10,7 @@
             Berwisata Di Kepulauan Biawak Lebih Mudah, <br />
             Tidak Perlu Mencari Agen Hanya Klik Dan Langsung Berangkat
         </p>
-        <a href="#" class="btn btn-get-started px-4 mt-4">
+        <a href="#informasi" class="btn btn-get-started px-4 mt-4">
             Mulai Eksplorasi
         </a>
     </header>
@@ -43,10 +43,11 @@
                                     laut, baik itu di pantai, pulau, atau bawah laut.</p>
                             </div>
                             <div class="d-flex">
-                                <button class="btn btn-primary btn-wisata"><a href="Checkout-WIsata.html"
+                                <button class="btn btn-primary btn-wisata"><a href="{{ route('checkout') }}"
                                         class="text-white text-center">Pesan
                                         Wisata</a></button>
-                                <a href="Detail-Wisata.html" class="d-flex align-items-center px-3">Lihat Wisata</a>
+                                <a href="{{ route('detail-wisata') }}" class="d-flex align-items-center px-3">Lihat
+                                    Wisata</a>
                             </div>
                         </div>
 
@@ -74,8 +75,9 @@
                                         kawasan
                                         laut, baik itu di pantai, pulau, atau bawah laut.</p>
                                     <div class="d-flex justify-content-between">
-                                        <a href="Detail-Wisata.html" class="d-flex align-items-center">Lihat Wisata</a>
-                                        <button class=" btn btn-primary btn-wisata"><a href="Checkout-WIsata.html"
+                                        <a href="{{ route('detail-wisata') }}" class="d-flex align-items-center">Lihat
+                                            Wisata</a>
+                                        <button class=" btn btn-primary btn-wisata"><a href="{{ route('checkout') }}"
                                                 class="text-white text-center">Pesan
                                                 Wisata</a></button>
                                     </div>
@@ -94,8 +96,9 @@
                                         Indonesia, sampai
                                         saat ini usianya telah mencapai 184 tahun.</p>
                                     <div class="d-flex justify-content-between">
-                                        <a href="Detail-Wisata.html" class="d-flex align-items-center">Lihat Wisata</a>
-                                        <button class=" btn btn-primary btn-wisata"><a href="Checkout-WIsata.html"
+                                        <a href="{{ route('detail-wisata') }}" class="d-flex align-items-center">Lihat
+                                            Wisata</a>
+                                        <button class=" btn btn-primary btn-wisata"><a href="{{ route('checkout') }}"
                                                 class="text-white text-center">Pesan
                                                 Wisata</a></button>
                                     </div>
@@ -114,8 +117,9 @@
                                         untuk
                                         beraktivitas sekaligus menikmati indahnya</p>
                                     <div class="d-flex justify-content-between">
-                                        <a href="Detail-Wisata.html" class="d-flex align-items-center">Lihat Wisata</a>
-                                        <button class=" btn btn-primary btn-wisata"><a href="Checkout-WIsata.html"
+                                        <a href="{{ route('detail-wisata') }}" class="d-flex align-items-center">Lihat
+                                            Wisata</a>
+                                        <button class=" btn btn-primary btn-wisata"><a href="{{ route('checkout') }}"
                                                 class="text-white text-center">Pesan
                                                 Wisata</a></button>
                                     </div>
@@ -128,7 +132,7 @@
                                 <div>
                                     <i class="bi bi-search"></i>
                                     <h2>Eksplor Wisata</h2>
-                                    <button class=" btn btn-primary btn-wisata"><a href="Eksplore-Wisata.html"
+                                    <button class=" btn btn-primary btn-wisata"><a href="eksplor"
                                             class="text-white text-center">Mulai
                                             Eksplor</a>
                                     </button>
@@ -142,6 +146,115 @@
             </div>
         </section>
 
+        <section class="section-investasi">
+            <div class="container">
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 py-2 text-center section-Wisata-Heading">
+                        <h2>Mari Kembangkan Wisata Kepulauan Biawak Bersama!</h2>
+                        <p class="small">
+                            Dukung Pengembangan Wisata Kepulauan Biawak
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 row justify-content-center">
+
+                    <div class="col-lg-4 py-1 px-0">
+                        <div class="card mx-1">
+                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
+                                class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Wisata Bahari</h5>
+                                <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau rekreasi
+                                    yang aktivitasnya
+                                    dilakukan di
+                                    kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%"
+                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                </div>
+                                <div class="col-12 d-flex align-items-center">
+                                    <div class="col-6">
+                                        <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
+                                            Sekarang</a>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="small m-0">Target Pengembangan</p>
+                                        <p class="fw-bold m-0">Rp.40.000.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 py-1 px-0">
+                        <div class="card mx-1">
+                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
+                                class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Wisata Bahari</h5>
+                                <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau rekreasi
+                                    yang aktivitasnya
+                                    dilakukan di
+                                    kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%"
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                </div>
+                                <div class="col-12 d-flex align-items-center">
+                                    <div class="col-6">
+                                        <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
+                                            Sekarang</a>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="small m-0">Target Pengembangan</p>
+                                        <p class="fw-bold m-0">Rp.40.000.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 py-1 px-0">
+                        <div class="card mx-1">
+                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
+                                class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Wisata Bahari</h5>
+                                <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau rekreasi
+                                    yang aktivitasnya
+                                    dilakukan di
+                                    kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 80%"
+                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                </div>
+                                <div class="col-12 d-flex align-items-center">
+                                    <div class="col-6">
+                                        <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
+                                            Sekarang</a>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="small m-0">Target Pengembangan</p>
+                                        <p class="fw-bold m-0">Rp.40.000.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-center mt-4">
+                    <div class="col-lg-12 py-2 text-center section-Wisata-Heading">
+                        <a href="{{ route('invest') }}" class="btn btn-primary rounded-pill">Lihat Semua</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <section class="section-register">
             <div class="container ">
                 <div class="row justify-content-center">
@@ -151,8 +264,9 @@
 
                     <div class="col-lg-5 py-2 d-flex align-items-center text-lg-start text-center">
                         <div class="">
-                            <h3>Kami Menunggu Berwisata Dengan Anda!</h3>
-                            <a href="#" class="btn btn-primary btn-register ">Daftarkan Akun Sekarang</a>
+                            <h3>Kami Menunggu Dukungan Wisata Dan Berwisata Dengan Anda!</h3>
+                            <a href="{{ route('register') }}" class="btn btn-primary btn-register ">Daftarkan Akun
+                                Sekarang</a>
                         </div>
                     </div>
 

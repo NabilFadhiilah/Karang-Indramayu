@@ -28,9 +28,9 @@
                             Bukti Pembayaran Untuk Mempercepat Verifikasi Pembayaran</p>
                         <label class="mb-3 col-8 btn btn-primary">Upload Bukti Pembayaran<input type="file"></input>
                         </label>
-                        <a href="Successful-Payment-Wisata.html">demo button</a>
+                        <a href="{{ route('sukses') }}">demo button</a>
                         <br>
-                        <a href="Dashboard-Menunggu-Pembayaran.html">Dashboard Saya</a>
+                        <a href="{{ route('dashboard-pending') }}">Dashboard Saya</a>
                     </div>
                 </div>
             </div>

@@ -13,26 +13,29 @@
               <div class="collapse navbar-collapse d-lg-flex flex-row-reverse " id="navbarNavDropdown">
                   <ul class="navbar-nav ml-auto mr-3">
                       <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="#">Beranda</a>
+                          <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Beranda</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="#">Eksplor Wisata</a>
+                          <a class="nav-link" aria-current="page" href="{{ route('eksplor') }}">Eksplor
+                              Wisata</a>
                       </li>
-                      {{-- <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="#">Peta Pulau</a>
-                      </li> --}}
+                      <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{{ route('invest') }}">Pengembangan
+                              Wisata</a>
+                      </li>
+
                       <!-- Mobile button -->
-                      <form class="form-inline d-sm-block d-lg-none">
+                      <a href="{{ route('login') }}" class="form-inline d-sm-block d-lg-none">
                           <button class="btn btn-login text-white my-2 my-sm-0">
                               Masuk/Daftar
                           </button>
-                      </form>
+                      </a>
                       <!-- Desktop Button -->
-                      <form class="form-inline my-2 my-lg-0 d-none d-lg-block">
+                      <a href="{{ route('login') }}" class="form-inline my-2 my-lg-0 d-none d-lg-block">
                           <button class="btn btn-login btn-navbar-right text-white my-2 my-sm-0 px-4">
                               Masuk/Daftar
                           </button>
-                      </form>
+                      </a>
                   </ul>
               </div>
           </div>

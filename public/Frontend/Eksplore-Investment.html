@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eksplor Terumbu
+        | Gokarang Indramayu</title>
+    <link href="Asset/Styles/main.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+</head>
+
+<body class="bg-light">
+    <!--Navigation Bar-->
+    <div class="container">
+        <!--Nabar User Logged In-->
+        <nav class="row navbar navbar-expand-lg navbar-light bg-white nav-custom">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="/Asset/Images/Logo-Gokarang.png" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="d-lg-flex flex-row-reverse collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Beranda</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Eksplor
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Wisata</a></li>
+                                <li><a class="dropdown-item" href="#">Donasi</a></li>
+                                <li><a class="dropdown-item" href="#">Berita</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Coralmaps</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Keranjang</a>
+                        </li>
+                        <li class="nav-item dropdown bg-white">
+                            <a class="nav-link dropdown-toggle" aria-current="page" href="#" id="user-logged-in"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">Brooklyn Simmons</a>
+                            <ul class="dropdown-menu" aria-labelledby="user-logged-in">
+                                <li><a class="dropdown-item" href="#">Dashboard Saya</a></li>
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                        <div class="avatar">
+                            <img src="/Asset/Images/Avatar.png" alt="" srcset="">
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <header class="banner-investment"></header>
+    <main>
+        <section class="eksplor-investment mt-4">
+            <div class="container">
+                <div class="row justify-content-center mb-2 ">
+                    <!--Breadcrumb-->
+                    <div class="col-lg-10 mb-2">
+                        <h4>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" aria-current="page">
+                                        Beranda
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        Eksplor Pengembangan
+                                    </li>
+                                </ol>
+                            </nav>
+                        </h4>
+                    </div>
+                    <!--Filter Side Bar-->
+                    <div class="col-lg-3">
+                        <div class="bg-white rounded-3 p-3 mb-3">
+                            <h3>Cari Wisata</h3>
+                            <div class="input-group flex-nowrap">
+                                <input type="text" class="form-control" placeholder="Cari Terumbu"
+                                    aria-label="Cari Terumbu" aria-describedby="addon-wrapping">
+                                <span class="input-group-append">
+                                    <button class="btn btn-outline-secondary border-left-0 border" type="button">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-3 p-3 mb-2 pb-md-3">
+                            <h3>Filter</h3>
+                            <div class="d-flex align-items-center mb-2">
+                                <input class="form-check-input mt-0" type="radio" name="radioNoLabel" id="radioNoLabel1"
+                                    value="" aria-label="...">
+                                <p class="paragraph-2 justify-content-center d-flex mb-0 px-1">Progress (Rendah Lebih
+                                    Dulu)</p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <input class="form-check-input mt-0" type="radio" name="radioNoLabel" id="radioNoLabel1"
+                                    value="" aria-label="...">
+                                <p class="paragraph-2 justify-content-center d-flex mb-0 px-1">Progress(Tinggi Lebih
+                                    Dulu)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Main Content-->
+                    <div class="col-lg-7">
+                        <div class="row mb-2 card-investment justify-content-center">
+
+                            <!--Card Terumbu-->
+
+                            <div class="col-lg-6 px-0 py-1">
+                                <div class="card mx-1">
+                                    <img src="./Asset/Images/Main-wisata-landing-3.png" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Wisata Bahari</h5>
+                                        <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau
+                                            rekreasi yang aktivitasnya
+                                            dilakukan di
+                                            kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                                                aria-valuemax="100">0%</div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-center">
+                                            <div class="col-6">
+                                                <a href="#" class="btn btn-primary">Invest Sekarang</a>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p class="small m-0">Target Pengembangan</p>
+                                                <p class="fw-bold m-0">Rp.40.000.000</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 px-0 py-1">
+                                <div class="card mx-1">
+                                    <img src="./Asset/Images/Main-wisata-landing-3.png" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Wisata Bahari</h5>
+                                        <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau
+                                            rekreasi yang aktivitasnya
+                                            dilakukan di
+                                            kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                                                aria-valuemax="100">0%</div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-center">
+                                            <div class="col-6">
+                                                <a href="#" class="btn btn-primary">Invest Sekarang</a>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p class="small m-0">Target Pengembangan</p>
+                                                <p class="fw-bold m-0">Rp.40.000.000</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 px-0 py-1">
+                                <div class="card mx-1">
+                                    <img src="./Asset/Images/Main-wisata-landing-3.png" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Wisata Bahari</h5>
+                                        <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau
+                                            rekreasi yang aktivitasnya
+                                            dilakukan di
+                                            kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                                                aria-valuemax="100">0%</div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-center">
+                                            <div class="col-6">
+                                                <a href="#" class="btn btn-primary">Invest Sekarang</a>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p class="small m-0">Target Pengembangan</p>
+                                                <p class="fw-bold m-0">Rp.40.000.000</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-10 mt-4">
+                        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="section-footer mt-5 mb-4 border-top bg-white">
+            <div class="container pt-5 pb-5">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12 col-lg-3">
+                                        <h5>Akun</h5>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a href="#">Login</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Daftar Akun</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Dashboard</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-12 col-lg-3">
+                                        <h5>Eksplorasi</h5>
+                                        <ul class="list-unstyled">
+                                            <li><a href="#">Wisata</a></li>
+                                            <li><a href="#">Terumbu Karang</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-12 col-lg-3">
+                                        <h5>Kenali Lebih Jauh</h5>
+                                        <ul class="list-unstyled">
+                                            <li><a href="#">Berita Kegiatan</a></li>
+                                            <li><a href="#">Sistem Donasi</a></li>
+                                            <li><a href="#">Sistem Wisata</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-12 col-lg-3 d-flex align-items-center">
+                                        <img src="/Asset/Images/Logo-Gokarang.png" alt="" width="200">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row border-top justify-content-center align-items-center pt-4">
+                    <div class="col-auto text-gray-500 font-weight-light">
+                        2022 Copyright Gokarang • All rights reserved • Made in Bandung
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="/Asset/Scripts/main.js"></script>
+
+</html>

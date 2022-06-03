@@ -10,10 +10,10 @@
                     <div class="text-center">
                         <h3 class="mb-3">Reservasi Berhasil!<br>
                             Harap Tunggu E-mail Dari Kami!</h3>
-                        <a href="Dashboard-Riwayat-Transaksi.html" class="col-12 mb-3 btn btn-primary">Ke Dashboard
+                        <a href="{{ route('dashboard-user') }}" class="col-12 mb-3 btn btn-primary">Ke Dashboard
                             Saya</a>
                         <br>
-                        <a href="Index.html">Beranda</a>
+                        <a href="{{ route('home') }}">Beranda</a>
                     </div>
                 </div>
             </div>

@@ -90,8 +90,8 @@
                                 Bank BNI</p>
                         </div>
                     </div>
-                    <a href="Pembayaran-Wisata-Terumbu.html"
-                        class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi Sekarang</a>
+                    <a href="{{ route('pembayaran') }}" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
+                        Sekarang</a>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,10 +25,13 @@ use Illuminate\Support\Facades\Route;
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/eksplor', 'eksplor')->name('eksplor');
-    Route::get('/eksplor/wisata', 'wisata')->name('wisata');
+    Route::get('/eksplor/wisata', 'wisata')->name('detail-wisata');
+    Route::get('/invest', 'invest')->name('invest');
+    Route::get('/invest/wisata', 'InvestWisata')->name('invest-wisata');
     // Butuh Middleware & Pembuatan Slug Untuk Route "Wisata"
     Route::get('/eksplor/wisata/checkout', 'checkout')->name('checkout');
     Route::get('/eksplor/wisata/pembayaran', 'pembayaran')->name('pembayaran');
+    Route::get('/invest/wisata/pembayaran', 'pembayaraninvest')->name('pembayaran-invest');
     Route::get('/sukses', 'sukses')->name('sukses');
 });
 
@@ -46,4 +50,11 @@ Route::prefix('admin')->group(function () {
     Route::controller(AdminDashboardController::class)->group(function () {
         Route::get('/', 'index');
     });
+});
+
+// Group Login,Register,Forgot
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'index')->name('login');
+    Route::get('/register', 'register')->name('register');
+    Route::get('/forgot', 'forgot')->name('forgot');
 });
