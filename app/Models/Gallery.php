@@ -15,4 +15,10 @@ class Gallery extends Model
     ];
 
     protected $table = 'gallery';
+
+    public function relationToWisata()
+    {
+        # code...
+        return $this->belongsTo(Wisata::class, 'id_wisata', 'id');
+    }
 }

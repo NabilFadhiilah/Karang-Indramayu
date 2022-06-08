@@ -63,10 +63,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('pengembanganWisata', PengembanganWisataController::class);
     Route::resource('gambar', GalleryController::class);
 });
-// Route::get('admin/wisata/checkSlug', [WisataController::class, 'checkSlug']);
-
-// filepond
-// Route::post('upload', [UploadController::class, 'store']);
 
 // Group Login,Register,Forgot
 Route::controller(LoginController::class)->group(function () {

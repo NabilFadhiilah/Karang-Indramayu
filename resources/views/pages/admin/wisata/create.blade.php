@@ -53,11 +53,26 @@
                                                 <small class="text-muted">Hanya Menerima 5 Gambar Dengan Masing-Masing
                                                     Gambar Maksimal
                                                     1MB</small>
-                                                <div class="card-content">
+                                                <div class="card-content fieldGroup">
+                                                    <div class="card-body p-0 mb-2">
+                                                        <input id="gambar" type="file" class="form-control"
+                                                            accept="image/*" name="gambar[]">
+                                                        <a href="javascript:void(0)"
+                                                            class="btn btn-secondary btn-sm addMore" for="wisata">Tambah
+                                                            Gambar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-content fieldGroupCopy d-none">
                                                     <div class="card-body p-0">
-                                                        <input id="gambar" type="file" class="with-validation-filepond"
-                                                            multiple data-max-file-size="1MB" data-max-files="5"
-                                                            name="gambar[]">
+                                                        <input id="gambar" type="file" class="form-control"
+                                                            accept="image/*" name="gambar[]">
+                                                        <a href="javascript:void(0)" class="input-group-text remove"
+                                                            for="wisata">Hapus</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,16 +149,7 @@
             event.preventDefault();
         });
     </script>
-    {{-- <script>
-        const nama_wisata = document.querySelector('#nama-wisata');
-        const slug = document.querySelector('#slug');
 
-        nama_wisata.addEventListener('change', function() {
-            fetch('/admin/wisata/checkSlug?nama_wisata=' + nama_wisata.value)
-                .then(response => response.json())
-                .then(data => slug.value = data.slug)
-        });
-    </script> --}}
     <script>
         const title = document.querySelector("#nama_wisata");
         const slug = document.querySelector("#slug");
@@ -155,9 +161,9 @@
         });
     </script>
 
-    <!-- filepond validation -->
+    {{-- <!-- filepond validation -->
     <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script> --}}
 
     <!-- image editor -->
     <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
@@ -172,7 +178,7 @@
     <script src="{{ url('Backend/assets/vendors/toastify/toastify.js') }}"></script>
 
     <!-- filepond -->
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    {{-- <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script>
         // register desired plugins...
         FilePond.registerPlugin(
@@ -205,31 +211,40 @@
                 resolve(type);
             })
         });
-        const inputElement = document.querySelector('input[id="gambar"]', {
-            chunkUploads: true
-        });
+        const inputElement = document.querySelector('input[id="gambar"]');
         const pond = FilePond.create(inputElement);
         FilePond.setOptions({
             server: {
-                url: '/admin/gambar',
+                url: '/upload',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
-                // process: {
-                //     url: '/admin/gambar',
-                //     headers: {
-                //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                //     }
-                // },
-                // revert: {
-                //     url: '/admin/gambar',
-                //     method: 'POST',
-                //     headers: {
-                //         'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                //         '_method': 'DELETE'
-                //     }
-                // }
             },
+        });
+    </script> --}}
+
+    {{-- Duplicate selection --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            //group add limit
+            var maxGroup = 5;
+
+            //add more fields group
+            $(".addMore").click(function() {
+                if ($('body').find('.fieldGroup').length < maxGroup) {
+                    var fieldHTML = '<div class="form-group fieldGroup">' + $(".fieldGroupCopy").html() +
+                        '</div>';
+                    $('body').find('.fieldGroup:last').after(fieldHTML);
+                } else {
+                    alert('Maksimal ' + maxGroup + ' Gambar wisata yang boleh dibuat.');
+                }
+            });
+
+            //remove fields group
+            $("body").on("click", ".remove", function() {
+                $(this).parents(".fieldGroup").remove();
+            });
         });
     </script>
 @endpush

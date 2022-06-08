@@ -15,10 +15,11 @@ class CreatePengembanganWisataTable extends Migration
     {
         Schema::create('pengembangan_wisata', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_wisata');
+            $table->bigInteger('id_wisata')->unsigned();
             $table->bigInteger('target_dana');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('id_wisata')->references('id')->on('wisata')->onDelete('cascade');
         });
     }
 

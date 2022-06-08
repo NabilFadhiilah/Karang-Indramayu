@@ -15,7 +15,7 @@ class CreateLapPengembanganTable extends Migration
     {
         Schema::create('lap_pengembangan', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_pengembangan');
+            $table->integer('id_pengembangan')->unsigned();
             $table->string('pengeluaran');
             $table->float('biaya_pengeluaran');
             $table->timestamps();

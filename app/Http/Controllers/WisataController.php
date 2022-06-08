@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Wisata;
 use App\Http\Requests\StoreWisataRequest;
 use App\Http\Requests\UpdateWisataRequest;
+use App\Models\Gallery;
 use Clockwork\Request\Request;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -45,11 +46,21 @@ class WisataController extends Controller
      */
     public function store(StoreWisataRequest $request)
     {
-        //
         $request->request->add(['status_wisata' => 1]);
         $data = $request->all();
-        // dd($data);
-        Wisata::create($data);
+        $wisataId = Wisata::create($data);
+
+        if ($request->hasFile('gambar')) {
+            for ($i = 0; $i < count($request->file('gambar')); $i++) {
+                # code...
+                $dataGallery = $request->file('gambar')[$i]->store('gambar-wisata');
+                Gallery::create([
+                    'id_wisata' => $wisataId->id,
+                    'image' => $dataGallery
+                ]);
+            }
+        }
+
         return redirect()->route('admin.wisata.index');
     }
 

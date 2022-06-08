@@ -15,9 +15,9 @@ class CreateReservasiPaketWisataTable extends Migration
     {
         Schema::create('reservasi_paket_wisata', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user');
-            $table->integer('id_paket_wisata');
-            $table->integer('id_rekening');
+            $table->bigInteger('id_user')->unsigned();
+            $table->bigInteger('id_paket_wisata')->unsigned();
+            $table->bigInteger('id_rekening')->unsigned();
             $table->integer('partisipan_reservasi');
             $table->date('tgl_reservasi');
             $table->date('tgl_pesan_reservasi');
