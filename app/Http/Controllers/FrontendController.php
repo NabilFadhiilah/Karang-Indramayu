@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paket;
+use App\Models\Wisata;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -16,7 +18,9 @@ class FrontendController extends Controller
     public function eksplor()
     {
         # code...
-        return view('eksplor');
+        $dataPaketWisata = Wisata::all();
+        return view('eksplor', ['wisata' => $dataPaketWisata]);
+        // return view('eksplor');
     }
     public function wisata()
     {

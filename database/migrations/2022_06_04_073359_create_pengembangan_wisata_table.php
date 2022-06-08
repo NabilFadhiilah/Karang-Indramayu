@@ -16,7 +16,7 @@ class CreatePengembanganWisataTable extends Migration
         Schema::create('pengembangan_wisata', function (Blueprint $table) {
             $table->id();
             $table->integer('id_wisata');
-            $table->float('target_dana');
+            $table->bigInteger('target_dana');
             $table->timestamps();
             $table->softDeletes();
         });

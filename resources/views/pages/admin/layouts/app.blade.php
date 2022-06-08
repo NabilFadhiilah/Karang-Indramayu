@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="{{ url('/Backend/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ url('/Backend/assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ url('/Backend/assets/css/app.css') }}">
-    <link rel="shortcut icon" href="{{ url('/Backend/assets/images/favicon.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url('/Frontend/Asset/Images/Logo-Gokarang.png') }}" type="image/x-icon">
+    @stack('style')
 </head>
 
 <body>
@@ -31,10 +32,10 @@
                 </a>
             </header>
 
-            <div class="page-heading">
-                {{-- change page heading below --}}
+            {{-- <div class="page-heading">
+                change page heading below
                 <h3>Profile Statistics</h3>
-            </div>
+            </div> --}}
             <div class="page-content">
                 {{-- insert blade below --}}
                 @yield('content')
@@ -59,6 +60,8 @@
     <script src="{{ url('/Backend/assets/js/pages/dashboard.js') }}"></script>
 
     <script src="{{ url('/Backend/assets/js/mazer.js') }}"></script>
+
+    @stack('script')
 </body>
 
 </html>

@@ -2,8 +2,15 @@
 
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PaketController;
+use App\Http\Controllers\PengembanganController;
+use App\Http\Controllers\PengembanganWisataController;
+use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\WisataController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,11 +53,20 @@ Route::prefix('user')->group(function () {
 });
 
 // Grup Dashboard Controller Admin (Backend & Butuh Middleware)
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::controller(AdminDashboardController::class)->group(function () {
         Route::get('/', 'index');
     });
+    Route::resource('rekening', RekeningController::class);
+    Route::resource('wisata', WisataController::class);
+    Route::resource('paket', PaketController::class);
+    Route::resource('pengembanganWisata', PengembanganWisataController::class);
+    Route::resource('gambar', GalleryController::class);
 });
+// Route::get('admin/wisata/checkSlug', [WisataController::class, 'checkSlug']);
+
+// filepond
+// Route::post('upload', [UploadController::class, 'store']);
 
 // Group Login,Register,Forgot
 Route::controller(LoginController::class)->group(function () {
