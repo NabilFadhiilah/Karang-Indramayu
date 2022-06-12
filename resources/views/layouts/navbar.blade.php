@@ -23,19 +23,40 @@
                           <a class="nav-link" aria-current="page" href="{{ route('invest') }}">Pengembangan
                               Wisata</a>
                       </li>
-
-                      <!-- Mobile button -->
-                      <a href="{{ route('login') }}" class="form-inline d-sm-block d-lg-none">
-                          <button class="btn btn-login text-white my-2 my-sm-0">
-                              Masuk/Daftar
-                          </button>
-                      </a>
-                      <!-- Desktop Button -->
-                      <a href="{{ route('login') }}" class="form-inline my-2 my-lg-0 d-none d-lg-block">
-                          <button class="btn btn-login btn-navbar-right text-white my-2 my-sm-0 px-4">
-                              Masuk/Daftar
-                          </button>
-                      </a>
+                      @auth
+                          <li class="nav-item dropdown bg-white">
+                              <a class="nav-link dropdown-toggle" aria-current="page" href="#" id="user-logged-in"
+                                  role="button" data-bs-toggle="dropdown"
+                                  aria-expanded="false">{{ auth()->user()->nama }}</a>
+                              <ul class="dropdown-menu" aria-labelledby="user-logged-in">
+                                  <li><a class="dropdown-item" href="{{ route('dashboard-user') }}">Dashboard Saya</a>
+                                  </li>
+                                  <li>
+                                      <form action="/logout" method="POST">
+                                          @csrf
+                                          <button type="submit" class="dropdown-item">Logout</button>
+                                      </form>
+                                  </li>
+                              </ul>
+                          </li>
+                          <div class="avatar">
+                              <img src="/Asset/Images/Avatar.png" alt="" srcset="">
+                          </div>
+                      @endauth
+                      @guest
+                          <!-- Mobile button -->
+                          <a href="{{ route('login') }}" class="form-inline d-sm-block d-lg-none">
+                              <button class="btn btn-login text-white my-2 my-sm-0">
+                                  Masuk/Daftar
+                              </button>
+                          </a>
+                          <!-- Desktop Button -->
+                          <a href="{{ route('login') }}" class="form-inline my-2 my-lg-0 d-none d-lg-block">
+                              <button class="btn btn-login btn-navbar-right text-white my-2 my-sm-0 px-4">
+                                  Masuk/Daftar
+                              </button>
+                          </a>
+                      @endguest
                   </ul>
               </div>
           </div>

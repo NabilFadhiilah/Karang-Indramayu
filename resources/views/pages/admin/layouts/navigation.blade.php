@@ -86,6 +86,12 @@
                         <span>Kelola Rekening</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger col-12">Logout</button>
+                    </form>
+                </li>
 
             </ul>
         </div>

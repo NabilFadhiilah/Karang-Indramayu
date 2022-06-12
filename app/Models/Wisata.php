@@ -20,6 +20,13 @@ class Wisata extends Model
     {
         # code...
         return $this->hasMany(Gallery::class, 'id_wisata', 'id');
+        // return $this->hasOne(Gallery::class, 'id_wisata', 'id');
+    }
+
+    public function relationToPengembangan()
+    {
+        # code...
+        return $this->hasMany(PengembanganWisata::class, 'id_wisata', 'id');
     }
 
     public function relationToPaket()

@@ -62,69 +62,33 @@
                 <div class="row justify-content-center">
                     <div class="swiper">
                         <div class="swiper-wrapper">
-                            <!--Card Wisata-->
-                            <div class="col-lg-3 p-0 bg-white rounded-3 m-2 swiper-slide">
-                                <div class="wisata-image">
-                                    <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}" alt=""
-                                        class="rounded-top img-fluid">
-                                </div>
-                                <div class="p-3">
-                                    <h2 class="overflow-ellipsis">Wisata Bahari</h2>
-                                    <p>Wisata bahari artinya segala jenis kegiatan wisata atau rekreasi yang aktivitasnya
-                                        dilakukan di
-                                        kawasan
-                                        laut, baik itu di pantai, pulau, atau bawah laut.</p>
-                                    <div class="d-flex justify-content-between">
-                                        <a href="{{ route('detail-wisata') }}" class="d-flex align-items-center">Lihat
-                                            Wisata</a>
-                                        <button class=" btn btn-primary btn-wisata"><a href="{{ route('checkout') }}"
-                                                class="text-white text-center">Pesan
-                                                Wisata</a></button>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <!--Card Wisata-->
-                            <div class="col-lg-3 p-0 bg-white rounded-3 m-2 swiper-slide">
-                                <div class="wisata-image">
-                                    <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}" alt=""
-                                        class="rounded-top">
-                                </div>
-                                <div class="p-3">
-                                    <h2 class="overflow-ellipsis">Wisata Mercusuar</h2>
-                                    <p>Mercusuar dibangun pada tahun 1872 oleh pemerintah belanda kala masih menjajah
-                                        Indonesia, sampai
-                                        saat ini usianya telah mencapai 184 tahun.</p>
-                                    <div class="d-flex justify-content-between">
-                                        <a href="{{ route('detail-wisata') }}" class="d-flex align-items-center">Lihat
-                                            Wisata</a>
-                                        <button class=" btn btn-primary btn-wisata"><a href="{{ route('checkout') }}"
-                                                class="text-white text-center">Pesan
-                                                Wisata</a></button>
+                            @forelse ($data as $wisata)
+                                <!--Card Wisata-->
+                                <div class="col-lg-3 p-0 bg-white rounded-3 m-2 swiper-slide">
+                                    <div class="wisata-image">
+                                        @foreach ($wisata->relationToGallery as $key => $gallery)
+                                            @if ($key == 0)
+                                                <img src="{{ asset('storage/' . $gallery->image) }}" alt=""
+                                                    class="rounded-top img-fluid">
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="p-3">
+                                        <h2 class="overflow-ellipsis">{{ $wisata->nama_wisata }}</h2>
+                                        <p>{!! $wisata->deskripsi !!}</p>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="{{ route('detail-wisata') }}" class="d-flex align-items-center">Lihat
+                                                Wisata</a>
+                                            <button class=" btn btn-primary btn-wisata"><a href="{{ route('checkout') }}"
+                                                    class="text-white text-center">Pesan
+                                                    Wisata</a></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!--Card Wisata-->
-                            <div class="col-lg-3 p-0 bg-white rounded-3 m-2 swiper-slide">
-                                <div class="wisata-image">
-                                    <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}" alt=""
-                                        class="justify-content-center img-fluid">
-                                </div>
-                                <div class="p-3">
-                                    <h2 class="overflow-ellipsis">Wisata Bahari</h2>
-                                    <p>Wisata Pantai berarti sebuah kegiatan yang dilakukan secara sendiri atau bersama-sama
-                                        untuk
-                                        beraktivitas sekaligus menikmati indahnya</p>
-                                    <div class="d-flex justify-content-between">
-                                        <a href="{{ route('detail-wisata') }}" class="d-flex align-items-center">Lihat
-                                            Wisata</a>
-                                        <button class=" btn btn-primary btn-wisata"><a href="{{ route('checkout') }}"
-                                                class="text-white text-center">Pesan
-                                                Wisata</a></button>
-                                    </div>
-                                </div>
-                            </div>
+                            @empty
+                                ga ada
+                            @endforelse
 
                             <!--Card Wisata Eksplore-->
                             <div
@@ -159,93 +123,44 @@
                 </div>
 
                 <div class="col-lg-12 row justify-content-center">
-
-                    <div class="col-lg-4 py-1 px-0">
-                        <div class="card mx-1">
-                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
-                                class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Wisata Bahari</h5>
-                                <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau rekreasi
-                                    yang aktivitasnya
-                                    dilakukan di
-                                    kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
-                                <div class="progress mb-3">
-                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%"
-                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                                </div>
-                                <div class="col-12 d-flex align-items-center">
-                                    <div class="col-6">
-                                        <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
-                                            Sekarang</a>
-                                    </div>
-                                    <div class="col-6 text-end">
-                                        <p class="small m-0">Target Pengembangan</p>
-                                        <p class="fw-bold m-0">Rp.40.000.000</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 py-1 px-0">
-                        <div class="card mx-1">
-                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
-                                class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Wisata Bahari</h5>
-                                <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau rekreasi
-                                    yang aktivitasnya
-                                    dilakukan di
-                                    kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
-                                <div class="progress mb-3">
-                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%"
-                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                                </div>
-                                <div class="col-12 d-flex align-items-center">
-                                    <div class="col-6">
-                                        <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
-                                            Sekarang</a>
-                                    </div>
-                                    <div class="col-6 text-end">
-                                        <p class="small m-0">Target Pengembangan</p>
-                                        <p class="fw-bold m-0">Rp.40.000.000</p>
+                    @forelse ($data as $pengembangan)
+                        <div class="col-lg-4 py-1 px-0">
+                            <div class="card mx-1">
+                                @foreach ($pengembangan->relationToGallery as $key => $gallery)
+                                    @if ($key == 0)
+                                        <img src="{{ asset('storage/' . $gallery->image) }}" alt=""
+                                            class="rounded-top img-fluid">
+                                    @endif
+                                @endforeach
+                                <div class="card-body">
+                                    @foreach ($pengembangan->relationToWisata as $wisata)
+                                        <h5 class="card-title">{{ $wisata->nama_wisata }}</h5>
+                                        <p class="card-text">{!! $wisata->deskripsi !!}</p>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    <div class="col-12 d-flex align-items-center">
+                                        <div class="col-6">
+                                            <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
+                                                Sekarang</a>
+                                        </div>
+                                        <div class="col-6 text-end">
+                                            <p class="small m-0">Target Pengembangan</p>
+                                            <p class="fw-bold m-0">
+                                                Rp.{{ number_format($pengembangan->target_dana) }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 py-1 px-0">
-                        <div class="card mx-1">
-                            <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
-                                class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Wisata Bahari</h5>
-                                <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau rekreasi
-                                    yang aktivitasnya
-                                    dilakukan di
-                                    kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
-                                <div class="progress mb-3">
-                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 80%"
-                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
-                                </div>
-                                <div class="col-12 d-flex align-items-center">
-                                    <div class="col-6">
-                                        <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
-                                            Sekarang</a>
-                                    </div>
-                                    <div class="col-6 text-end">
-                                        <p class="small m-0">Target Pengembangan</p>
-                                        <p class="fw-bold m-0">Rp.40.000.000</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @empty
+                        ga ada
+                    @endforelse
 
                 </div>
-
                 <div class="row justify-content-center mt-4">
                     <div class="col-lg-12 py-2 text-center section-Wisata-Heading">
                         <a href="{{ route('invest') }}" class="btn btn-primary rounded-pill">Lihat Semua</a>
@@ -273,4 +188,9 @@
                 </div>
             </div>
         </section>
-    @endsection
+    </main>
+@endsection
+@push('script')
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script src="{{ url('/Frontend/Asset/Scripts/swiper.js') }}"></script>
+@endpush

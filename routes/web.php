@@ -35,25 +35,26 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/eksplor/wisata', 'wisata')->name('detail-wisata');
     Route::get('/invest', 'invest')->name('invest');
     Route::get('/invest/wisata', 'InvestWisata')->name('invest-wisata');
-    // Butuh Middleware & Pembuatan Slug Untuk Route "Wisata"
+});
+// Butuh Middleware Untuk Route "Wisata"
+Route::controller(FrontendController::class)->middleware('User')->group(function () {
     Route::get('/eksplor/wisata/checkout', 'checkout')->name('checkout');
     Route::get('/eksplor/wisata/pembayaran', 'pembayaran')->name('pembayaran');
     Route::get('/invest/wisata/pembayaran', 'pembayaraninvest')->name('pembayaran-invest');
     Route::get('/sukses', 'sukses')->name('sukses');
 });
 
-// Group Dashboard Controller User (Middleware)
-Route::prefix('user')->group(function () {
-    Route::controller(UserDashboardController::class)->group(function () {
-        Route::get('/', 'index')->name('dashboard-user');
-        Route::get('/detail', 'detail')->name('dashboard-detail');
-        Route::get('/pending', 'pending')->name('dashboard-pending');
-        Route::get('/riwayat', 'riwayat')->name('dashboard-riwayat');
-    });
+// Group Dashboard Controller User (Frontend)
+Route::controller(UserDashboardController::class)->prefix('user')->middleware('User')->group(function () {
+    Route::get('/', 'index')->name('dashboard-user');
+    Route::get('/detail', 'detail')->name('dashboard-detail');
+    Route::get('/pending', 'pending')->name('dashboard-pending');
+    Route::get('/riwayat', 'riwayat')->name('dashboard-riwayat');
 });
 
-// Grup Dashboard Controller Admin (Backend & Butuh Middleware)
-Route::prefix('admin')->name('admin.')->group(function () {
+
+// Grup Dashboard Controller Admin (Backend)
+Route::middleware('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::controller(AdminDashboardController::class)->group(function () {
         Route::get('/', 'index');
     });
@@ -66,7 +67,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 // Group Login,Register,Forgot
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', 'index')->name('login');
-    Route::get('/register', 'register')->name('register');
-    Route::get('/forgot', 'forgot')->name('forgot');
+    Route::get('/login', 'index')->name('login')->middleware('guest');
+    Route::post('/login', 'auth');
+    Route::post('/logout', 'logout');
+
+    Route::get('/register', 'register')->name('register')->middleware('guest');
+    Route::post('/register', 'registerStore');
+
+    Route::get('/forgot', 'forgot')->name('forgot')->middleware('guest');
 });
