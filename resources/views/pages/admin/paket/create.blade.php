@@ -50,8 +50,9 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="durasi_wisata">Durasi Wisata</label>
+                                                <small class="text-muted">Maksimal 7 Hari Dalam 1 Paket</small>
                                                 <div class="input-group mb-3">
-                                                    <select class="form-select" id="durasi_wisata">
+                                                    <select class="form-select" id="durasi_wisata" name="durasi_wisata">
                                                         <option>Durasi Wisata</option>
                                                         <option value="1">1 Hari</option>
                                                         <option value="2">2 Hari</option>
@@ -84,9 +85,9 @@
                                             </div>
                                         </div>--}}
 
-                                        <div class="col-12 form-group fieldGroupCopy" style="display: none;">
+                                        {{-- <div class="col-12 form-group fieldGroupCopy" style="display: none;">
                                             <div class="input-group mb-3">
-                                                <select class="form-select" id="wisata" name="id_wisata[]">
+                                                <select class="form-select" id="wisata" name="id_wisata[][]">
                                                     <option>Pilih Wisata</option>
                                                     @foreach ($wisata as $item)
                                                         <option value="{{ $item->id }}">
@@ -96,7 +97,7 @@
                                                 <a href="javascript:void(0)" class="input-group-text remove" for="wisata"
                                                     aria-hidden="true">Hapus Wisata</a>
                                             </div>
-                                        </div> 
+                                        </div>  --}}
 
                                         <div class="col-12">
                                             <div class="card">
@@ -150,6 +151,7 @@
             </div>
         </div>
     </section>
+    {{-- <input type="hidden" value="hari_ke_${i}" name="hari_ke[]"> --}}
     <!-- // Basic Vertical form layout section end -->
 @endsection
 
@@ -160,14 +162,14 @@
         $('#durasi_wisata').change(function() {
             const jumlahValue = parseInt($('#durasi_wisata').val());
             
-            for (let i = 1; i <= jumlahValue; i++) {
+            for (let i = 0; i < jumlahValue; i++) {
                 $('#durasi_paket').append(`
                 <div class="col-12 form-group fieldGroup${i}">
-                    <h5>Hari Ke ${i}</h5>
+                    <h5>Wisata Hari Ke ${i+1}</h5>
                     <label for="wisata">Pilih Wisata</label>
-                    <small class="text-muted">Maksimal 3 Wisata Dalam 1 Paket</small>
+                    
                     <div class="input-group mb-3">
-                        <select class="form-select" id="wisata" name="id_wisata[]">
+                        <select class="form-select" id="wisata" name="id_wisata[${i}][]">
                             <option>Pilih Wisata</option>
                             @foreach ($wisata as $item)
                                 <option value="{{ $item->id }}">
@@ -178,6 +180,19 @@
                             for="wisata">Tambah Wisata</a>
                     </div>
                 </div>
+                <div class="col-12 form-group fieldGroupCopy${i}" style="display: none;">
+                    <div class="input-group mb-3">
+                        <select class="form-select" id="wisata" name="id_wisata[${i}][]">
+                            <option>Pilih Wisata</option>
+                            @foreach ($wisata as $item)
+                                <option value="{{ $item->id }}">
+                                    {{ $item->nama_wisata }}</option>
+                            @endforeach
+                        </select>
+                        <a href="javascript:void(0)" class="input-group-text remove" for="wisata"
+                            aria-hidden="true">Hapus Wisata</a>
+                    </div>
+                </div> 
             `);
             $(document).ready(function() {
                 //group add limit
@@ -186,7 +201,7 @@
                 $(`.addMore${i}`).click(function() {
                     // if ($('body').find('.fieldGroup${i}').length < maxGroup) {
                     if ($('body').find(`.fieldGroup${i}`).length < maxGroup) {
-                        var fieldHTML = '<div class="form-group fieldGroup">' + $(".fieldGroupCopy").html() +
+                        var fieldHTML = '<div class="form-group fieldGroup">' + $(`.fieldGroupCopy${i}`).html() +
                             '</div>';
                             $('body').find(`.fieldGroup${i}:last`).after(fieldHTML);
                     } else {

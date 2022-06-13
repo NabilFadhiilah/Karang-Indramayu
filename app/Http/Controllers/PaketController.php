@@ -47,12 +47,17 @@ class PaketController extends Controller
         $data = $request->all();
         $paket = Paket::create($data);
         $paketId = $paket->id;
-        for ($i = 0; $i < (count($request->id_wisata) - 1); $i++) {
+        for ($i = 0; $i < count($request->id_wisata); $i++) {
             # code...
-            PaketWisata::create([
-                'id_paket' => $paketId,
-                'id_wisata' => $request->id_wisata[$i]
-            ]);
+            $j = 0;
+            while ($j < (count($request->id_wisata[$i]) - 1)) {
+                PaketWisata::create([
+                    'id_paket' => $paketId,
+                    'id_wisata' => $request->id_wisata[$i][$j],
+                    'hari' => 'hari ke ' . $i + 1,
+                ]);
+                $j++;
+            }
         }
         $data = Paket::with(['relationToWisata'])->get();
         return view('pages.admin.paket.index', ['paket' => $data]);

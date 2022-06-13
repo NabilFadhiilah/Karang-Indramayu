@@ -13,14 +13,17 @@
               <div class="collapse navbar-collapse d-lg-flex flex-row-reverse " id="navbarNavDropdown">
                   <ul class="navbar-nav ml-auto mr-3">
                       <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Beranda</a>
+                          <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" aria-current="page"
+                              href="{{ route('home') }}">Beranda</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="{{ route('eksplor') }}">Eksplor
+                          <a class="nav-link {{ request()->routeIs('eksplor') ? 'active' : '' }}" aria-current="page"
+                              href="{{ route('eksplor') }}">Eksplor
                               Wisata</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="{{ route('invest') }}">Pengembangan
+                          <a class="nav-link {{ request()->routeIs('invest') ? 'active' : '' }}" aria-current="page"
+                              href="{{ route('invest') }}">Pengembangan
                               Wisata</a>
                       </li>
                       @auth
@@ -29,20 +32,38 @@
                                   role="button" data-bs-toggle="dropdown"
                                   aria-expanded="false">{{ auth()->user()->nama }}</a>
                               <ul class="dropdown-menu" aria-labelledby="user-logged-in">
-                                  <li><a class="dropdown-item" href="{{ route('dashboard-user') }}">Dashboard Saya</a>
+                                  <li>
+                                      <a class="dropdown-item" href="{{ route('dashboard-user') }}">Dashboard Saya</a>
                                   </li>
+                                  <li>
+                                      <form action="{{ route('change-role') }}" method="POST">
+                                          @csrf
+                                          {{ auth()->user()->roles }}
+                                          <button type="submit" class="dropdown-item">Ubah Role</button>
+                                      </form>
+                                  </li>
+                                  <hr>
                                   <li>
                                       <form action="/logout" method="POST">
                                           @csrf
-                                          <button type="submit" class="dropdown-item">Logout</button>
+                                          <button type="submit" class="dropdown-item">
+                                              Logout
+                                          </button>
                                       </form>
                                   </li>
                               </ul>
                           </li>
-                          <div class="avatar">
-                              <img src="/Asset/Images/Avatar.png" alt="" srcset="">
-                          </div>
+                          @if (Auth::user()->avatar)
+                              <div class="avatar">
+                                  <img src="{{ Auth::user()->avatar }}" alt="" srcset="">
+                              </div>
+                          @else
+                              <div class="avatar">
+                                  <img src="https://ui-avatars.com/api/?name={{ Auth::user()->nama }}" alt="" srcset="">
+                              </div>
+                          @endif
                       @endauth
+
                       @guest
                           <!-- Mobile button -->
                           <a href="{{ route('login') }}" class="form-inline d-sm-block d-lg-none">

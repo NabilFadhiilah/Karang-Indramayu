@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Paket extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $table = 'paket';
     protected $fillable = ['nama_paket', 'slug', 'deskripsi', 'durasi_wisata', 'harga', 'ketentuan', 'tgl_reservasi_awal', 'tgl_reservasi_akhir', 'status_wisata'];
 

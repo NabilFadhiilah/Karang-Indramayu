@@ -17,6 +17,7 @@ class CreatePaketWisataTable extends Migration
             $table->id();
             $table->bigInteger('id_paket')->unsigned();
             $table->bigInteger('id_wisata')->unsigned();
+            $table->string('hari');
             $table->timestamps();
             $table->foreign('id_paket')->references('id')->on('paket')->onDelete('cascade');
             $table->foreign('id_wisata')->references('id')->on('wisata')->onDelete('cascade');
