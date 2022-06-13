@@ -47,7 +47,28 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-12 form-group fieldGroup">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="durasi_wisata">Durasi Wisata</label>
+                                                <div class="input-group mb-3">
+                                                    <select class="form-select" id="durasi_wisata">
+                                                        <option>Durasi Wisata</option>
+                                                        <option value="1">1 Hari</option>
+                                                        <option value="2">2 Hari</option>
+                                                        <option value="3">3 Hari</option>
+                                                        <option value="4">4 Hari</option>
+                                                        <option value="5">5 Hari</option>
+                                                        <option value="6">6 Hari</option>
+                                                        <option value="7">7 Hari</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="durasi_paket">
+
+                                        </div>
+                                        {{-- <div class="col-12 form-group fieldGroup">
                                             <label for="wisata">Pilih Wisata</label>
                                             <small class="text-muted">Maksimal 3 Wisata Dalam 1 Paket</small>
                                             <div class="input-group mb-3">
@@ -61,7 +82,7 @@
                                                 <a href="javascript:void(0)" class="input-group-text addMore"
                                                     for="wisata">Tambah Wisata</a>
                                             </div>
-                                        </div>
+                                        </div>--}}
 
                                         <div class="col-12 form-group fieldGroupCopy" style="display: none;">
                                             <div class="input-group mb-3">
@@ -75,23 +96,7 @@
                                                 <a href="javascript:void(0)" class="input-group-text remove" for="wisata"
                                                     aria-hidden="true">Hapus Wisata</a>
                                             </div>
-                                        </div>
-
-                                        {{-- <div class="col-12">
-                                            <div class="card">
-                                                <label for="gambar">Gambar</label>
-                                                <small class="text-muted">Hanya Menerima 5 Gambar Dengan Masing-Masing
-                                                    Gambar Maksimal
-                                                    1MB</small>
-                                                <div class="card-content">
-                                                    <div class="card-body p-0">
-                                                        <input id="gambar" type="file" class="with-validation-filepond"
-                                                            multiple data-max-file-size="1MB" data-max-files="5"
-                                                            name="gambar">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
+                                        </div> 
 
                                         <div class="col-12">
                                             <div class="card">
@@ -113,14 +118,6 @@
                                                 <label for="tgl_reservasi_akhir">Tanggal Reservasi Akhir</label>
                                                 <input type="date" id="tgl_reservasi_akhir" class="form-control"
                                                     name="tgl_reservasi_akhir" placeholder="Tanggal Reservasi Akhir">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="durasi_wisata">Durasi Wisata</label>
-                                                <input type="text" id="durasi_wisata" class="form-control"
-                                                    name="durasi_wisata" placeholder="Durasi Wisata">
                                             </div>
                                         </div>
 
@@ -160,25 +157,49 @@
     {{-- Duplicate selection --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-            //group add limit
-            var maxGroup = 3;
+        $('#durasi_wisata').change(function() {
+            const jumlahValue = parseInt($('#durasi_wisata').val());
+            
+            for (let i = 1; i <= jumlahValue; i++) {
+                $('#durasi_paket').append(`
+                <div class="col-12 form-group fieldGroup${i}">
+                    <h5>Hari Ke ${i}</h5>
+                    <label for="wisata">Pilih Wisata</label>
+                    <small class="text-muted">Maksimal 3 Wisata Dalam 1 Paket</small>
+                    <div class="input-group mb-3">
+                        <select class="form-select" id="wisata" name="id_wisata[]">
+                            <option>Pilih Wisata</option>
+                            @foreach ($wisata as $item)
+                                <option value="{{ $item->id }}">
+                                    {{ $item->nama_wisata }}</option>
+                            @endforeach
+                        </select>
+                        <a href="javascript:void(0)" class="input-group-text addMore${i}"
+                            for="wisata">Tambah Wisata</a>
+                    </div>
+                </div>
+            `);
+            $(document).ready(function() {
+                //group add limit
+                var maxGroup = 99;
+                //add more fields group
+                $(`.addMore${i}`).click(function() {
+                    // if ($('body').find('.fieldGroup${i}').length < maxGroup) {
+                    if ($('body').find(`.fieldGroup${i}`).length < maxGroup) {
+                        var fieldHTML = '<div class="form-group fieldGroup">' + $(".fieldGroupCopy").html() +
+                            '</div>';
+                            $('body').find(`.fieldGroup${i}:last`).after(fieldHTML);
+                    } else {
+                        alert('Maksimal ' + maxGroup + ' wisata yang boleh dibuat.');
+                    }
+                });
 
-            //add more fields group
-            $(".addMore").click(function() {
-                if ($('body').find('.fieldGroup').length < maxGroup) {
-                    var fieldHTML = '<div class="form-group fieldGroup">' + $(".fieldGroupCopy").html() +
-                        '</div>';
-                    $('body').find('.fieldGroup:last').after(fieldHTML);
-                } else {
-                    alert('Maksimal ' + maxGroup + ' wisata yang boleh dibuat.');
-                }
+                //remove fields group
+                $("body").on("click", ".remove", function() {
+                    $(this).parents(".fieldGroup").remove();
+                });
             });
-
-            //remove fields group
-            $("body").on("click", ".remove", function() {
-                $(this).parents(".fieldGroup").remove();
-            });
+            }
         });
     </script>
 
@@ -190,6 +211,7 @@
         });
     </script>
 
+    {{-- Slug --}}
     <script>
         const title = document.querySelector("#nama_paket");
         const slug = document.querySelector("#slug");
@@ -201,65 +223,6 @@
         });
     </script>
 
-    <!-- filepond validation -->
-    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-
-    <!-- image editor -->
-    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
-    </script>
-    <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-filter/dist/filepond-plugin-image-filter.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
-
     <!-- toastify -->
     <script src="{{ url('Backend/assets/vendors/toastify/toastify.js') }}"></script>
-
-    <!-- filepond -->
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-    <script>
-        // register desired plugins...
-        FilePond.registerPlugin(
-            // validates the size of the file...
-            FilePondPluginFileValidateSize,
-            // validates the file type...
-            FilePondPluginFileValidateType,
-
-            // calculates & dds cropping info based on the input image dimensions and the set crop ratio...
-            FilePondPluginImageCrop,
-            // preview the image file type...
-            FilePondPluginImagePreview,
-            // filter the image file
-            FilePondPluginImageFilter,
-            // corrects mobile image orientation...
-            FilePondPluginImageExifOrientation,
-            // calculates & adds resize information...
-            FilePondPluginImageResize,
-        );
-
-        // Filepond: With Validation
-        FilePond.create(document.querySelector('.with-validation-filepond'), {
-            allowImagePreview: true,
-            allowMultiple: true,
-            allowFileEncode: false,
-            required: true,
-            acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
-            fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-                // Do custom type detection here and return with promise
-                resolve(type);
-            })
-        });
-        const inputElement = document.querySelector('input[id="gambar"]');
-        const pond = FilePond.create(inputElement);
-        FilePond.setOptions({
-            server: {
-                url: '/upload',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            },
-        });
-    </script>
 @endpush
