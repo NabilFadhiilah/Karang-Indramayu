@@ -54,110 +54,47 @@
                     <div class="row mb-2 card-investment justify-content-center">
 
                         <!--Card Terumbu-->
-
-                        <div class="col-lg-6 px-0 py-1">
-                            <div class="card mx-1">
-                                <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
-                                    class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Wisata Bahari</h5>
-                                    <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau
-                                        rekreasi yang aktivitasnya
-                                        dilakukan di
-                                        kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%"
-                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                                    </div>
-                                    <div class="col-12 d-flex align-items-center">
-                                        <div class="col-6">
-                                            <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
-                                                Sekarang</a>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <p class="small m-0">Target Pengembangan</p>
-                                            <p class="fw-bold m-0">Rp.40.000.000</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 px-0 py-1">
-                            <div class="card mx-1">
-                                <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
-                                    class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Wisata Bahari</h5>
-                                    <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau
-                                        rekreasi yang aktivitasnya
-                                        dilakukan di
-                                        kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%"
-                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                                    </div>
-                                    <div class="col-12 d-flex align-items-center">
-                                        <div class="col-6">
-                                            <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
-                                                Sekarang</a>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <p class="small m-0">Target Pengembangan</p>
-                                            <p class="fw-bold m-0">Rp.40.000.000</p>
+                        @forelse ($data as $pengembangan)
+                            <div class="col-lg-6 px-0 py-1">
+                                <div class="card mx-1">
+                                    @foreach ($pengembangan->relationToGallery as $key => $gallery)
+                                        @if ($key == 0)
+                                            <img src="{{ asset('storage/' . $gallery->image) }}" class="card-img-top">
+                                        @endif
+                                    @endforeach
+                                    <div class="card-body">
+                                        @foreach ($pengembangan->relationToWisata as $wisata)
+                                            <h5 class="card-title">{{ $wisata->nama_wisata }}</h5>
+                                            <p class="card-text">{!! $wisata->deskripsi !!}</p>
+                                            <div class="progress mb-3">
+                                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                    style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                                                    aria-valuemax="100">0%
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        <div class="col-12 d-flex align-items-center">
+                                            <div class="col-6">
+                                                <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
+                                                    Sekarang</a>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p class="small m-0">Target Pengembangan</p>
+                                                <p class="fw-bold m-0">
+                                                    Rp.{{ number_format($pengembangan->target_dana) }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-6 px-0 py-1">
-                            <div class="card mx-1">
-                                <img src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
-                                    class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Wisata Bahari</h5>
-                                    <p class="card-text">Wisata bahari artinya segala jenis kegiatan wisata atau
-                                        rekreasi yang aktivitasnya
-                                        dilakukan di
-                                        kawasan laut, baik itu di pantai, pulau, atau bawah laut.</p>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%"
-                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                                    </div>
-                                    <div class="col-12 d-flex align-items-center">
-                                        <div class="col-6">
-                                            <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
-                                                Sekarang</a>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <p class="small m-0">Target Pengembangan</p>
-                                            <p class="fw-bold m-0">Rp.40.000.000</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        @empty
+                            ga ada
+                        @endforelse
                     </div>
                 </div>
                 <div class="col-lg-10 mt-4">
                     <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
+                        {{ $data->links() }}
                     </nav>
                 </div>
             </div>

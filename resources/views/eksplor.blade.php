@@ -23,15 +23,18 @@
                 <div class="col-lg-3">
                     <div class="bg-white rounded-3 p-3 mb-3">
                         <h3>Cari Wisata</h3>
-                        <div class="input-group flex-nowrap">
-                            <input type="text" class="form-control" placeholder="Cari Wisata" aria-label="Cari Wisata"
-                                aria-describedby="addon-wrapping">
-                            <span class="input-group-append">
-                                <button class="btn btn-outline-secondary border-left-0 border" type="button">
-                                    <i class="bi bi-search"></i>
-                                </button>
-                            </span>
-                        </div>
+                        <form action="/eksplor" method="GET">
+                            <div class="input-group flex-nowrap">
+                                <input type="text" class="form-control" placeholder="Cari Wisata" name="search"
+                                    value="{{ request('search') }}" aria-label="Cari Wisata"
+                                    aria-describedby="addon-wrapping">
+                                <span class="input-group-append">
+                                    <button class="btn btn-outline-secondary border-left-0 border" type="submit">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
                     </div>
                     <div class="bg-white rounded-3 p-3 mb-2 pb-md-3">
                         <h3>Bedasarkan Harga</h3>
@@ -55,21 +58,22 @@
                     @forelse ($wisata as $item)
                         <div class="row bg-white rounded-3 mb-2">
                             <div class="col-lg-3 p-0 m-0">
-                                <img src="{{ url('/Frontend/Asset/Images/card-wisata-1.png') }}"
-                                    class="img-responsive rounded-start" width="100%" height="100%" alt="">
+                                @foreach ($item->relationToGallery as $key => $gallery)
+                                    @if ($key == 0)
+                                        <img src="{{ asset('storage/' . $gallery->image) }}" style="object-fit: cover;"
+                                            class="img-responsive rounded-start" width="100%" height="180px" alt="">
+                                    @endif
+                                @endforeach
                             </div>
                             <div class="col-lg-9 py-3">
                                 <div class="d-flex justify-content-between">
                                     <h3>{{ $item->nama_wisata }}</h3>
                                     <h3>Rp.{{ number_format($item->harga) }}</h3>
                                 </div>
-                                {{-- @foreach ($item->relationToWisata as $wisata)
-                                    <p>{{ $wisata->nama_wisata }}</p>
-                                @endforeach --}}
                                 <div class="d-flex align-items-start flex-column" style="height: 80%;">
                                     <div class="mb-auto">
                                         <p class="parahraph-2">
-                                            {{ $item->deskripsi }}</p>
+                                            {!! $item->deskripsi !!}</p>
                                     </div>
                                     <div class="">
                                         <a href=" {{ route('checkout') }}" class="btn btn-primary m-1 py-1">Reservasi
@@ -86,21 +90,7 @@
                 </div>
                 <div class="col-lg-10 mt-4">
                     <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
+                        {{ $wisata->links() }}
                     </nav>
                 </div>
             </div>

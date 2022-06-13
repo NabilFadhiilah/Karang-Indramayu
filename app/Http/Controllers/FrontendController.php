@@ -29,8 +29,15 @@ class FrontendController extends Controller
     public function eksplor()
     {
         # code...
-        $dataWisata = Wisata::all();
-        return view('eksplor', ['wisata' => $dataWisata]);
+        // dd(request('search'));
+
+
+        $dataWisata = Wisata::with('relationToGallery')->latest();
+        if (request('search')) {
+            # code...
+            $dataWisata->where('nama_wisata', 'like', '%' . request('search') . '%');
+        }
+        return view('eksplor', ['wisata' => $dataWisata->paginate(5)]);
         // return view('eksplor');
     }
     public function wisata()
@@ -42,7 +49,15 @@ class FrontendController extends Controller
     public function invest()
     {
         # code...
-        return view('eksplor-invest');
+        $data = PengembanganWisata::with(
+            'relationToWisata',
+            'relationToGallery'
+        )->latest();
+        if (request('search')) {
+            # code...
+            $data->where('nama_wisata', 'like', '%' . request('search') . '%');
+        }
+        return view('eksplor-invest', ['data' => $data->paginate(5)]);
     }
     public function InvestWisata()
     {
