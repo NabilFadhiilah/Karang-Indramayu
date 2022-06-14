@@ -48,6 +48,7 @@
                                         </div>
 
                                         <div class="col-12">
+
                                             <div class="card">
                                                 <label for="gambar">Gambar</label>
                                                 <small class="text-muted">Hanya Menerima 5 Gambar Dengan Masing-Masing
@@ -56,7 +57,10 @@
                                                 <div class="card-content fieldGroup">
                                                     <div class="card-body p-0 mb-2">
                                                         <input id="gambar" type="file" class="form-control"
-                                                            accept="image/*" name="gambar[]">
+                                                            accept="image/*" name="gambar[]" onchange="previewImage()">
+                                                        <div class="my-2 d-flex justify-content-center col-12">
+                                                            <img class="img-preview" style="width: 250px;">
+                                                        </div>
                                                         <a href="javascript:void(0)"
                                                             class="btn btn-secondary btn-sm addMore" for="wisata">Tambah
                                                             Gambar</a>
@@ -70,8 +74,11 @@
                                                 <div class="card-content fieldGroupCopy d-none">
                                                     <div class="card-body p-0">
                                                         <input id="gambar" type="file" class="form-control"
-                                                            accept="image/*" name="gambar[]">
-                                                        <a href="javascript:void(0)" class="input-group-text remove"
+                                                            accept="image/*" name="gambar[]" onchange="previewImage()">
+                                                        <div class="my-2 d-flex justify-content-center col-12">
+                                                            <img class="img-preview" style="width: 250px;">
+                                                        </div>
+                                                        <a href="javascript:void(0)" class="btn btn-secondary btn-sm remove"
                                                             for="wisata">Hapus</a>
                                                     </div>
                                                 </div>
@@ -142,6 +149,47 @@
 @endsection
 
 @push('script')
+    {{-- Duplicate selection --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            //group add limit
+            var maxGroup = 5;
+
+            //add more fields group
+            $(".addMore").click(function() {
+                if ($('body').find('.fieldGroup').length < maxGroup) {
+                    var fieldHTML = '<div class="form-group fieldGroup">' + $(".fieldGroupCopy").html() +
+                        '</div>';
+                    $('body').find('.fieldGroup:last').after(fieldHTML);
+                } else {
+                    alert('Maksimal ' + maxGroup + ' Gambar wisata yang boleh dibuat.');
+                }
+            });
+
+            //remove fields group
+            $("body").on("click", ".remove", function() {
+                $(this).parents(".fieldGroup").remove();
+            });
+        });
+    </script>
+
+    {{-- Preview Image --}}
+    <script>
+        function previewImage() {
+            const image = document.querySelector('#gambar');
+            const imagePreview = document.querySelector('.img-preview');
+
+            imagePreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imagePreview.src = oFREvent.target.result;
+            }
+        }
+    </script>
     {{-- Trix Editor --}}
     <script type="text/javascript" src="{{ url('Backend/assets/js/trix.js') }}"></script>
     <script>
@@ -166,13 +214,13 @@
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script> --}}
 
     <!-- image editor -->
-    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
+    {{-- <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
     </script>
     <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-filter/dist/filepond-plugin-image-filter.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script> --}}
 
     <!-- toastify -->
     <script src="{{ url('Backend/assets/vendors/toastify/toastify.js') }}"></script>
@@ -222,29 +270,4 @@
             },
         });
     </script> --}}
-
-    {{-- Duplicate selection --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            //group add limit
-            var maxGroup = 5;
-
-            //add more fields group
-            $(".addMore").click(function() {
-                if ($('body').find('.fieldGroup').length < maxGroup) {
-                    var fieldHTML = '<div class="form-group fieldGroup">' + $(".fieldGroupCopy").html() +
-                        '</div>';
-                    $('body').find('.fieldGroup:last').after(fieldHTML);
-                } else {
-                    alert('Maksimal ' + maxGroup + ' Gambar wisata yang boleh dibuat.');
-                }
-            });
-
-            //remove fields group
-            $("body").on("click", ".remove", function() {
-                $(this).parents(".fieldGroup").remove();
-            });
-        });
-    </script>
 @endpush
