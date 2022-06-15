@@ -35,8 +35,8 @@
                         <li class="submenu-item {{ request()->is('admin/wisata*') ? 'active' : '' }}">
                             <a href="{{ route('admin.wisata.index') }}">Wisata</a>
                         </li>
-                        <li class="submenu-item ">
-                            <a href="">Gallery</a>
+                        <li class="submenu-item {{ request()->is('admin/gallery*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.gallery.index') }}">Gallery</a>
                         </li>
                         <li class="submenu-item ">
                             <a href="component-breadcrumb.html">Verifikasi Paket Wisata</a>

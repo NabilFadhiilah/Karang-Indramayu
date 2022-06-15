@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreGalleryRequest;
 use App\Http\Requests\UpdateGalleryRequest;
 
@@ -16,6 +17,9 @@ class GalleryController extends Controller
     public function index()
     {
         //
+        $data = Gallery::with('relationToWisata')->get();
+        // dd($data);
+        return view('pages.admin.gallery.index', ['gallery' => $data]);
     }
 
     /**
@@ -37,15 +41,6 @@ class GalleryController extends Controller
     public function store(StoreGalleryRequest $request)
     {
         //
-        if ($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            $filename = $file->getClientOriginalName();
-            $folder = uniqid() . '-' . now()->timestamp;
-            $file->storeAs('gambar/' . $folder, $filename);
-            return $folder;
-        }
-
-        return '';
     }
 
     /**
@@ -68,6 +63,8 @@ class GalleryController extends Controller
     public function edit(Gallery $gallery)
     {
         //
+        // dd($gallery);
+        return view('pages.admin.gallery.edit', ['item' => $gallery]);
     }
 
     /**
@@ -80,6 +77,14 @@ class GalleryController extends Controller
     public function update(UpdateGalleryRequest $request, Gallery $gallery)
     {
         //
+        if ($request->hasFile('gambar')) {
+            Storage::delete($request->oldImage);
+            $data = $request->file('gambar')->store('gambar-wisata');
+            $gallery->update([
+                'image' => $data
+            ]);
+        }
+        return redirect()->route('admin.gallery.index');
     }
 
     /**
