@@ -9,9 +9,12 @@ use App\Http\Controllers\PengembanganController;
 use App\Http\Controllers\PengembanganWisataController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\WisataController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,14 +35,14 @@ use Illuminate\Support\Facades\Route;
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/eksplor', 'eksplor')->name('eksplor');
-    Route::get('/eksplor/wisata', 'wisata')->name('detail-wisata');
+    Route::get('/eksplor/{wisata:slug}', 'wisata')->name('detail-wisata');
     Route::get('/invest', 'invest')->name('invest');
     Route::get('/invest/wisata', 'InvestWisata')->name('invest-wisata');
 });
 // Butuh Middleware Untuk Route "Wisata"
 Route::controller(FrontendController::class)->middleware('User')->group(function () {
-    Route::get('/eksplor/wisata/checkout', 'checkout')->name('checkout');
-    Route::get('/eksplor/wisata/pembayaran', 'pembayaran')->name('pembayaran');
+    Route::get('/eksplor/{wisata:slug}/checkout', 'checkout')->name('checkout');
+    Route::get('/eksplor/{wisata:slug}/pembayaran', 'pembayaran')->name('pembayaran');
     Route::get('/invest/wisata/pembayaran', 'pembayaraninvest')->name('pembayaran-invest');
     Route::get('/sukses', 'sukses')->name('sukses');
 });
@@ -62,7 +65,7 @@ Route::middleware('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('wisata', WisataController::class);
     Route::resource('paket', PaketController::class);
     Route::resource('pengembanganWisata', PengembanganWisataController::class);
-    Route::resource('gambar', GalleryController::class);
+    Route::resource('gallery', GalleryController::class);
 });
 
 // Group Login,Register,Forgot
@@ -76,3 +79,23 @@ Route::controller(LoginController::class)->group(function () {
 
     Route::get('/forgot', 'forgot')->name('forgot')->middleware('guest');
 });
+
+// Route Change Role
+Route::post('/roles', [UserController::class, 'changeRole'])->middleware('User');
+
+// Route Email
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');

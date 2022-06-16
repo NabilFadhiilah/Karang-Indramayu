@@ -43,10 +43,9 @@
                                     laut, baik itu di pantai, pulau, atau bawah laut.</p>
                             </div>
                             <div class="d-flex">
-                                <button class="btn btn-primary btn-wisata"><a href="{{ route('checkout') }}"
-                                        class="text-white text-center">Pesan
+                                <button class="btn btn-primary btn-wisata"><a href="#" class="text-white text-center">Pesan
                                         Wisata</a></button>
-                                <a href="{{ route('detail-wisata') }}" class="d-flex align-items-center px-3">Lihat
+                                <a href="#" class="d-flex align-items-center px-3">Lihat
                                     Wisata</a>
                             </div>
                         </div>
@@ -63,10 +62,12 @@
                     <div class="swiper">
                         <div class="swiper-wrapper">
 
-                            @forelse ($data as $wisata)
+                            @forelse ($dataWisata as $wisata)
                                 <!--Card Wisata-->
                                 <div class="col-lg-3 p-0 bg-white rounded-3 m-2 swiper-slide">
                                     <div class="wisata-image">
+                                        <input type="hidden" name="" id="swipercount"
+                                            value="{{ count($dataWisata) + 1 }}">
                                         @foreach ($wisata->relationToGallery as $key => $gallery)
                                             @if ($key == 0)
                                                 <img src="{{ asset('storage/' . $gallery->image) }}" alt=""
@@ -78,35 +79,35 @@
                                         <h2 class="overflow-ellipsis">{{ $wisata->nama_wisata }}</h2>
                                         <p>{!! $wisata->deskripsi !!}</p>
                                         <div class="d-flex justify-content-between">
-                                            <a href="{{ route('detail-wisata') }}" class="d-flex align-items-center">Lihat
+                                            <a href="{{ route('detail-wisata', $wisata->slug) }}"
+                                                class="d-flex align-items-center">Lihat
                                                 Wisata</a>
-                                            <button class=" btn btn-primary btn-wisata"><a href="{{ route('checkout') }}"
+                                            <button class=" btn btn-primary btn-wisata"><a
+                                                    href="{{ route('checkout', $wisata->slug) }}"
                                                     class="text-white text-center">Pesan
                                                     Wisata</a></button>
                                         </div>
+                                    </div>
+                                </div>
+                                <!--Card Wisata Eksplore-->
+                                <div
+                                    class="col-lg-3 p-0 bg-white rounded-3 m-2 d-flex justify-content-center align-items-center swiper-slide text-center">
+                                    <div>
+                                        <i class="bi bi-search"></i>
+                                        <h2>Eksplor Wisata</h2>
+                                        <button class=" btn btn-primary btn-wisata"><a href="{{ route('eksplor') }}"
+                                                class="text-white text-center">Mulai
+                                                Eksplor</a>
+                                        </button>
                                     </div>
                                 </div>
                             @empty
                                 ga ada
                             @endforelse
 
-                            <!--Card Wisata Eksplore-->
-                            <div
-                                class="col-lg-3 p-0 bg-white rounded-3 m-2 d-flex justify-content-center align-items-center swiper-slide text-center">
-                                <div>
-                                    <i class="bi bi-search"></i>
-                                    <h2>Eksplor Wisata</h2>
-                                    <button class=" btn btn-primary btn-wisata"><a href="eksplor"
-                                            class="text-white text-center">Mulai
-                                            Eksplor</a>
-                                    </button>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </section>
 
@@ -156,16 +157,15 @@
                                 </div>
                             </div>
                         </div>
-                    @empty
-                        ga ada
-                    @endforelse
-
                 </div>
                 <div class="row justify-content-center mt-4">
                     <div class="col-lg-12 py-2 text-center section-Wisata-Heading">
                         <a href="{{ route('invest') }}" class="btn btn-primary rounded-pill">Lihat Semua</a>
                     </div>
                 </div>
+            @empty
+                ga ada
+                @endforelse
 
             </div>
         </section>
@@ -192,5 +192,20 @@
 @endsection
 @push('script')
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-    <script src="{{ url('/Frontend/Asset/Scripts/swiper.js') }}"></script>
+    {{-- <script src="{{ url('/Frontend/Asset/Scripts/swiper.js') }}"></script> --}}
+    <script>
+        let swipercount = document.querySelector('#swipercount');
+        var swiper = new Swiper(".swiper", {
+            direction: "horizontal",
+            centeredSlides: false,
+            spaceBetween: 20,
+            freeMode: true,
+            breakpoints: {
+                786: {
+                    slidesPerView: swipercount.value,
+                    slidesPerGroup: 4,
+                },
+            },
+        });
+    </script>
 @endpush

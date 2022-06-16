@@ -36,11 +36,14 @@
                                       <a class="dropdown-item" href="{{ route('dashboard-user') }}">Dashboard Saya</a>
                                   </li>
                                   <li>
-                                      <form action="{{ route('change-role') }}" method="POST">
+                                      <form action="/roles" method="POST">
                                           @csrf
-                                          {{ auth()->user()->roles }}
                                           <button type="submit" class="dropdown-item">Ubah Role</button>
                                       </form>
+                                  </li>
+                                  <li>
+                                      <span
+                                          class="badge bg-primary d-flex justify-content-center">{{ auth()->user()->roles }}</span>
                                   </li>
                                   <hr>
                                   <li>
@@ -54,11 +57,11 @@
                               </ul>
                           </li>
                           @if (Auth::user()->avatar)
-                              <div class="avatar">
+                              <div class="avatar d-sm-none d-md-none d-lg-block">
                                   <img src="{{ Auth::user()->avatar }}" alt="" srcset="">
                               </div>
                           @else
-                              <div class="avatar">
+                              <div class="avatar d-sm-none d-md-none d-lg-block">
                                   <img src="https://ui-avatars.com/api/?name={{ Auth::user()->nama }}" alt="" srcset="">
                               </div>
                           @endif

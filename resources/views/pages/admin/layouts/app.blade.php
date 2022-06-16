@@ -56,7 +56,7 @@
     <script src="{{ url('/Backend/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ url('/Backend/assets/js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="{{ url('/Backend/assets/vendors/apexcharts/apexcharts.js') }}"></script>
+    {{-- <script src="{{ url('/Backend/assets/vendors/apexcharts/apexcharts.js') }}"></script> --}}
     <script src="{{ url('/Backend/assets/js/pages/dashboard.js') }}"></script>
 
     <script src="{{ url('/Backend/assets/js/mazer.js') }}"></script>

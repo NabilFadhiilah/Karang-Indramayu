@@ -13,7 +13,7 @@
                                 Eksplor Wisata
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Wisata Bahari
+                                {{ $wisata->nama_wisata }}
                             </li>
                         </ol>
                     </nav>
@@ -26,79 +26,74 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-7 px-1">
                     <div class="gallery main-card p-3 bg-white rounded-3 mb-2">
-                        <h2>Wisata Bahari</h2>
+                        {{-- {{ dd($wisata) }} --}}
+                        <h2>{{ $wisata->nama_wisata }}</h2>
                         <div class="xzoom-container">
-                            <img class="xzoom" id="xzoom-default"
-                                src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}"
-                                xoriginal="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}" />
-                            <div class="xzoom-thumbs pt-3">
-                                <a href="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}"><img
-                                        class="xzoom-gallery" width="115"
-                                        src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}"
-                                        xpreview="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}" /></a>
-                                <a href="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}"><img
-                                        class="xzoom-gallery" width="115"
-                                        src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}"
-                                        xpreview="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}" /></a>
-                                <a href="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"><img
-                                        class="xzoom-gallery" width="115"
-                                        src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
-                                        xpreview="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}" /></a>
-                                <a href="{{ url('/Frontend/Asset/Images/card-wisata-4.png') }}"><img
-                                        class="xzoom-gallery" width="115"
-                                        src="{{ url('/Frontend/Asset/Images/card-wisata-4.png') }}"
-                                        xpreview="{{ url('/Frontend/Asset/Images/card-wisata-4.png') }}" /></a>
-                                <a href="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}"><img
-                                        class="xzoom-gallery" width="115"
-                                        src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}"
-                                        xpreview="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}" /></a>
-                            </div>
+                            @foreach ($wisata->relationToGallery as $gallery)
+                                {{-- @if ($key == 0) --}}
+                                <img class="xzoom" id="xzoom-default"
+                                    src="{{ asset('storage/' . $gallery->image) }}"
+                                    xoriginal="{{ asset('storage/' . $gallery->image) }}" />
+                                {{-- @endif --}}
+                                <div class="xzoom-thumbs pt-3">
+                                    <a href="{{ asset('storage/' . $gallery->image) }}"><img class="xzoom-gallery"
+                                            width="115" height="125" src="{{ asset('storage/' . $gallery->image) }}"
+                                            xpreview="{{ asset('storage/' . $gallery->image) }}" /></a>
+                                </div>
+                            @endforeach
                         </div>
-                        <h3>Tentang Paket Wisata Ini</h3>
-                        <p>Wisata bahari merupakan salah satu wisata unggulan yang dimiliki Indonesia. Menurut data
-                            Kementerian Kelautan dan Perikanan, Indonesia memiliki 20,87Juta Ha kawasan konservasi
-                            perairan, pesisir, dan pulau-pulau kecil. Garis pantai Indonesia membentang 99.093 km
-                            dengan
-                            luas laut 3,257Juta km².
-
-                            Kekayaan maritim ini membuat wisata bahari di Indonesia tak diragukan lagi keindahan dan
-                            keunikannya. Wisata bahari Indonesia tersebar dari Sabang sampai Merauke. Ada banyak
-                            yang
-                            bisa dieksplor dalam wisata bahari Indonesia.
+                        <h3>Tentang Wisata Ini</h3>
+                        <p>{!! $wisata->deskripsi !!}
                         </p>
                     </div>
                 </div>
                 <div class="col-lg-3 px-1">
                     <div class="bg-white rounded-top p-3 side-card">
-                        <h3>Informasi Paket Wisata</h3>
+                        <h3>Informasi Wisata</h3>
                         <table class="informasi-paket">
                             <tr>
                                 <th width="50%">Durasi Wisata</th>
-                                <td width="50%" class="text-end">2 Hari 1 Malam</td>
+                                <td width="50%" class="text-end">{{ $wisata->durasi_wisata }}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Tanggal Keberangkatan</th>
                                 <td width="50%" class="text-end">21-12-2021</td>
                             </tr>
                             <tr>
-                                <th width="50%">Tanggal Reservasi Awal</th>
-                                <td width="50%" class="text-end">14-12-2021</td>
+                                <th width="50%">Reservasi Awal</th>
+                                <td width="50%" class="text-end">{{ $wisata->tgl_reservasi_awal }}</td>
                             </tr>
                             <tr>
-                                <th width="50%">Tanggal Reservasi Akhir</th>
-                                <td width="50%" class="text-end">31-12-2021</td>
+                                <th width="50%">Reservasi Akhir</th>
+                                <td width="50%" class="text-end">{{ $wisata->tgl_reservasi_akhir }}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Harga</th>
-                                <td width="50%" class="text-end">Rp 123.123.123 / orang</td>
+                                <td width="50%" class="text-end">Rp.{{ number_format($wisata->harga) }} / orang
+                                </td>
                             </tr>
                         </table>
                     </div>
-                    <a href="{{ route('checkout') }}" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
-                        Sekarang</a>
+                    @guest
+                        <a href="{{ route('login') }}"
+                            class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Masuk/Daftar</a>
+                    @endguest
+                    @auth
+                        @if (auth()->user()->roles == 'WISATAWAN')
+                            <a href="{{ route('checkout') }}"
+                                class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
+                                Sekarang</a>
+                        @endif
+                        @if (auth()->user()->roles == 'INVESTOR')
+                            <form action="/roles" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Ubah Ke Wisatawan
+                            </form>
+                        @endif
+                    @endauth
                 </div>
             </div>
-            <div class="row d-flex justify-content-center">
+            {{-- <div class="row d-flex justify-content-center">
                 <div class="col-lg-12 pt-3">
                     <h3>Wisata Dalam Paket Ini</h3>
                 </div>
@@ -181,7 +176,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
 @endsection

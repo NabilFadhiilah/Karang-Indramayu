@@ -6,6 +6,7 @@ use App\Models\Gallery;
 use App\Models\Paket;
 use App\Models\Pengembangan;
 use App\Models\PengembanganWisata;
+use App\Models\Rekening;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class FrontendController extends Controller
     public function index()
     {
         # code...
+        $dataWisata = Wisata::with('relationToGallery')->limit(3)->get();
         $data = PengembanganWisata::with(
             [
                 'relationToWisata' => function ($query) {
@@ -23,7 +25,7 @@ class FrontendController extends Controller
                 'relationToGallery'
             ]
         )->limit(3)->latest()->get();
-        return view('index', ['data' => $data]);
+        return view('index', ['data' => $data, 'dataWisata' => $dataWisata]);
     }
 
     public function eksplor()
@@ -40,10 +42,11 @@ class FrontendController extends Controller
         return view('eksplor', ['wisata' => $dataWisata->paginate(5)]);
         // return view('eksplor');
     }
-    public function wisata()
+    public function wisata(Wisata $wisata)
     {
         # code...
-        return view('wisata');
+        $wisata->load('relationToGallery');
+        return view('wisata', compact('wisata'));
     }
 
     public function invest()
@@ -70,17 +73,19 @@ class FrontendController extends Controller
         return view('pembayaran');
     }
 
-    public function checkout()
+    public function checkout(Wisata $wisata)
     {
         # code...
-        return view('checkout');
+        $wisata->load('relationToGallery');
+        $dataRekening = Rekening::all();
+        return view('checkout', compact('wisata', 'dataRekening'));
     }
     public function pembayaran()
     {
         # code...
         return view('pembayaran');
     }
-    public function sukses()
+    public function sukses(Request $request, Wisata $wisata)
     {
         # code...
         return view('sukses');

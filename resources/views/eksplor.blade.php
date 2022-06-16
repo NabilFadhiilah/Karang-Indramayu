@@ -76,9 +76,10 @@
                                             {!! $item->deskripsi !!}</p>
                                     </div>
                                     <div class="">
-                                        <a href=" {{ route('checkout') }}" class="btn btn-primary m-1 py-1">Reservasi
+                                        <a href=" {{ route('checkout', $item->slug) }}"
+                                            class="btn btn-primary m-1 py-1">Reservasi
                                             Wisata</a>
-                                        <a href="{{ route('detail-wisata') }}"
+                                        <a href="{{ route('detail-wisata', $item->slug) }}"
                                             class="btn btn-outline-primary m-1 py-1">Lihat
                                             Detail Wisata</a>
                                     </div>
