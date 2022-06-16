@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Events\Registered;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class LoginController extends Controller
             } elseif (auth()->user()->roles == 'WISATAWAN') {
                 return redirect()->intended('eksplor');
             } else {
-                return redirect()->route('/');
+                return redirect()->route('home');
             }
         }
         return back()->with('loginError', 'Email Atau Password Salah');
@@ -57,6 +58,7 @@ class LoginController extends Controller
         $data['password'] = Hash::make($data['password']);
         // dd($data);
         User::create($data);
+        event(new Registered($data));
         return redirect('login')->with('sukses', 'Registrasi Berhasil!');
     }
 
