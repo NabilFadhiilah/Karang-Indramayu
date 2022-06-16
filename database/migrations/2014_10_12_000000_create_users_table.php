@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('nama');
             $table->string('email')->unique();
-            $table->string('roles')->default('USERS');
+            $table->string('roles')->default('WISATAWAN');
             $table->string('no_tlp')->nullable();
             $table->string('alamat')->nullable();
             $table->string('jenis_kelamin')->nullable();
