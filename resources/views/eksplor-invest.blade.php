@@ -13,7 +13,7 @@
                                     Beranda
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Eksplor Wisata
+                                    Pengembangan Wisata
                                 </li>
                             </ol>
                         </nav>
@@ -22,10 +22,10 @@
                 <!--Filter Side Bar-->
                 <div class="col-lg-3">
                     <div class="bg-white rounded-3 p-3 mb-3">
-                        <h3>Cari Wisata</h3>
+                        <h3>Cari Pemgembangan</h3>
                         <div class="input-group flex-nowrap">
-                            <input type="text" class="form-control" placeholder="Cari Wisata" aria-label="Cari Wisata"
-                                aria-describedby="addon-wrapping">
+                            <input type="text" class="form-control" placeholder="Cari Pemgembangan"
+                                aria-label="Cari Pemgembangan" aria-describedby="addon-wrapping">
                             <span class="input-group-append">
                                 <button class="btn btn-outline-secondary border-left-0 border" type="button">
                                     <i class="bi bi-search"></i>
@@ -51,9 +51,9 @@
                 </div>
                 <!--Main Content-->
                 <div class="col-lg-7">
-                    <div class="row mb-2 card-investment justify-content-center">
 
-                        <!--Card Terumbu-->
+                    <!--Card Invest-->
+                    <div class="row mb-2 card-investment justify-content-center">
                         @forelse ($data as $pengembangan)
                             <div class="col-lg-6 px-0 py-1">
                                 <div class="card mx-1">
@@ -74,10 +74,13 @@
                                             </div>
                                         @endforeach
                                         <div class="col-12 d-flex align-items-center">
-                                            <div class="col-6">
-                                                <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
-                                                    Sekarang</a>
-                                            </div>
+                                            @foreach ($pengembangan->relationToWisata as $wisata)
+                                                <div class="col-6">
+                                                    <a href="{{ route('invest-wisata', $wisata->slug) }}"
+                                                        class="btn btn-primary">Invest
+                                                        Sekarang</a>
+                                                </div>
+                                            @endforeach
                                             <div class="col-6 text-end">
                                                 <p class="small m-0">Target Pengembangan</p>
                                                 <p class="fw-bold m-0">
@@ -88,9 +91,13 @@
                                 </div>
                             </div>
                         @empty
-                            ga ada
-                        @endforelse
                     </div>
+                    <div class="d-flex flex-column">
+                        <img class="align-self-center" style="width: 20%;object-fit: cover;"
+                            src="{{ url('Frontend/Asset/Images/empty.svg') }}" alt="">
+                        <h3 class="align-self-center mt-2">Data Belum Terserdia</h3>
+                    </div>
+                    @endforelse
                 </div>
                 <div class="col-lg-10 mt-4">
                     <nav aria-label="Page navigation example" class="d-flex justify-content-center">

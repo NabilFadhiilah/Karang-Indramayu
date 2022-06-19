@@ -31,23 +31,30 @@ use Illuminate\Http\Request;
 //     return view('welcome');
 // });
 
-// Grup Frontend Controller
+// Grup Frontend Controller (Guest)
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/eksplor', 'eksplor')->name('eksplor');
     Route::get('/eksplor/{wisata:slug}', 'wisata')->name('detail-wisata');
     Route::get('/invest', 'invest')->name('invest');
-    Route::get('/invest/wisata', 'InvestWisata')->name('invest-wisata');
+    Route::get('/invest/{wisata:slug}', 'InvestWisata')->name('invest-wisata');
 });
-// Butuh Middleware Untuk Route "Wisata"
+// Group Frontend Controller (Auth)
 Route::controller(FrontendController::class)->middleware('User')->group(function () {
+    // wisata
     Route::get('/eksplor/{wisata:slug}/checkout', 'checkout')->name('checkout');
-    Route::get('/eksplor/{wisata:slug}/pembayaran', 'pembayaran')->name('pembayaran');
-    Route::get('/invest/wisata/pembayaran', 'pembayaraninvest')->name('pembayaran-invest');
+    Route::post('/eksplor/{wisata:slug}/pembayaran', 'pembayaranWisataStore')->name('pembayaran-wisata');
+    Route::get('/eksplor/{wisata:slug}/pembayaran', 'pembayaranWisata')->name('payment-wisata');
+    Route::post('/eksplor/{reservasiWisata}/upload', 'wisataUpload')->name('wisataUpload');
+    // invest
+    Route::post('/invest/{wisata:slug}/pembayaran', 'pembayaraninveststore')->name('pembayaran-invest');
+    Route::get('/invest/{wisata:slug}/pembayaran', 'pembayaraninvest')->name('payment-invest');
+    Route::post('/invest/{pengembangan}/upload', 'investUpload')->name('investUpload');
+
     Route::get('/sukses', 'sukses')->name('sukses');
 });
 
-// Group Dashboard Controller User (Frontend)
+// Group User Dashboard Controller (Auth)
 Route::controller(UserDashboardController::class)->prefix('user')->middleware('User')->group(function () {
     Route::get('/', 'index')->name('dashboard-user');
     Route::get('/detail', 'detail')->name('dashboard-detail');
@@ -56,7 +63,7 @@ Route::controller(UserDashboardController::class)->prefix('user')->middleware('U
 });
 
 
-// Grup Dashboard Controller Admin (Backend)
+// Grup Admin Dashboard Controller (Backend)
 Route::middleware('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::controller(AdminDashboardController::class)->group(function () {
         Route::get('/', 'index');
@@ -81,7 +88,7 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 // Route Change Role
-Route::post('/roles', [UserController::class, 'changeRole'])->middleware('User');
+Route::post('/roles', [UserController::class, 'changeRole'])->middleware('User')->name('roles');
 
 // Route Email
 Route::get('/email/verify', function () {

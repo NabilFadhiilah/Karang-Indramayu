@@ -43,7 +43,8 @@
                                     laut, baik itu di pantai, pulau, atau bawah laut.</p>
                             </div>
                             <div class="d-flex">
-                                <button class="btn btn-primary btn-wisata"><a href="#" class="text-white text-center">Pesan
+                                <button class="btn btn-primary btn-wisata"><a href="#"
+                                        class="text-white text-center">Pesan
                                         Wisata</a></button>
                                 <a href="#" class="d-flex align-items-center px-3">Lihat
                                     Wisata</a>
@@ -62,8 +63,8 @@
                     <div class="swiper">
                         <div class="swiper-wrapper">
 
+                            <!--Card Wisata-->
                             @forelse ($dataWisata as $wisata)
-                                <!--Card Wisata-->
                                 <div class="col-lg-3 p-0 bg-white rounded-3 m-2 swiper-slide">
                                     <div class="wisata-image">
                                         <input type="hidden" name="" id="swipercount"
@@ -89,6 +90,15 @@
                                         </div>
                                     </div>
                                 </div>
+                            @endforeach
+                            {{-- {{ dd($dataWisata) }} --}}
+                            @if (!$dataWisata->isNotEmpty())
+                                <div class="d-flex flex-column">
+                                    <img class="align-self-center" style="width: 20%;object-fit: cover;"
+                                        src="{{ url('Frontend/Asset/Images/empty.svg') }}" alt="">
+                                    <h3 class="align-self-center mt-2">Data Belum Terserdia</h3>
+                                </div>
+                            @else
                                 <!--Card Wisata Eksplore-->
                                 <div
                                     class="col-lg-3 p-0 bg-white rounded-3 m-2 d-flex justify-content-center align-items-center swiper-slide text-center">
@@ -101,10 +111,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            @empty
-                                ga ada
-                            @endforelse
-
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -124,7 +131,7 @@
                 </div>
 
                 <div class="col-lg-12 row justify-content-center">
-                    @forelse ($data as $pengembangan)
+                    @foreach ($data as $pengembangan)
                         <div class="col-lg-4 py-1 px-0">
                             <div class="card mx-1">
                                 @foreach ($pengembangan->relationToGallery as $key => $gallery)
@@ -144,10 +151,13 @@
                                         </div>
                                     @endforeach
                                     <div class="col-12 d-flex align-items-center">
-                                        <div class="col-6">
-                                            <a href="{{ route('invest-wisata') }}" class="btn btn-primary">Invest
-                                                Sekarang</a>
-                                        </div>
+                                        @foreach ($pengembangan->relationToWisata as $wisata)
+                                            <div class="col-6">
+                                                <a href="{{ route('invest-wisata', $wisata->slug) }}"
+                                                    class="btn btn-primary">Invest
+                                                    Sekarang</a>
+                                            </div>
+                                        @endforeach
                                         <div class="col-6 text-end">
                                             <p class="small m-0">Target Pengembangan</p>
                                             <p class="fw-bold m-0">
@@ -157,15 +167,22 @@
                                 </div>
                             </div>
                         </div>
+                    @endforeach
+
+                    @if (!$data->isNotEmpty())
+                        <div class="d-flex flex-column">
+                            <img class="align-self-center" style="width: 10%;object-fit: cover;"
+                                src="{{ url('Frontend/Asset/Images/empty.svg') }}" alt="">
+                            <h3 class="align-self-center mt-2">Data Belum Terserdia</h3>
+                        </div>
+                    @else
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-lg-12 py-2 text-center section-Wisata-Heading">
+                                <a href="{{ route('invest') }}" class="btn btn-primary rounded-pill">Lihat Semua</a>
+                            </div>
+                        </div>
+                    @endif
                 </div>
-                <div class="row justify-content-center mt-4">
-                    <div class="col-lg-12 py-2 text-center section-Wisata-Heading">
-                        <a href="{{ route('invest') }}" class="btn btn-primary rounded-pill">Lihat Semua</a>
-                    </div>
-                </div>
-            @empty
-                ga ada
-                @endforelse
 
             </div>
         </section>

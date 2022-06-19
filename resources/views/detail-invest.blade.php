@@ -10,10 +10,10 @@
                                 Beranda
                             </li>
                             <li class="breadcrumb-item" aria-current="page">
-                                Eksplor Wisata
+                                Pengembangan Wisata
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Wisata Bahari
+                                {{ $wisata->nama_wisata }}
                             </li>
                         </ol>
                     </nav>
@@ -25,85 +25,117 @@
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-7 px-1">
-                    <div class="gallery main-card p-3 bg-white rounded-3 mb-2">
-                        <h2>Wisata Bahari</h2>
+                    <div class="gallery main-card p-3 border bg-white rounded-3 mb-2">
+                        <h2>{{ $wisata->nama_wisata }}</h2>
                         <div class="xzoom-container">
-                            <img class="xzoom" id="xzoom-default"
-                                src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}"
-                                xoriginal="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}" />
-                            <div class="xzoom-thumbs pt-3">
-                                <a href="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}"><img
-                                        class="xzoom-gallery" width="115"
-                                        src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}"
-                                        xpreview="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}" /></a>
-                                <a href="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}"><img
-                                        class="xzoom-gallery" width="115"
-                                        src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}"
-                                        xpreview="{{ url('/Frontend/Asset/Images/Main-wisata-landing-2.png') }}" /></a>
-                                <a href="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"><img
-                                        class="xzoom-gallery" width="115"
-                                        src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}"
-                                        xpreview="{{ url('/Frontend/Asset/Images/Main-wisata-landing-3.png') }}" /></a>
-                                <a href="{{ url('/Frontend/Asset/Images/card-wisata-4.png') }}"><img
-                                        class="xzoom-gallery" width="115"
-                                        src="{{ url('/Frontend/Asset/Images/card-wisata-4.png') }}"
-                                        xpreview="{{ url('/Frontend/Asset/Images/card-wisata-4.png') }}" /></a>
-                                <a href="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}"><img
-                                        class="xzoom-gallery" width="115"
-                                        src="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}"
-                                        xpreview="{{ url('/Frontend/Asset/Images/Main-wisata-landing-1.png') }}" /></a>
-                            </div>
+                            @foreach ($wisata->relationToGallery as $gallery)
+                                {{-- @if ($key == 0) --}}
+                                <img class="xzoom" id="xzoom-default" src="{{ asset('storage/' . $gallery->image) }}"
+                                    xoriginal="{{ asset('storage/' . $gallery->image) }}" />
+                                {{-- @endif --}}
+                                <div class="xzoom-thumbs pt-3">
+                                    <a href="{{ asset('storage/' . $gallery->image) }}"><img class="xzoom-gallery"
+                                            width="115" height="125" src="{{ asset('storage/' . $gallery->image) }}"
+                                            xpreview="{{ asset('storage/' . $gallery->image) }}" /></a>
+                                </div>
+                            @endforeach
                         </div>
-                        <h3>Tentang Paket Wisata Ini</h3>
-                        <p>Wisata bahari merupakan salah satu wisata unggulan yang dimiliki Indonesia. Menurut data
-                            Kementerian Kelautan dan Perikanan, Indonesia memiliki 20,87Juta Ha kawasan konservasi
-                            perairan, pesisir, dan pulau-pulau kecil. Garis pantai Indonesia membentang 99.093 km
-                            dengan
-                            luas laut 3,257Juta km².
-
-                            Kekayaan maritim ini membuat wisata bahari di Indonesia tak diragukan lagi keindahan dan
-                            keunikannya. Wisata bahari Indonesia tersebar dari Sabang sampai Merauke. Ada banyak
-                            yang
-                            bisa dieksplor dalam wisata bahari Indonesia.
-                        </p>
+                        <div class="my-2">
+                            <h3>Tentang Wisata Ini</h3>
+                            <p>{!! $wisata->deskripsi !!}</p>
+                        </div>
+                        <div class="my-2">
+                            @foreach ($wisata->relationToPengembangan as $pengembangan)
+                                <h3>Mengenai Investasi Ini</h3>
+                                <p>{!! $pengembangan->deskripsi !!}</p>
+                            @endforeach
+                        </div>
+                        <div class="my-2">
+                            <h3>Update</h3>
+                            <p>Belum Ada Update Pengembangan Untuk Wisata Ini</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 px-1">
-                    <div class="bg-white rounded-top p-3 side-card">
-                        <h3>Informasi Pengembangan Wisata</h3>
-                        <table class="informasi-paket">
-                            <tr>
-                                <th width="50%">Durasi Wisata</th>
-                                <td width="50%" class="text-end">2 Hari 1 Malam</td>
-                            </tr>
-                            <tr>
-                                <th width="50%">Tanggal Keberangkatan</th>
-                                <td width="50%" class="text-end">21-12-2021</td>
-                            </tr>
-                            <tr>
-                                <th width="50%">Tanggal Reservasi Awal</th>
-                                <td width="50%" class="text-end">14-12-2021</td>
-                            </tr>
-                            <tr>
-                                <th width="50%">Tanggal Reservasi Akhir</th>
-                                <td width="50%" class="text-end">31-12-2021</td>
-                            </tr>
-                            <tr>
-                                <th width="50%">Harga</th>
-                                <td width="50%" class="text-end">Rp 123.123.123 / orang</td>
-                            </tr>
-                        </table>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Jumlah Investasi"
-                                aria-label="Jumlah Investasi" aria-describedby="basic-addon1">
+                    <div class="bg-white rounded p-3 side-card border mb-3">
+                        <h3>Informasi Pengembangan</h3>
+                        <div class="informasi-paket">
+                            @foreach ($wisata->relationToPengembangan as $pengembangan)
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="m-0">Target Dana</h6>
+                                    <p class="m-0">Rp.{{ number_format($pengembangan->target_dana) }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="m-0">Imbal Hasil</h6>
+                                    <p class="m-0">{{ $pengembangan->imbal_hasil }}%p.a</p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="m-0">Minimal Invest</h6>
+                                    <p class="m-0">Rp.{{ number_format($pengembangan->min_investasi) }}</p>
+                                </div>
+                            @endforeach
+                        </div>
+                        {{-- progress bar --}}
+                        <div class="mb-1 d-flex justify-content-between">
+                            <h6 class="m-0">Terkumpul</h6>
+                            <p class="m-0 fw-bold text-success">Rp.10</p>
+                        </div>
+                        <h6 class="m-0 pb-2">Progres Pendanaan :</h6>
+                        <div class="progress mb-3">
+                            <div id="invest"class="progress-bar progress-bar-striped" role="progressbar"
+                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%
+                            </div>
                         </div>
                     </div>
-                    <a href="{{ route('pembayaran-invest') }}"
-                        class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Investasi
-                        Sekarang</a>
+                    {{-- invest --}}
+                    <div class="bg-white rounded-top p-3 mt-3 border side-card">
+                        <form action={{ route('pembayaran-invest', $wisata->slug) }} method="POST">
+                            @csrf
+                            <h4>Jumlah Investasi</h4>
+                            <div class="input-group mb-3">
+                                <input type="number" min="{{ $pengembangan->min_investasi }}" class="form-control"
+                                    placeholder="Min Rp.{{ number_format($pengembangan->min_investasi) }}"
+                                    aria-label="Jumlah Investasi" name="pendanaan" aria-describedby="basic-addon1">
+                                <input type="hidden" name="id_pengembangan" value="{{ $pengembangan->id }}">
+                            </div>
+                            <h4>Metode Pembayaran</h4>
+                            @forelse ($rekening as $rekening)
+                                <div class="d-flex align-items-center mb-2">
+                                    <input class="form-check-input mt-0 mx-2" type="radio" name="id_rekening"
+                                        id="radioNoLabel1" value="{{ $rekening->id }}" aria-label="...">
+                                    <p class="paragraph-2 justify-content-center d-flex mb-0 px-1">
+                                        {{ $rekening->pemilik_rekening }} <br>
+                                        {{ $rekening->no_rekening }} <br>
+                                        {{ $rekening->bank_rekening }}</p>
+                                </div>
+                            @empty
+                                Metode Pembayaran Belum Tersedia, Harap Hubungi Admin
+                            @endforelse
+                    </div>
+                    @auth
+                        @if (auth()->user()->roles == 'INVESTOR')
+                            <button type="submit" name="payment"
+                                class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Invest
+                                Sekarang</button>
+                            </form>
+                        @endif
+                        @if (auth()->user()->roles == 'WISATAWAN')
+                            {{-- <form action="{{ route('roles') }}" method="POST">
+                                @csrf --}}
+                            <a class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Ubah Ke
+                                Investor</a>
+                            {{-- </form> --}}
+                        @endif
+                    @endauth
+                    {{-- @if (!$rekening->isNotEmpty())
+                        <p class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Invest Belum Tersedia</p>
+                    @endif --}}
+                    @guest
+                        <a href="{{ route('login') }}"
+                            class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Masuk/Daftar</a>
+                    @endguest
                 </div>
             </div>
-
         </div>
     </section>
 @endsection

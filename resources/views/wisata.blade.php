@@ -31,8 +31,7 @@
                         <div class="xzoom-container">
                             @foreach ($wisata->relationToGallery as $gallery)
                                 {{-- @if ($key == 0) --}}
-                                <img class="xzoom" id="xzoom-default"
-                                    src="{{ asset('storage/' . $gallery->image) }}"
+                                <img class="xzoom" id="xzoom-default" src="{{ asset('storage/' . $gallery->image) }}"
                                     xoriginal="{{ asset('storage/' . $gallery->image) }}" />
                                 {{-- @endif --}}
                                 <div class="xzoom-thumbs pt-3">
@@ -55,10 +54,10 @@
                                 <th width="50%">Durasi Wisata</th>
                                 <td width="50%" class="text-end">{{ $wisata->durasi_wisata }}</td>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <th width="50%">Tanggal Keberangkatan</th>
                                 <td width="50%" class="text-end">21-12-2021</td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <th width="50%">Reservasi Awal</th>
                                 <td width="50%" class="text-end">{{ $wisata->tgl_reservasi_awal }}</td>
@@ -80,14 +79,15 @@
                     @endguest
                     @auth
                         @if (auth()->user()->roles == 'WISATAWAN')
-                            <a href="{{ route('checkout') }}"
+                            <a href="{{ route('checkout', $wisata->slug) }}"
                                 class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
                                 Sekarang</a>
                         @endif
                         @if (auth()->user()->roles == 'INVESTOR')
                             <form action="/roles" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Ubah Ke Wisatawan
+                                <button type="submit" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Ubah Ke
+                                    Wisatawan
                             </form>
                         @endif
                     @endauth

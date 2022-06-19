@@ -61,7 +61,8 @@
                                 @foreach ($item->relationToGallery as $key => $gallery)
                                     @if ($key == 0)
                                         <img src="{{ asset('storage/' . $gallery->image) }}" style="object-fit: cover;"
-                                            class="img-responsive rounded-start" width="100%" height="180px" alt="">
+                                            class="img-responsive rounded-start" width="100%" height="180px"
+                                            alt="">
                                     @endif
                                 @endforeach
                             </div>
@@ -87,6 +88,11 @@
                             </div>
                         </div>
                     @empty
+                        <div class="d-flex flex-column">
+                            <img class="align-self-center" style="width: 20%;object-fit: cover;"
+                                src="{{ url('Frontend/Asset/Images/empty.svg') }}" alt="">
+                            <h3 class="align-self-center mt-2">Data Belum Terserdia</h3>
+                        </div>
                     @endforelse
                 </div>
                 <div class="col-lg-10 mt-4">
