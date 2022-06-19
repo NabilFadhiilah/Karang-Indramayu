@@ -32,9 +32,16 @@
                                   role="button" data-bs-toggle="dropdown"
                                   aria-expanded="false">{{ auth()->user()->nama }}</a>
                               <ul class="dropdown-menu" aria-labelledby="user-logged-in">
-                                  <li>
-                                      <a class="dropdown-item" href="{{ route('dashboard-user') }}">Dashboard Saya</a>
-                                  </li>
+                                  @if (auth()->user()->roles == 'ADMIN')
+                                      <li>
+                                          <a class="dropdown-item" href="{{ route('admin.') }}">Dashboard Saya</a>
+                                      </li>
+                                  @endif
+                                  @if (auth()->user()->roles == 'WISATAWAN' || auth()->user()->roles == 'INVESTOR')
+                                      <li>
+                                          <a class="dropdown-item" href="{{ route('dashboard-user') }}">Dashboard Saya</a>
+                                      </li>
+                                  @endif
                                   <li>
                                       <form action="/roles" method="POST">
                                           @csrf
@@ -62,7 +69,8 @@
                               </div>
                           @else
                               <div class="avatar d-sm-none d-md-none d-lg-block">
-                                  <img src="https://ui-avatars.com/api/?name={{ Auth::user()->nama }}" alt="" srcset="">
+                                  <img src="https://ui-avatars.com/api/?name={{ Auth::user()->nama }}" alt=""
+                                      srcset="">
                               </div>
                           @endif
                       @endauth
