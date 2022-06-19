@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Wisata extends Model
 {
     // use Sluggable;
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'wisata';
     protected $fillable = [

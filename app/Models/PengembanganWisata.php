@@ -13,7 +13,7 @@ class PengembanganWisata extends Model
     use HasFactory, SoftDeletes, HasRelationships;
 
     protected $table = 'pengembangan_wisata';
-    protected $fillable = ['id_wisata', 'target_dana'];
+    protected $guarded = ['id'];
 
     public function relationToWisata()
     {
