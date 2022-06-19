@@ -26,8 +26,8 @@ class StoreWisataRequest extends FormRequest
     {
         return [
             //
-            'nama_wisata' => 'required',
-            'slug' => 'required',
+            'nama_wisata' => 'required|unique:wisata',
+            'slug' => 'required|unique:wisata',
             'deskripsi' => 'required',
             'tgl_reservasi_awal' => 'required',
             'tgl_reservasi_akhir' => 'required',

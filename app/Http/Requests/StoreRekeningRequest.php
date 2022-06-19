@@ -26,8 +26,8 @@ class StoreRekeningRequest extends FormRequest
     {
         return [
             //
-            'no_rekening' => 'required|max:255',
-            'bank_rekening' => 'required',
+            'no_rekening' => 'required|max:255|unique:rekening',
+            'bank_rekening' => 'required|max:255',
             'pemilik_rekening' => 'required|max:255',
         ];
     }

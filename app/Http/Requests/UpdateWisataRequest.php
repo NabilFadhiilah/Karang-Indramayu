@@ -26,6 +26,14 @@ class UpdateWisataRequest extends FormRequest
     {
         return [
             //
+            'nama_wisata' => 'required',
+            'slug' => 'required',
+            'deskripsi' => 'required',
+            'tgl_reservasi_awal' => 'required',
+            'tgl_reservasi_akhir' => 'required',
+            'durasi_wisata' => 'required',
+            'harga' => 'required',
+            'ketentuan' => 'required',
         ];
     }
 }

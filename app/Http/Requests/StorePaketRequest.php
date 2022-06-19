@@ -26,14 +26,14 @@ class StorePaketRequest extends FormRequest
     {
         return [
             //
-            // 'nama_paket' => 'required',
-            // 'slug' => 'required',
-            // 'deskripsi' => 'required',
-            // 'tgl_reservasi_awal' => 'required',
-            // 'tgl_reservasi_akhir' => 'required',
-            // 'durasi_wisata' => 'required',
-            // 'harga' => 'required',
-            // 'ketentuan' => 'required',
+            'nama_paket' => 'required|unique:paket',
+            'slug' => 'required|unique:paket',
+            'deskripsi' => 'required',
+            'tgl_reservasi_awal' => 'required',
+            'tgl_reservasi_akhir' => 'required',
+            'durasi_wisata' => 'required',
+            'harga' => 'required',
+            'ketentuan' => 'required',
         ];
     }
 }

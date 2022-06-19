@@ -26,6 +26,11 @@ class StorePengembanganWisataRequest extends FormRequest
     {
         return [
             //
+            'id_wisata' => 'required',
+            'target_dana' => 'required|max:255',
+            'deskripsi' => 'required|max:255',
+            'imbal_hasil' => 'required|max:255',
+            'min_investasi' => 'required|max:255',
         ];
     }
 }
