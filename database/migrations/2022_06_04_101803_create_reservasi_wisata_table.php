@@ -21,11 +21,15 @@ class CreateReservasiWisataTable extends Migration
             $table->integer('partisipan_reservasi');
             $table->date('tgl_reservasi');
             $table->date('tgl_pesan_reservasi');
-            $table->date('tgl_batas_pembayaran');
+            $table->dateTime('tgl_batas_pembayaran');
             $table->string('bukti_reservasi')->nullable();
+            $table->date('tgl_verifikasi')->nullable();
             $table->string('status_reservasi')->default('PENDING');
             $table->string('total_reservasi');
             $table->timestamps();
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_wisata')->references('id')->on('wisata');
+            $table->foreign('id_rekening')->references('id')->on('rekening');
         });
     }
 
