@@ -34,8 +34,13 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="nama_paket">Nama Paket Wisata</label>
-                                                <input type="text" id="nama_paket" class="form-control" name="nama_paket"
+                                                <input type="text" id="nama_paket" class="form-control @error('nama_paket') is-invalid @enderror" value="{{ old('nama_paket') }}" name="nama_paket"
                                                     placeholder="Nama Paket Wisata">
+                                                @error('nama_paket')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -43,7 +48,12 @@
                                             <div class="form-group">
                                                 <label for="slug">Slug</label>
                                                 <small class="text-muted">Otomatis Terisi</small>
-                                                <input name="slug" type="text" class="form-control" id="slug" readonly>
+                                                <input name="slug" type="text" value="{{ old('slug') }}" class="form-control @error('slug') is-invalid @enderror" id="slug" readonly>
+                                                @error('slug')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                             </div>
                                         </div>
 
@@ -102,7 +112,10 @@
                                         <div class="col-12">
                                             <div class="card">
                                                 <label for="deskripsi">Deskripsi Paket Wisata</label>
-                                                <input id="deskripsi" type="hidden" name="deskripsi">
+                                                @error('deskripsi')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
+                                                <input id="deskripsi" type="hidden" name="deskripsi" value="{{ old('deskripsi') }}">
                                                 <trix-editor input="deskripsi"></trix-editor>
                                             </div>
                                         </div>
@@ -110,30 +123,48 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="tgl_reservasi_awal">Tanggal Reservasi Awal</label>
-                                                <input type="date" id="tgl_reservasi_awal" class="form-control"
-                                                    name="tgl_reservasi_awal" placeholder="Tanggal Reservasi Awal">
+                                                <input type="date" id="tgl_reservasi_awal" class="form-control @error('tgl_reservasi_awal') is-invalid @enderror"
+                                                    name="tgl_reservasi_awal" placeholder="Tanggal Reservasi Awal" value="{{ old('tgl_reservasi_awal') }}">
+                                                    @error('tgl_reservasi_awal')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="tgl_reservasi_akhir">Tanggal Reservasi Akhir</label>
-                                                <input type="date" id="tgl_reservasi_akhir" class="form-control"
-                                                    name="tgl_reservasi_akhir" placeholder="Tanggal Reservasi Akhir">
+                                                <input type="date" id="tgl_reservasi_akhir" class="form-control @error('tgl_reservasi_akhir') is-invalid @enderror"
+                                                    name="tgl_reservasi_akhir" placeholder="Tanggal Reservasi Akhir" value="{{ old('tgl_reservasi_akhir') }}">
+                                                    @error('tgl_reservasi_akhir')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="harga">Harga</label>
-                                                <input type="text" id="harga" class="form-control" name="harga"
-                                                    placeholder="Harga">
+                                                <input type="text" id="harga" class="form-control  @error('harga') is-invalid @enderror" name="harga"
+                                                    placeholder="Harga" value="{{ old('harga') }}">
+                                                    @error('harga')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="card">
                                                 <label for="ketentuan">Ketentuan Paket Wisata</label>
-                                                <input id="ketentuan" type="hidden" name="ketentuan">
+                                                @error('ketentuan')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
+                                                <input id="ketentuan" type="hidden" name="ketentuan" value="{{ old('ketentuan') }}">
                                                 <trix-editor input="ketentuan"></trix-editor>
                                             </div>
                                         </div>

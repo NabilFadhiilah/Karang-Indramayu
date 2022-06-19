@@ -21,27 +21,45 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="nama-rekening-pemilik">Nama Pemilik Rekening</label>
-                                                <input type="text" id="nama-rekening-pemilik" class="form-control"
+                                                <input type="text" id="nama-rekening-pemilik"
+                                                    class="form-control  @error('pemilik_rekening') is-invalid @enderror"
                                                     name="pemilik_rekening" placeholder="Nama Pemilik Rekening"
                                                     value="{{ old('pemilik_rekening') ?? $item->pemilik_rekening }}">
+                                                @error('pemilik_rekening')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="no_rekening">No Rekening</label>
-                                                <input type="text" id="no_rekening" class="form-control"
+                                                <input type="text" id="no_rekening"
+                                                    class="form-control  @error('no_rekening') is-invalid @enderror"
                                                     name="no_rekening" placeholder="No Rekening"
                                                     value="{{ old('no_rekening') ?? $item->no_rekening }}">
+                                                @error('no_rekening')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class=" col-12">
                                             <div class="form-group">
                                                 <label for="nama_bank">Nama Bank</label>
-                                                <input type="text" id="nama_bank" class="form-control"
+                                                <input type="text" id="nama_bank"
+                                                    class="form-control  @error('bank_rekening') is-invalid @enderror"
                                                     name="bank_rekening" placeholder="Nama Bank"
                                                     value="{{ old('bank_rekening') ?? $item->bank_rekening }}">
+                                                @error('bank_rekening')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 

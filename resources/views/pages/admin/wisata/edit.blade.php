@@ -37,6 +37,11 @@
                                                 <input type="text" id="nama_wisata" class="form-control"
                                                     name="nama_wisata" placeholder="Nama Wisata"
                                                     value="{{ old('nama_wisata') ?? $item->nama_wisata }}">
+                                                @error('nama_wisata')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -44,8 +49,13 @@
                                             <div class="form-group">
                                                 <label for="slug">Slug</label>
                                                 <small class="text-muted">Otomatis Terisi</small>
-                                                <input name="slug" type="text" class="form-control" id="slug" readonly
-                                                    value="{{ old('slug') ?? $item->slug }}">
+                                                <input name="slug" type="text" class="form-control" id="slug"
+                                                    readonly value="{{ old('slug') ?? $item->slug }}">
+                                                @error('slug')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -68,6 +78,9 @@
                                         <div class="col-12">
                                             <div class="card">
                                                 <label for="deskripsi">Deskripsi Wisata</label>
+                                                @error('deskripsi')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
                                                 <input id="deskripsi" type="hidden" name="deskripsi"
                                                     value="{{ old('deskripsi') ?? $item->deskripsi }}">
                                                 <trix-editor input="deskripsi"
@@ -82,6 +95,11 @@
                                                 <input type="date" id="tgl_reservasi_awal" class="form-control"
                                                     name="tgl_reservasi_awal" placeholder="Tanggal Reservasi Awal"
                                                     value="{{ old('tgl_reservasi_awal') ?? $item->tgl_reservasi_awal }}">
+                                                @error('tgl_reservasi_awal')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -90,6 +108,11 @@
                                                 <input type="date" id="tgl_reservasi_akhir" class="form-control"
                                                     name="tgl_reservasi_akhir" placeholder="Tanggal Reservasi Akhir"
                                                     value="{{ old('tgl_reservasi_akhir') ?? $item->tgl_reservasi_akhir }}">
+                                                @error('tgl_reservasi_akhir')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -99,6 +122,11 @@
                                                 <input type="text" id="durasi_wisata" class="form-control"
                                                     name="durasi_wisata" placeholder="Durasi Wisata"
                                                     value="{{ old('durasi_wisata') ?? $item->durasi_wisata }}">
+                                                @error('durasi_wisata')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -107,12 +135,20 @@
                                                 <label for="harga">Harga</label>
                                                 <input type="text" id="harga" class="form-control" name="harga"
                                                     placeholder="Harga" value="{{ old('harga') ?? $item->harga }}">
+                                                @error('harga')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="card">
                                                 <label for="ketentuan">Ketentuan Wisata</label>
+                                                @error('ketentuan')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
                                                 <input id="ketentuan" type="hidden" name="ketentuan"
                                                     value="{{ old('ketentuan') ?? $item->ketentuan }}">
                                                 <trix-editor input="ketentuan"
@@ -123,7 +159,8 @@
 
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                            <button type="reset"
+                                                class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                         </div>
                                     </div>
                                 </div>
