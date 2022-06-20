@@ -40,7 +40,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="my-2">
+                        {{-- <div class="my-2">
                             <h3>Tentang Wisata Ini</h3>
                             <p>{!! $wisata->deskripsi !!}</p>
                         </div>
@@ -53,6 +53,38 @@
                         <div class="my-2">
                             <h3>Update</h3>
                             <p>Belum Ada Update Pengembangan Untuk Wisata Ini</p>
+                        </div> --}}
+                        <div class="my-2">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-tentang-wisata-ini-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-tentang-wisata-ini" type="button" role="tab"
+                                        aria-controls="nav-tentang-wisata-ini" aria-selected="true">Tentang Wisata
+                                        Ini</button>
+                                    <button class="nav-link" id="nav-mengenai-investasi-ini-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-mengenai-investasi-ini" type="button" role="tab"
+                                        aria-controls="nav-mengenai-investasi-ini" aria-selected="false">Mengenai Investasi
+                                        Ini</button>
+                                    <button class="nav-link" id="nav-Update-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-Update" type="button" role="tab"
+                                        aria-controls="nav-Update" aria-selected="false">Update</button>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-tentang-wisata-ini" role="tabpanel"
+                                    aria-labelledby="nav-tentang-wisata-ini-tab">
+                                    <p>{!! $wisata->deskripsi !!}</p>
+                                </div>
+                                <div class="tab-pane fade" id="nav-mengenai-investasi-ini" role="tabpanel"
+                                    aria-labelledby="nav-mengenai-investasi-ini-tab">
+                                    @foreach ($wisata->relationToPengembangan as $pengembangan)
+                                        <p>{!! $pengembangan->deskripsi !!}</p>
+                                    @endforeach
+                                </div>
+                                <div class="tab-pane fade" id="nav-Update" role="tabpanel" aria-labelledby="nav-Update-tab">
+                                    <p>Belum Ada Update Pengembangan Untuk Wisata Ini</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,12 +110,14 @@
                         {{-- progress bar --}}
                         <div class="mb-1 d-flex justify-content-between">
                             <h6 class="m-0">Terkumpul</h6>
-                            <p class="m-0 fw-bold text-success">Rp.10</p>
+                            <p class="m-0 fw-bold text-success">Rp.{{ number_format($data) }}</p>
                         </div>
                         <h6 class="m-0 pb-2">Progres Pendanaan :</h6>
                         <div class="progress mb-3">
                             <div id="invest"class="progress-bar progress-bar-striped" role="progressbar"
-                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%
+                                style="width: {{ round(($data / $pengembangan->target_dana) * 100) }}%"
+                                aria-valuenow="{{ round(($data / $pengembangan->target_dana) * 100) }}" aria-valuemin="0"
+                                aria-valuemax="100">{{ round(($data / $pengembangan->target_dana) * 100) }}%
                             </div>
                         </div>
                     </div>

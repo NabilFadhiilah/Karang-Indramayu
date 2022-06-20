@@ -18,7 +18,7 @@ class PaketController extends Controller
     public function index()
     {
         //
-        $data = Paket::with(['relationToWisata'])->get();
+        $data = Paket::with('relationToWisata')->get();
         return view('pages.admin.paket.index', ['paket' => $data]);
     }
 

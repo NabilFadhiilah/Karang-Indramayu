@@ -13,7 +13,9 @@ class PengembanganWisata extends Model
     use HasFactory, SoftDeletes, HasRelationships;
 
     protected $table = 'pengembangan_wisata';
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
+    // protected $fillable = ['id_pengembangan', 'id_user', 'id_rekening', 'pendanaan', 'bukti_pembayaran', 'tgl_investasi', 'tgl_batas_pembayaran', 'status', 'tgl_verifikasi'];
+    protected $fillable = ['id_wisata', 'target_dana', 'deskripsi', 'imbal_hasil', 'min_investasi'];
 
     public function relationToWisata()
     {
@@ -24,6 +26,6 @@ class PengembanganWisata extends Model
     public function relationToGallery()
     {
         # code...
-        return $this->HasMany(Gallery::class, 'id_wisata', 'id_wisata');
+        return $this->hasMany(Gallery::class, 'id_wisata', 'id_wisata');
     }
 }

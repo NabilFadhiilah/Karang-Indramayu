@@ -39,10 +39,10 @@
                             <a href="{{ route('admin.gallery.index') }}">Gallery</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="component-breadcrumb.html">Verifikasi Paket Wisata</a>
+                            <a href="{{ route('admin.verifikasi-wisata.index') }}">Verifikasi Wisata</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="component-breadcrumb.html">Verifikasi Wisata</a>
+                            <a href="{{ route('admin.verifikasi-paket.index') }}">Verifikasi Paket Wisata</a>
                         </li>
                     </ul>
                 </li>
@@ -57,7 +57,7 @@
                             <a href="{{ route('admin.pengembanganWisata.index') }}">Pengembangan</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="extra-component-sweetalert.html">Verifikasi Pengembangan</a>
+                            <a href="{{ route('admin.verifikasi-pengembangan.index') }}">Verifikasi Pengembangan</a>
                         </li>
                     </ul>
                 </li>

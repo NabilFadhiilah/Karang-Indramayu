@@ -8,10 +8,13 @@ use App\Http\Controllers\PaketController;
 use App\Http\Controllers\PengembanganController;
 use App\Http\Controllers\PengembanganWisataController;
 use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\ReservasiPaketWisataController;
+use App\Http\Controllers\ReservasiWisataController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\WisataController;
+use App\Models\ReservasiPaketWisata;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -73,6 +76,9 @@ Route::middleware('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('paket', PaketController::class);
     Route::resource('pengembanganWisata', PengembanganWisataController::class);
     Route::resource('gallery', GalleryController::class);
+    Route::resource('verifikasi-wisata', ReservasiWisataController::class);
+    Route::resource('verifikasi-paket', ReservasiPaketWisataController::class);
+    Route::resource('verifikasi-pengembangan', PengembanganController::class);
 });
 
 // Group Login,Register,Forgot

@@ -34,4 +34,10 @@ class Wisata extends Model
         # code...
         return $this->belongsToMany(Paket::class);
     }
+
+    public function relationThroughPengembangan()
+    {
+        # code...
+        return $this->hasManyThrough(Pengembangan::class, PengembanganWisata::class, 'id_wisata', 'id_pengembangan');
+    }
 }

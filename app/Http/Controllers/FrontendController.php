@@ -11,6 +11,7 @@ use App\Models\Pengembangan;
 use Illuminate\Http\Request;
 use App\Models\ReservasiWisata;
 use App\Models\PengembanganWisata;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
@@ -91,6 +92,7 @@ class FrontendController extends Controller
     public function wisataUpload(Request $request, ReservasiWisata $reservasiWisata)
     {
         # code...
+        // dd($request);
         if ($request->hasFile('bukti_pembayaran')) {
             $data = $request->file('bukti_pembayaran')->store('bukti_reservasi');
             $reservasiWisata->update([
@@ -123,7 +125,8 @@ class FrontendController extends Controller
         # code...
         $wisata->load('relationToGallery', 'relationToPengembangan');
         $rekening = Rekening::all();
-        return view('detail-invest', compact('wisata', 'rekening'));
+        $data = DB::table('pengembangan')->where('id_pengembangan', '=', $wisata->relationToPengembangan->first()->id)->where('status', 'like', 'TERIMA')->sum('pendanaan');
+        return view('detail-invest', compact('wisata', 'rekening', 'data'));
     }
     public function pembayaraninveststore(Request $request, Wisata $wisata)
     {

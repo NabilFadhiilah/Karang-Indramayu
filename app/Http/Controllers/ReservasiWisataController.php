@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\ReservasiWisata;
 use App\Http\Requests\StoreReservasiWisataRequest;
 use App\Http\Requests\UpdateReservasiWisataRequest;
@@ -16,6 +17,8 @@ class ReservasiWisataController extends Controller
     public function index()
     {
         //
+        $data = ReservasiWisata::with('relationToWisata')->get();
+        return view('pages.admin.verifikasiWisata.index', ['reservasi' => $data]);
     }
 
     /**
@@ -42,10 +45,10 @@ class ReservasiWisataController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ReservasiWisata  $reservasiWisata
+     * @param  \App\Models\ReservasiWisata  $verifikasi_wisatum
      * @return \Illuminate\Http\Response
      */
-    public function show(ReservasiWisata $reservasiWisata)
+    public function show(ReservasiWisata $verifikasi_wisatum)
     {
         //
     }
@@ -53,33 +56,41 @@ class ReservasiWisataController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ReservasiWisata  $reservasiWisata
+     * @param  \App\Models\ReservasiWisata  $verifikasi_wisatum
      * @return \Illuminate\Http\Response
      */
-    public function edit(ReservasiWisata $reservasiWisata)
+    public function edit(ReservasiWisata $verifikasi_wisatum)
     {
         //
+        $verifikasi_wisatum->load('relationToWisata', 'relationToRekening', 'relationToUser');
+        // dd($verifikasi_wisatum);
+        return view('pages.admin.verifikasiWisata.edit', ['reservasi' => $verifikasi_wisatum]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateReservasiWisataRequest  $request
-     * @param  \App\Models\ReservasiWisata  $reservasiWisata
+     * @param  \App\Models\ReservasiWisata  $verifikasi_wisatum
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateReservasiWisataRequest $request, ReservasiWisata $reservasiWisata)
+    public function update(UpdateReservasiWisataRequest $request, ReservasiWisata $verifikasi_wisatum)
     {
         //
+        $verifikasi_wisatum->update([
+            'status_reservasi' => $request->status_reservasi,
+            'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
+        ]);
+        return redirect()->route('admin.verifikasi-wisata.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ReservasiWisata  $reservasiWisata
+     * @param  \App\Models\ReservasiWisata  $verifikasi_wisatum
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReservasiWisata $reservasiWisata)
+    public function destroy(ReservasiWisata $verifikasi_wisatum)
     {
         //
     }
