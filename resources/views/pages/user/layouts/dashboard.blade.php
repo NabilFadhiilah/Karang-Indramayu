@@ -15,26 +15,45 @@
                 <div class="row d-flex justify-content-center flex-column-reverse flex-lg-row">
                     <div class="col-lg-3 px-1">
                         <div class="bg-white rounded-top p-3 side-card">
-                            <div class="avatar-circle text-center">
-                                <img src="{{ url('Frontend/Asset/Images/Avatar.png') }}" alt="">
-                                <h4 class="mt-2">Brooklyn Simmons</h4>
-                            </div>
+                            @if (Auth::user()->avatar)
+                                <div class="avatar-circle text-center">
+                                    <img src="{{ Auth::user()->avatar }}" alt="" srcset="">
+                                    <h4 class="mt-2">{{ Auth::user()->nama }}</h4>
+                                </div>
+                            @else
+                                <div class="avatar-circle text-center">
+                                    <img src="https://ui-avatars.com/api/?name={{ Auth::user()->nama }}" alt=""
+                                        srcset="">
+                                    <h4 class="mt-2">{{ Auth::user()->nama }}</h4>
+                                </div>
+                            @endif
+
                             <hr>
                             <p class="mb-1 fw-bold parahraph-2">
                                 Pembelian
                             </p>
                             <div class="px-2 mb-2">
-                                <p class="mb-0 paragraph-2"><a href="Dashboard-Menunggu-Pembayaran.html">Menunggu
+                                <p class="mb-0 paragraph-2"><a href="{{ route('dashboard-pending') }}">Menunggu
                                         Pembayaran</a></p>
-                                <p class="mb-0 paragraph-2"><a href="Dashboard-Riwayat-Transaksi.html">Riwayat
+                                <p class="mb-0 paragraph-2"><a href="{{ route('dashboard-riwayat') }}">Riwayat
                                         Transaksi</a></p>
                             </div>
                             <p class="mb-1 fw-bold parahraph-2">
                                 Profil Saya
                             </p>
                             <div class="px-2">
-                                <p class="mb-0 paragraph-2"><a href="Dashboard-Biodata.html">Biodata Saya</a></p>
-                                <p class="mb-0 paragraph-2"><a href="#">Logout</a></p>
+                                <p class="mb-0 paragraph-2"><a href="{{ route('dashboard-user') }}">Biodata Saya</a></p>
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                        style="  border: none;
+                                    padding: 0;
+                                    background: none;">
+                                        <p class="mb-0 paragraph-2">
+                                            Logout
+                                        </p>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
