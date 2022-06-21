@@ -144,12 +144,16 @@
                                     @foreach ($pengembangan->relationToWisata as $wisata)
                                         <h5 class="card-title">{{ $wisata->nama_wisata }}</h5>
                                         <p class="card-text">{!! $wisata->deskripsi !!}</p>
-                                        <div class="progress mb-3">
-                                            <div class="progress-bar progress-bar-striped" role="progressbar"
-                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%
-                                            </div>
-                                        </div>
                                     @endforeach
+                                    <h6>Terkumpul :</h6>
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar progress-bar-striped" role="progressbar"
+                                            style="width: {{ round(($pengembangan->relation_to_pengembangan_wisata_sum_pendanaan / $pengembangan->target_dana) * 100) }}%"
+                                            aria-valuenow="{{ round(($pengembangan->relation_to_pengembangan_wisata_sum_pendanaan / $pengembangan->target_dana) * 100) }}"
+                                            aria-valuemin="0" aria-valuemax="100">
+                                            {{ round(($pengembangan->relation_to_pengembangan_wisata_sum_pendanaan / $pengembangan->target_dana) * 100) }}%
+                                        </div>
+                                    </div>
                                     <div class="col-12 d-flex align-items-center">
                                         @foreach ($pengembangan->relationToWisata as $wisata)
                                             <div class="col-6">

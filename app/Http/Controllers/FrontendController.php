@@ -19,6 +19,12 @@ class FrontendController extends Controller
     //
     public function index()
     {
+        /* 
+        eager relation withsum and using where
+        $sumpengembangan = PengembanganWisata::withSum(['relationToPengembanganWisata' => function ($query) {
+            $query->where('status', 'TERIMA');
+        }], 'pendanaan')->latest()->get(); 
+        */
         # code...
         $dataWisata = Wisata::with('relationToGallery')->limit(3)->get();
         $data = PengembanganWisata::with(
@@ -28,7 +34,9 @@ class FrontendController extends Controller
                 },
                 'relationToGallery'
             ]
-        )->limit(3)->latest()->get();
+        )->withSum(['relationToPengembanganWisata' => function ($query) {
+            $query->where('status', 'TERIMA');
+        }], 'pendanaan')->limit(3)->latest()->get();
         return view('index', ['data' => $data, 'dataWisata' => $dataWisata]);
     }
 
@@ -65,7 +73,7 @@ class FrontendController extends Controller
     public function pembayaranWisataStore(Request $request, Wisata $wisata)
     {
         # code...
-        ReservasiWisata::create([
+        $reservasi = ReservasiWisata::create([
             'id_user' => Auth::user()->id,
             'id_wisata' => $wisata->id,
             'id_rekening' => $request->rekening,
@@ -76,16 +84,17 @@ class FrontendController extends Controller
             'total_reservasi' => $request->total_reservasi,
             'status_reservasi' => 'PENDING'
         ]);
-        return redirect()->route('payment-wisata', $wisata->slug);
+        return redirect()->route('payment-wisata', [$wisata->slug, $reservasi->id]);
     }
 
     /* 
     Butuh validasi kalau user iseng buka link yang sama
     */
-    public function pembayaranWisata()
+    public function pembayaranWisata(Wisata $wisata, ReservasiWisata $reservasiWisata)
     {
         # code...
-        $data = ReservasiWisata::with('relationToRekening')->where('id_user', Auth::user()->id)->latest()->limit(1)->get();
+        // dd($reservasiWisata);
+        $data = $reservasiWisata->load('relationToRekening')->where('id_user', Auth::user()->id)->where('bukti_reservasi', '=', null)->get();
         return view('pembayaran-wisata', ['pembayaran' => $data]);
     }
 
@@ -113,7 +122,9 @@ class FrontendController extends Controller
         $data = PengembanganWisata::with(
             'relationToWisata',
             'relationToGallery'
-        )->latest();
+        )->withSum(['relationToPengembanganWisata' => function ($query) {
+            $query->where('status', 'TERIMA');
+        }], 'pendanaan')->latest();
         if (request('search')) {
             # code...
             $data->where('nama_wisata', 'like', '%' . request('search') . '%');
