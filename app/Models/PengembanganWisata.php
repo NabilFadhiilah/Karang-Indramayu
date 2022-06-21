@@ -28,4 +28,10 @@ class PengembanganWisata extends Model
         # code...
         return $this->hasMany(Gallery::class, 'id_wisata', 'id_wisata');
     }
+
+    public function relationToPengembanganWisata()
+    {
+        # code...
+        return $this->hasMany(Pengembangan::class, 'id_pengembangan', 'id');
+    }
 }

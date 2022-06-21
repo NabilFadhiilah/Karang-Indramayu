@@ -13,6 +13,12 @@ class ReservasiWisata extends Model
         'id_user', 'id_wisata', 'id_rekening', 'partisipan_reservasi', 'tgl_reservasi', 'tgl_pesan_reservasi', 'tgl_batas_pembayaran', 'bukti_reservasi', 'tgl_verifikasi', 'status_reservasi',  'total_reservasi'
     ];
 
+    public function relationToGallery()
+    {
+        # code...
+        return $this->hasMany(Gallery::class, 'id', 'id_wisata');
+    }
+
     public function relationToWisata()
     {
         # code...

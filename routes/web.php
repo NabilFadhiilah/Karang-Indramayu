@@ -47,7 +47,7 @@ Route::controller(FrontendController::class)->middleware('User')->group(function
     // wisata
     Route::get('/eksplor/{wisata:slug}/checkout', 'checkout')->name('checkout');
     Route::post('/eksplor/{wisata:slug}/pembayaran', 'pembayaranWisataStore')->name('pembayaran-wisata');
-    Route::get('/eksplor/{wisata:slug}/pembayaran', 'pembayaranWisata')->name('payment-wisata');
+    Route::get('/eksplor/{wisata:slug}/pembayaran/{ReservasiWisata}', 'pembayaranWisata')->name('payment-wisata');
     Route::post('/eksplor/{reservasiWisata}/upload', 'wisataUpload')->name('wisataUpload');
     // invest
     Route::post('/invest/{wisata:slug}/pembayaran', 'pembayaraninveststore')->name('pembayaran-invest');
@@ -60,7 +60,8 @@ Route::controller(FrontendController::class)->middleware('User')->group(function
 // Group User Dashboard Controller (Auth)
 Route::controller(UserDashboardController::class)->prefix('user')->middleware('User')->group(function () {
     Route::get('/', 'index')->name('dashboard-user');
-    Route::get('/detail', 'detail')->name('dashboard-detail');
+    Route::put('/update/{user}', 'bioUpdate')->name('dashboard-update');
+    Route::get('/riwayat/detail/{reservasi_wisata}', 'detail')->name('dashboard-detail');
     Route::get('/pending', 'pending')->name('dashboard-pending');
     Route::get('/riwayat', 'riwayat')->name('dashboard-riwayat');
 });
