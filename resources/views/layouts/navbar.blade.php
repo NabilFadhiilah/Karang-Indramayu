@@ -42,7 +42,7 @@
                                           <a class="dropdown-item" href="{{ route('dashboard-user') }}">Dashboard Saya</a>
                                       </li>
                                   @endif
-                                  <li>
+                                  <li class="{{ auth()->user()->roles == 'ADMIN' ? 'd-none' : '' }}">
                                       <form action="/roles" method="POST">
                                           @csrf
                                           <button type="submit" class="dropdown-item">Ubah Role</button>
