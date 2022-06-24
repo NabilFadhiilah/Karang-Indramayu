@@ -22,7 +22,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($paket as $item)
+                        @foreach ($reservasi as $item)
                             <tr>
                                 @foreach ($item->relationToWisata as $wisata)
                                     <td>{{ $wisata->nama_wisata }}</td>

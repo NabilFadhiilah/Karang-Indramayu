@@ -37,22 +37,38 @@ use Illuminate\Http\Request;
 // Grup Frontend Controller (Guest)
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+
+    // wisata
     Route::get('/eksplor', 'eksplor')->name('eksplor');
     Route::get('/eksplor/{wisata:slug}', 'wisata')->name('detail-wisata');
+
+    // invest
     Route::get('/invest', 'invest')->name('invest');
     Route::get('/invest/{wisata:slug}', 'InvestWisata')->name('invest-wisata');
+
+    // paket
+    Route::get('/paket', 'paket')->name('paket-wisata');
+    Route::get('/paket/{paket:slug}', 'paketWisata')->name('detail-paket');
 });
 // Group Frontend Controller (Auth)
 Route::controller(FrontendController::class)->middleware('User')->group(function () {
+
     // wisata
     Route::get('/eksplor/{wisata:slug}/checkout', 'checkout')->name('checkout');
     Route::post('/eksplor/{wisata:slug}/pembayaran', 'pembayaranWisataStore')->name('pembayaran-wisata');
     Route::get('/eksplor/{wisata:slug}/pembayaran/{ReservasiWisata}', 'pembayaranWisata')->name('payment-wisata');
     Route::post('/eksplor/{reservasiWisata}/upload', 'wisataUpload')->name('wisataUpload');
+
     // invest
     Route::post('/invest/{wisata:slug}/pembayaran', 'pembayaraninveststore')->name('pembayaran-invest');
     Route::get('/invest/{wisata:slug}/pembayaran', 'pembayaraninvest')->name('payment-invest');
     Route::post('/invest/{pengembangan}/upload', 'investUpload')->name('investUpload');
+
+    // paket
+    Route::get('/paket/{paket:slug}/checkout', 'checkoutPaket')->name('checkout-paket');
+    Route::post('/paket/{paket:slug}/pembayaran', 'pembayaranPaketStore')->name('pembayaran-paket');
+    Route::get('/paket/{paket:slug}/pembayaran/{ReservasiPaketWisata}', 'pembayaranPaket')->name('payment-paket');
+    Route::post('/paket/{ReservasiPaketWisata}/upload', 'paketUpload')->name('paketUpload');
 
     Route::get('/sukses', 'sukses')->name('sukses');
 });
@@ -80,6 +96,9 @@ Route::middleware('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('verifikasi-wisata', ReservasiWisataController::class);
     Route::resource('verifikasi-paket', ReservasiPaketWisataController::class);
     Route::resource('verifikasi-pengembangan', PengembanganController::class);
+    // Route::get('/users', [UserController::class, 'index']);
+    // Route::get('/users/edit/{user}', [UserController::class, 'edit']);
+    // Route::put('/users/update/{user}', [UserController::class, 'update']);
 });
 
 // Group Login,Register,Forgot

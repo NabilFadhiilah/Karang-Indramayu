@@ -5,7 +5,7 @@
         <div class="container ">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-10 px-2 text-white">
-                    <h3>Checkout Reservasi Wisata</h3>
+                    <h3>Checkout Paket Wisata</h3>
                 </div>
             </div>
         </div>
@@ -15,9 +15,9 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-7 px-1">
                     <div class=" main-card p-3 bg-white rounded-3 mb-2">
-                        <h2>Informasi Wisata</h2>
+                        <h2>Informasi Paket Wisata</h2>
                         <div class="row mb-3">
-                            @foreach ($wisata->relationToGallery as $key => $gallery)
+                            @foreach ($paket->relationToGallery as $key => $gallery)
                                 @if ($key == 0)
                                     <div class="col-lg-4 pb-2 pe-md-0 mb-md-2 checkout-image">
                                         <img src="{{ asset('storage/' . $gallery->image) }}" alt="">
@@ -25,13 +25,13 @@
                                 @endif
                             @endforeach
                             <div class="col-lg-8">
-                                <h3>{{ $wisata->nama_wisata }}</h3>
-                                <p class="paragraph-2">{!! $wisata->deskripsi !!}
+                                <h3>{{ $paket->nama_paket }}</h3>
+                                <p class="paragraph-2">{!! $paket->deskripsi !!}
                                 </p>
                             </div>
                         </div>
                         <h3>Data Reservasi</h3>
-                        <form action="{{ route('pembayaran-wisata', $wisata->slug) }}" method="POST">
+                        <form action="{{ route('pembayaran-paket', $paket->slug) }}" method="POST">
                             @csrf
                             <div class="row ">
                                 <div class="col-lg-5">
@@ -64,14 +64,14 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="m-0" width="50%">Harga Per Orang</h6>
-                                <p class="m-0" width="50%" class="text-end">Rp.{{ number_format($wisata->harga) }}
+                                <p class="m-0" width="50%" class="text-end">Rp.{{ number_format($paket->harga) }}
                                 </p>
-                                <input type="hidden" id="harga" value="{{ $wisata->harga }}">
+                                <input type="hidden" id="harga" value="{{ $paket->harga }}">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="m-0" width="50%">Total Paket Wisata</h6>
                                 <p class="m-0" width="50%" class="text-end" id="perkalian">Rp
-                                    {{ number_format($wisata->harga) }}
+                                    {{ number_format($paket->harga) }}
                                 </p>
                             </div>
                             <div class="d-flex justify-content-between">

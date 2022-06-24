@@ -28,19 +28,21 @@
                     <div class="gallery main-card p-3 bg-white rounded-3 mb-2">
                         {{-- {{ dd($wisata) }} --}}
                         <h2>{{ $wisata->nama_wisata }}</h2>
-                        <div class="xzoom-container">
-                            @foreach ($wisata->relationToGallery as $gallery)
-                                {{-- @if ($key == 0) --}}
-                                <img class="xzoom" id="xzoom-default" src="{{ asset('storage/' . $gallery->image) }}"
-                                    xoriginal="{{ asset('storage/' . $gallery->image) }}" />
-                                {{-- @endif --}}
+                        @if ($wisata->relationToGallery->count())
+                            <div class="xzoom-container">
+                                <img class="xzoom" id="xzoom-default"
+                                    src="{{ asset('storage/' . $wisata->relationToGallery->first()->image) }}"
+                                    xoriginal="{{ asset('storage/' . $wisata->relationToGallery->first()->image) }}" />
                                 <div class="xzoom-thumbs pt-3">
-                                    <a href="{{ asset('storage/' . $gallery->image) }}"><img class="xzoom-gallery"
-                                            width="115" height="125" src="{{ asset('storage/' . $gallery->image) }}"
-                                            xpreview="{{ asset('storage/' . $gallery->image) }}" /></a>
+                                    @foreach ($wisata->relationToGallery as $gallery)
+                                        <a href="{{ asset('storage/' . $gallery->image) }}"><img class="xzoom-gallery"
+                                                width="115" height="125"
+                                                src="{{ asset('storage/' . $gallery->image) }}"
+                                                xpreview="{{ asset('storage/' . $gallery->image) }}" /></a>
+                                    @endforeach
                                 </div>
-                            @endforeach
-                        </div>
+                            </div>
+                        @endif
                         <h3>Tentang Wisata Ini</h3>
                         <p>{!! $wisata->deskripsi !!}
                         </p>

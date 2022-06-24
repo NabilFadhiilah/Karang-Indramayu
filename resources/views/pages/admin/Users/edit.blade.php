@@ -93,7 +93,7 @@
                                                 </p>
                                                 <p class="my-1">Email Pemesan : {{ $reservasi->relationToUser->email }}
                                                 </p>
-                                                <p class="my-1">No Tlp Pemesan :
+                                                <p class="my-1">No Tlp : Pemesan
                                                     {{ $reservasi->relationToUser->no_tlp }}</p>
                                             </div>
                                         </div>

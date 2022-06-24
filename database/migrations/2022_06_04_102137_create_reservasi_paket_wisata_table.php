@@ -21,7 +21,7 @@ class CreateReservasiPaketWisataTable extends Migration
             $table->integer('partisipan_reservasi');
             $table->date('tgl_reservasi');
             $table->date('tgl_pesan_reservasi');
-            $table->date('tgl_batas_pembayaran');
+            $table->dateTime('tgl_batas_pembayaran');
             $table->string('bukti_reservasi')->nullable();
             $table->string('status_reservasi')->default('PENDING');
             $table->string('total_reservasi');

@@ -10,5 +10,5 @@ class PaketWisata extends Model
     use HasFactory;
 
     protected $table = 'paket_wisata';
-    protected $guarded = [];
+    protected $fillable = ['id_paket', 'id_wisata', 'hari'];
 }

@@ -28,32 +28,17 @@
                     <div class="gallery main-card p-3 border bg-white rounded-3 mb-2">
                         <h2>{{ $wisata->nama_wisata }}</h2>
                         <div class="xzoom-container">
-                            @foreach ($wisata->relationToGallery as $gallery)
-                                {{-- @if ($key == 0) --}}
-                                <img class="xzoom" id="xzoom-default" src="{{ asset('storage/' . $gallery->image) }}"
-                                    xoriginal="{{ asset('storage/' . $gallery->image) }}" />
-                                {{-- @endif --}}
-                                <div class="xzoom-thumbs pt-3">
+                            <img class="xzoom" id="xzoom-default"
+                                src="{{ asset('storage/' . $wisata->relationToGallery->first()->image) }}"
+                                xoriginal="{{ asset('storage/' . $wisata->relationToGallery->first()->image) }}" />
+                            <div class="xzoom-thumbs pt-3">
+                                @foreach ($wisata->relationToGallery as $gallery)
                                     <a href="{{ asset('storage/' . $gallery->image) }}"><img class="xzoom-gallery"
                                             width="115" height="125" src="{{ asset('storage/' . $gallery->image) }}"
                                             xpreview="{{ asset('storage/' . $gallery->image) }}" /></a>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
-                        {{-- <div class="my-2">
-                            <h3>Tentang Wisata Ini</h3>
-                            <p>{!! $wisata->deskripsi !!}</p>
-                        </div>
-                        <div class="my-2">
-                            @foreach ($wisata->relationToPengembangan as $pengembangan)
-                                <h3>Mengenai Investasi Ini</h3>
-                                <p>{!! $pengembangan->deskripsi !!}</p>
-                            @endforeach
-                        </div>
-                        <div class="my-2">
-                            <h3>Update</h3>
-                            <p>Belum Ada Update Pengembangan Untuk Wisata Ini</p>
-                        </div> --}}
                         <div class="my-2">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -133,21 +118,21 @@
                                 <input type="hidden" name="id_pengembangan" value="{{ $pengembangan->id }}">
                             </div>
                             <h4>Metode Pembayaran</h4>
-                            @forelse ($rekening as $rekening)
+                            @forelse ($rekening as $dataRekening)
                                 <div class="d-flex align-items-center mb-2">
                                     <input class="form-check-input mt-0 mx-2" type="radio" name="id_rekening"
-                                        id="radioNoLabel1" value="{{ $rekening->id }}" aria-label="...">
+                                        id="radioNoLabel1" value="{{ $dataRekening->id }}" aria-label="...">
                                     <p class="paragraph-2 justify-content-center d-flex mb-0 px-1">
-                                        {{ $rekening->pemilik_rekening }} <br>
-                                        {{ $rekening->no_rekening }} <br>
-                                        {{ $rekening->bank_rekening }}</p>
+                                        {{ $dataRekening->pemilik_rekening }} <br>
+                                        {{ $dataRekening->no_rekening }} <br>
+                                        {{ $dataRekening->bank_rekening }}</p>
                                 </div>
                             @empty
                                 Metode Pembayaran Belum Tersedia, Harap Hubungi Admin
                             @endforelse
                     </div>
                     @auth
-                        @if (auth()->user()->roles == 'INVESTOR')
+                        @if (auth()->user()->roles == 'INVESTOR' && $rekening->isNotEmpty())
                             <button type="submit" name="payment"
                                 class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Invest
                                 Sekarang</button>

@@ -7,11 +7,14 @@ use App\Models\Paket;
 use App\Models\Wisata;
 use App\Models\Gallery;
 use App\Models\Rekening;
+use App\Models\PaketWisata;
 use App\Models\Pengembangan;
 use Illuminate\Http\Request;
 use App\Models\ReservasiWisata;
+use Dflydev\DotAccessData\Data;
 use App\Models\PengembanganWisata;
 use Illuminate\Support\Facades\DB;
+use App\Models\ReservasiPaketWisata;
 use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
@@ -40,6 +43,93 @@ class FrontendController extends Controller
         return view('index', ['data' => $data, 'dataWisata' => $dataWisata]);
     }
 
+    /* 
+    |--------------------------------------------------------------------------
+    | Paket Function
+    |--------------------------------------------------------------------------
+    */
+    public function paket()
+    {
+        # code...
+        $data = Paket::with(['relationToWisata' => function ($query) {
+            $query->leftJoin('gallery', 'wisata.id', '=', 'gallery.id_wisata')->select('wisata.*', 'gallery.image');
+        }])->paginate(5);
+        return view('eksplor-paket', ['paket' => $data]);
+    }
+
+    public function paketWisata(Paket $paket)
+    {
+        # code...
+        $wisata =
+            DB::table('gallery')
+            ->select('wisata.nama_wisata', 'paket_wisata.hari', 'paket_wisata.id_paket as laravel_through_key')
+            ->join('wisata', 'wisata.id', '=', 'gallery.id_wisata')
+            ->join('paket_wisata', 'paket_wisata.id_wisata', '=', 'wisata.id')
+            ->whereIn('paket_wisata.id_paket', [$paket->id])
+            ->groupBy('paket_wisata.id')
+            ->get();
+        $array = json_decode(json_encode($wisata), true);
+        $collection = collect($array);
+        $group = $collection->mapToGroups(function ($item) {
+            return [$item['hari'] => $item['nama_wisata']];
+        })->all();
+        $bawah =
+            DB::table('gallery')
+            ->select('wisata.nama_wisata', 'wisata.deskripsi', 'gallery.image', 'wisata.slug', 'paket_wisata.hari', 'paket_wisata.id_paket as laravel_through_key')
+            ->join('wisata', 'wisata.id', '=', 'gallery.id_wisata')
+            ->join('paket_wisata', 'paket_wisata.id_wisata', '=', 'wisata.id')
+            ->whereIn('paket_wisata.id_paket', [$paket->id])
+            ->groupBy('wisata.id')
+            ->get();
+        return view('detail-paket', ['detailPaket' => $paket, 'detailWisata' => $group, 'bawah' => $bawah]);
+    }
+
+    public function checkoutPaket(Paket $paket)
+    {
+        # code...
+        $paket->load('relationToPaketWisata');
+        // dd($paket);
+        $dataRekening = Rekening::all();
+        return view('checkout-paket', compact('paket', 'dataRekening'));
+    }
+
+    public function pembayaranPaketStore(Request $request, Paket $paket)
+    {
+        # code...
+        $reservasi = ReservasiPaketWisata::create([
+            'id_user' => Auth::user()->id,
+            'id_paket_wisata' => $paket->id,
+            'id_rekening' => $request->rekening,
+            'partisipan_reservasi' => $request->partisipan_reservasi,
+            'tgl_reservasi' => $request->tgl_reservasi,
+            'tgl_pesan_reservasi' => Carbon::now('Asia/Jakarta'),
+            'tgl_batas_pembayaran' => Carbon::now('Asia/Jakarta')->addDays(3),
+            'total_reservasi' => $request->total_reservasi,
+            'status_reservasi' => 'PENDING'
+        ]);
+        return redirect()->route('payment-paket', [$paket->slug, $reservasi->id]);
+    }
+
+    public function pembayaranPaket(Paket $paket, ReservasiPaketWisata $reservasiPaketWisata)
+    {
+        # code...
+        $data = $reservasiPaketWisata->load('relationToRekening')->where('id_user', Auth::user()->id)->where('bukti_reservasi', '=', null)->get();
+        return view('pembayaran-paket', ['pembayaran' => $data]);
+    }
+
+    public function paketUpload(Request $request, ReservasiPaketWisata $ReservasiPaketWisata)
+    {
+        # code...
+        // dd($ReservasiPaketWisata);
+        if ($request->hasFile('bukti_pembayaran')) {
+            $data = $request->file('bukti_pembayaran')->store('bukti_reservasi_paket');
+            $ReservasiPaketWisata->update([
+                'bukti_reservasi' => $data
+            ]);
+        }
+        return redirect()->route('sukses');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Wisata Function
@@ -48,12 +138,13 @@ class FrontendController extends Controller
     public function eksplor()
     {
         # code...
+
         $dataWisata = Wisata::with('relationToGallery')->latest();
         if (request('search')) {
             # code...
             $dataWisata->where('nama_wisata', 'like', '%' . request('search') . '%');
         }
-        return view('eksplor', ['wisata' => $dataWisata->paginate(5)]);
+        return view('eksplor', ['wisata' => $dataWisata->paginate(5), 'paket' => PaketWisata::exists()]);
     }
     public function wisata(Wisata $wisata)
     {
@@ -87,9 +178,6 @@ class FrontendController extends Controller
         return redirect()->route('payment-wisata', [$wisata->slug, $reservasi->id]);
     }
 
-    /* 
-    Butuh validasi kalau user iseng buka link yang sama
-    */
     public function pembayaranWisata(Wisata $wisata, ReservasiWisata $reservasiWisata)
     {
         # code...

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\ReservasiPaketWisata;
 use App\Http\Requests\StoreReservasiPaketWisataRequest;
 use App\Http\Requests\UpdateReservasiPaketWisataRequest;
@@ -16,6 +17,9 @@ class ReservasiPaketWisataController extends Controller
     public function index()
     {
         //
+        $data = ReservasiPaketWisata::with('relationToPaket')->get();
+        // dd($data);
+        return view('pages.admin.verifikasiPaket.index', ['paket' => $data]);
     }
 
     /**
@@ -45,7 +49,7 @@ class ReservasiPaketWisataController extends Controller
      * @param  \App\Models\ReservasiPaketWisata  $reservasiPaketWisata
      * @return \Illuminate\Http\Response
      */
-    public function show(ReservasiPaketWisata $reservasiPaketWisata)
+    public function show(ReservasiPaketWisata $verifikasi_paket)
     {
         //
     }
@@ -56,9 +60,12 @@ class ReservasiPaketWisataController extends Controller
      * @param  \App\Models\ReservasiPaketWisata  $reservasiPaketWisata
      * @return \Illuminate\Http\Response
      */
-    public function edit(ReservasiPaketWisata $reservasiPaketWisata)
+    public function edit(ReservasiPaketWisata $verifikasi_paket)
     {
         //
+        $verifikasi_paket->load('relationToPaket', 'relationToRekening', 'relationToUser');
+        // dd($verifikasi_paket);
+        return view('pages.admin.verifikasiPaket.edit', ['reservasi' => $verifikasi_paket]);
     }
 
     /**
@@ -68,9 +75,14 @@ class ReservasiPaketWisataController extends Controller
      * @param  \App\Models\ReservasiPaketWisata  $reservasiPaketWisata
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateReservasiPaketWisataRequest $request, ReservasiPaketWisata $reservasiPaketWisata)
+    public function update(UpdateReservasiPaketWisataRequest $request, ReservasiPaketWisata $verifikasi_paket)
     {
         //
+        $verifikasi_paket->update([
+            'status_reservasi' => $request->status_reservasi,
+            'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
+        ]);
+        return redirect()->route('admin.verifikasi-paket.index');
     }
 
     /**
@@ -79,7 +91,7 @@ class ReservasiPaketWisataController extends Controller
      * @param  \App\Models\ReservasiPaketWisata  $reservasiPaketWisata
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReservasiPaketWisata $reservasiPaketWisata)
+    public function destroy(ReservasiPaketWisata $verifikasi_paket)
     {
         //
     }

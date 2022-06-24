@@ -16,7 +16,7 @@
         "livewire/livewire": "^2.10",
         "rahulhaque/laravel-filepond": "^1.8",
         "staudenmeir/belongs-to-through": "^2.5",
-        "staudenmeir/eloquent-has-many-deep": "^1.7"
+        "staudenmeir/eloquent-has-many-deep": "^1.13"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

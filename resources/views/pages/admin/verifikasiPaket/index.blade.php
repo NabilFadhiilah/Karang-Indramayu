@@ -7,37 +7,31 @@
         <div class="card">
             <div class="card-header d-flex">
                 <div class="col-6">
-                    <h2 class="m-0">Wisata</h2>
-                </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <a href="{{ route('admin.wisata.create') }}" class="btn btn-primary">+ Tambah Wisata</a>
+                    <h2 class="m-0">Verifikasi Paket Wisata</h2>
                 </div>
             </div>
             <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
-                            <th>Wisata</th>
-                            <th>Deskripsi</th>
-                            <th>Harga</th>
+                            <th>Paket</th>
+                            <th>Tanggal Keberangkatan</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @foreach ($wisata as $item)
+                        @foreach ($paket as $item)
                             <tr>
-                                <td>{{ $item->nama_wisata }}</td>
-                                <td>{!! $item->deskripsi !!}</td>
-                                <td>Rp.{{ number_format($item->harga) }}</td>
+                                @foreach ($item->relationToPaket as $datapaket)
+                                    <td>{{ $datapaket->nama_paket }}</td>
+                                @endforeach
+                                <td>{{ $item->tgl_reservasi }}</td>
+                                <td><span class="badge bg-success">{{ $item->status_reservasi }}</span></td>
                                 <td class="d-flex justify-content-start">
-                                    <a href="{{ route('admin.wisata.edit', $item->id) }}"
-                                        class="btn btn-success btn-sm mx-1">Edit</a>
-                                    <form action="{{ route('admin.wisata.destroy', $item->id) }}" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm">Hapus</button>
-                                    </form>
+                                    <a href="{{ route('admin.verifikasi-paket.edit', $item->id) }}"
+                                        class="btn btn-success btn-sm mx-1">Verifikasi</a>
                                 </td>
                             </tr>
                         @endforeach

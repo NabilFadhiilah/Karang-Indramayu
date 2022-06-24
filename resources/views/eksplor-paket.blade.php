@@ -51,23 +51,14 @@
                                 Dulu)</p>
                         </div>
                     </div>
-                    @if ($paket)
-                        <div class="bg-white rounded-3 border p-3 mb-2 pb-md-3 d-flex flex-column">
-                            <h4 class="align-self-center">Kami Menyediakan Paket Wisata</h4>
-                            <img class="align-self-center mb-2" style="width: 50%;object-fit: cover;"
-                                src="{{ url('Frontend/Asset/Images/paket-wisata.svg') }}" alt="">
-                            <a href="{{ route('paket-wisata') }}"
-                                class="btn align-items-center btn-outline-primary py-1">Lihat Paket Wisata</a>
-                        </div>
-                    @endif
                 </div>
                 <!--Main Content-->
                 <div class="col-lg-7 px-2">
                     <!--Card Wisata-->
-                    @forelse ($wisata as $item)
+                    @forelse ($paket as $dataPaket)
                         <div class="row bg-white rounded-3 mb-2">
                             <div class="col-lg-3 p-0 m-0">
-                                @foreach ($item->relationToGallery as $key => $gallery)
+                                @foreach ($dataPaket->relationToWisata as $key => $gallery)
                                     @if ($key == 0)
                                         <img src="{{ asset('storage/' . $gallery->image) }}" style="object-fit: cover;"
                                             class="img-responsive rounded-start" width="100%" height="180px"
@@ -77,21 +68,21 @@
                             </div>
                             <div class="col-lg-9 py-3">
                                 <div class="d-flex justify-content-between">
-                                    <h3>{{ $item->nama_wisata }}</h3>
-                                    <h3>Rp.{{ number_format($item->harga) }}</h3>
+                                    <h3>{{ $dataPaket->nama_paket }}</h3>
+                                    <h3>Rp.{{ number_format($dataPaket->harga) }}</h3>
                                 </div>
                                 <div class="d-flex align-items-start flex-column" style="height: 80%;">
                                     <div class="mb-auto">
                                         <p class="parahraph-2">
-                                            {!! $item->deskripsi !!}</p>
+                                            {!! $dataPaket->deskripsi !!}</p>
                                     </div>
                                     <div class="">
-                                        <a href=" {{ route('checkout', $item->slug) }}"
+                                        <a href=" {{ route('checkout-paket', $dataPaket->slug) }}"
                                             class="btn btn-primary m-1 py-1">Reservasi
                                             Wisata</a>
-                                        <a href="{{ route('detail-wisata', $item->slug) }}"
+                                        <a href="{{ route('detail-paket', $dataPaket->slug) }}"
                                             class="btn btn-outline-primary m-1 py-1">Lihat
-                                            Detail Wisata</a>
+                                            Paket Wisata</a>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +97,7 @@
                 </div>
                 <div class="col-lg-10 mt-4">
                     <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                        {{ $wisata->links() }}
+                        {{ $paket->links() }}
                     </nav>
                 </div>
             </div>
