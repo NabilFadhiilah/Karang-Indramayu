@@ -5,6 +5,7 @@
         <div class="row col-12 d-flex justify-content-center">
             <div class="col-lg-6 py-3 bg-white rounded-3">
                 @foreach ($pembayaran as $item)
+                    {{-- {{ dd($pembayaran) }} --}}
                     <div class="col-12 d-flex justify-content-center">
                         <div class="text-center">
                             <h4 class="mb-1 p-0">Segera Melakukan Pembayaran Sebelum Waktu Habis</h4>

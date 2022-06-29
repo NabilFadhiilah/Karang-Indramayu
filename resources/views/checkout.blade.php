@@ -39,8 +39,15 @@
                                         <label for="jumlah-partisipan" class="form-label">
                                             <p class="paragraph-2 m-0 fw-bold">Jumlah Partisipan</p>
                                         </label>
-                                        <input type="number" name="partisipan_reservasi" class="form-control"
-                                            id="jumlah-partisipan" value="1" min="1" onchange="calculate()">
+                                        <input type="number" name="partisipan_reservasi"
+                                            class="form-control @error('partisipan_reservasi') is-invalid @enderror"
+                                            value="{{ old('partisipan_reservasi') }}" id="jumlah-partisipan"
+                                            placeholder="Minimal 1 Orang" min="1" onchange="calculate()">
+                                        @error('partisipan_reservasi')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-5">
@@ -48,7 +55,15 @@
                                         <label for="keberangkatan" class="form-label">
                                             <p class="paragraph-2 m-0 fw-bold">Tanggal Keberangkatan</p>
                                         </label>
-                                        <input type="date" name="tgl_reservasi" class="form-control" id="keberangkatan">
+                                        <input type="date" name="tgl_reservasi" value="{{ old('tgl_reservasi') }}"
+                                            class="form-control
+                                            @error('tgl_reservasi') is-invalid @enderror"
+                                            id="keberangkatan">
+                                        @error('tgl_reservasi')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -88,8 +103,9 @@
                         <h3>Metode Pembayaran</h3>
                         @forelse ($dataRekening as $rekening)
                             <div class="d-flex align-items-center mb-2">
-                                <input class="form-check-input mt-0 mx-2" type="radio" name="rekening" id="radioNoLabel1"
-                                    value="{{ $rekening->id }}" aria-label="...">
+                                <input class="form-check-input mt-0 mx-2 @error('id_rekening') is-invalid @enderror"
+                                    type="radio" name="id_rekening" id="radioNoLabel1" value="{{ $rekening->id }}"
+                                    aria-label="...">
                                 <p class="paragraph-2 justify-content-center d-flex mb-0 px-1">
                                     {{ $rekening->pemilik_rekening }} <br>
                                     {{ $rekening->no_rekening }} <br>

@@ -96,31 +96,37 @@ class FrontendController extends Controller
     public function pembayaranPaketStore(Request $request, Paket $paket)
     {
         # code...
+        // dd($request->all());
+        $data = $request->validate([
+            'id_rekening' => 'required',
+            'partisipan_reservasi' => 'required',
+            'tgl_reservasi' => 'required',
+            'total_reservasi' => 'required'
+        ]);
         $reservasi = ReservasiPaketWisata::create([
             'id_user' => Auth::user()->id,
             'id_paket_wisata' => $paket->id,
-            'id_rekening' => $request->rekening,
-            'partisipan_reservasi' => $request->partisipan_reservasi,
-            'tgl_reservasi' => $request->tgl_reservasi,
+            'id_rekening' => $data['id_rekening'],
+            'partisipan_reservasi' => $data['partisipan_reservasi'],
+            'tgl_reservasi' => $data['tgl_reservasi'],
             'tgl_pesan_reservasi' => Carbon::now('Asia/Jakarta'),
             'tgl_batas_pembayaran' => Carbon::now('Asia/Jakarta')->addDays(3),
-            'total_reservasi' => $request->total_reservasi,
+            'total_reservasi' => $data['total_reservasi'],
             'status_reservasi' => 'PENDING'
         ]);
         return redirect()->route('payment-paket', [$paket->slug, $reservasi->id]);
     }
 
-    public function pembayaranPaket(Paket $paket, ReservasiPaketWisata $reservasiPaketWisata)
+    public function pembayaranPaket(Paket $paket, ReservasiPaketWisata $ReservasiPaketWisata)
     {
         # code...
-        $data = $reservasiPaketWisata->load('relationToRekening')->where('id_user', Auth::user()->id)->where('bukti_reservasi', '=', null)->get();
+        $data = $ReservasiPaketWisata->load('relationToRekening')->where('id', '=', $ReservasiPaketWisata->id)->where('id_user', Auth::user()->id)->where('bukti_reservasi', '=', null)->get();
         return view('pembayaran-paket', ['pembayaran' => $data]);
     }
 
     public function paketUpload(Request $request, ReservasiPaketWisata $ReservasiPaketWisata)
     {
         # code...
-        // dd($ReservasiPaketWisata);
         if ($request->hasFile('bukti_pembayaran')) {
             $data = $request->file('bukti_pembayaran')->store('bukti_reservasi_paket');
             $ReservasiPaketWisata->update([
@@ -164,25 +170,31 @@ class FrontendController extends Controller
     public function pembayaranWisataStore(Request $request, Wisata $wisata)
     {
         # code...
+        $data = $request->validate([
+            'id_rekening' => 'required',
+            'partisipan_reservasi' => 'required',
+            'tgl_reservasi' => 'required',
+            'total_reservasi' => 'required'
+        ]);
         $reservasi = ReservasiWisata::create([
             'id_user' => Auth::user()->id,
             'id_wisata' => $wisata->id,
-            'id_rekening' => $request->rekening,
-            'partisipan_reservasi' => $request->partisipan_reservasi,
-            'tgl_reservasi' => $request->tgl_reservasi,
+            'id_rekening' => $data['id_rekening'],
+            'partisipan_reservasi' => $data['partisipan_reservasi'],
+            'tgl_reservasi' => $data['tgl_reservasi'],
             'tgl_pesan_reservasi' => Carbon::now('Asia/Jakarta'),
             'tgl_batas_pembayaran' => Carbon::now('Asia/Jakarta')->addDays(3),
-            'total_reservasi' => $request->total_reservasi,
+            'total_reservasi' => $data['total_reservasi'],
             'status_reservasi' => 'PENDING'
         ]);
         return redirect()->route('payment-wisata', [$wisata->slug, $reservasi->id]);
     }
 
-    public function pembayaranWisata(Wisata $wisata, ReservasiWisata $reservasiWisata)
+    public function pembayaranWisata(Wisata $wisata, ReservasiWisata $ReservasiWisata)
     {
         # code...
-        // dd($reservasiWisata);
-        $data = $reservasiWisata->load('relationToRekening')->where('id_user', Auth::user()->id)->where('bukti_reservasi', '=', null)->get();
+        // dd($ReservasiWisata);
+        $data = $ReservasiWisata->load('relationToRekening')->where('id', '=', $ReservasiWisata->id)->where('id_user', Auth::user()->id)->where('bukti_reservasi', '=', null)->get();
         return view('pembayaran-wisata', ['pembayaran' => $data]);
     }
 
@@ -230,25 +242,28 @@ class FrontendController extends Controller
     public function pembayaraninveststore(Request $request, Wisata $wisata)
     {
         # code...
-        Pengembangan::create([
+        // dd($request);
+        $validate = $request->validate([
+            'id_rekening' => 'required',
+            'pendanaan' => 'required',
+        ]);
+        $investId = Pengembangan::create([
             'id_pengembangan' => $request->id_pengembangan,
             'id_user' => Auth::user()->id,
-            'id_rekening' => $request->id_rekening,
-            'pendanaan' => $request->pendanaan,
+            'id_rekening' => $validate['id_rekening'],
+            'pendanaan' => $validate['pendanaan'],
             'tgl_investasi' => Carbon::now('Asia/Jakarta'),
             'tgl_batas_pembayaran' => Carbon::now('Asia/Jakarta')->addDays(3),
             'status' => 'PENDING'
         ]);
-        return redirect()->route('payment-invest', $wisata->slug);
+        return redirect()->route('payment-invest', [$wisata->slug, $investId->id]);
     }
 
-    /* 
-    Butuh validasi kalau user iseng buka link yang sama
-    */
-    public function pembayaraninvest()
+    public function pembayaraninvest(Wisata $wisata, Pengembangan $pengembangan)
     {
         # code...
-        $data = Pengembangan::with('relationToRekening')->where('id_user', Auth::user()->id)->latest()->limit(1)->get();
+        // dd($pengembangan);
+        $data = $pengembangan->load('relationToRekening')->where('id', '=', $pengembangan->id)->where('id_user', Auth::user()->id)->where('bukti_pembayaran', '=', null)->get();
         // dd($data);
         return view('pembayaran-invest', ['pembayaran' => $data]);
     }

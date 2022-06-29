@@ -13,7 +13,7 @@
                                     Beranda
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Eksplor Wisata
+                                    Eksplor Paket
                                 </li>
                             </ol>
                         </nav>

@@ -84,7 +84,7 @@ class GalleryController extends Controller
                 'image' => $data
             ]);
         }
-        return redirect()->route('admin.gallery.index');
+        return redirect()->route('admin.gallery.index')->with('sukses', 'Data Berhasil Diupdate');
     }
 
     /**

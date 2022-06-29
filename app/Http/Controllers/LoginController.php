@@ -27,7 +27,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             # code...
             $request->session()->regenerate();
-            if (auth()->user()->roles == 'ADMIN') {
+            if (auth()->user()->roles == 'ADMIN' || auth()->user()->roles == 'SUPERUSER') {
                 return redirect()->intended('admin');
             } elseif (auth()->user()->roles == 'INVESTOR') {
                 return redirect()->intended('invest');

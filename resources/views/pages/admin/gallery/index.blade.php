@@ -10,6 +10,12 @@
                     <h2 class="m-0">Gallery Wisata</h2>
                 </div>
             </div>
+            @if (session()->has('sukses'))
+                <div class="mx-3 alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('sukses') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
@@ -24,7 +30,8 @@
                         @foreach ($gallery as $item)
                             <tr>
                                 <td>{{ $item->relationToWisata->nama_wisata }}</td>
-                                <td><img src="{{ asset('storage/' . $item->image) }}" style="width: 75px;" alt=""></td>
+                                <td><img src="{{ asset('storage/' . $item->image) }}" style="width: 75px;" alt="">
+                                </td>
                                 <td class="d-flex justify-content-start">
                                     <a href="{{ route('admin.gallery.edit', $item->id) }}"
                                         class="btn btn-success btn-sm mx-1">Edit</a>

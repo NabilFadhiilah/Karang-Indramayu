@@ -61,8 +61,8 @@
                                             <div class="form-group">
                                                 <label for="durasi_wisata">Durasi Wisata</label>
                                                 <small class="text-muted">Maksimal 7 Hari Dalam 1 Paket</small>
-                                                <div class="input-group mb-3">
-                                                    <select class="form-select" id="durasi_wisata" name="durasi_wisata">
+                                                <div class="input-group mb-3 ">
+                                                    <select class="form-select @error('durasi_wisata') is-invalid @enderror" id="durasi_wisata" name="durasi_wisata">
                                                         <option>Durasi Wisata</option>
                                                         <option value="1">1 Hari</option>
                                                         <option value="2">2 Hari</option>
@@ -72,6 +72,11 @@
                                                         <option value="6">6 Hari</option>
                                                         <option value="7">7 Hari</option>
                                                     </select>
+                                                    @error('durasi_wisata')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -148,7 +153,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="harga">Harga</label>
-                                                <input type="text" id="harga" class="form-control  @error('harga') is-invalid @enderror" name="harga"
+                                                <input type="number" id="harga" class="form-control  @error('harga') is-invalid @enderror" name="harga"
                                                     placeholder="Harga" value="{{ old('harga') }}">
                                                     @error('harga')
                                                     <div class="invalid-feedback">
@@ -182,8 +187,6 @@
             </div>
         </div>
     </section>
-    {{-- <input type="hidden" value="hari_ke_${i}" name="hari_ke[]"> --}}
-    <!-- // Basic Vertical form layout section end -->
 @endsection
 
 @push('script')
@@ -192,7 +195,7 @@
     <script>
         $('#durasi_wisata').change(function() {
             const jumlahValue = parseInt($('#durasi_wisata').val());
-            
+            $('#durasi_paket').children("div").remove();
             for (let i = 0; i < jumlahValue; i++) {
                 $('#durasi_paket').append(`
                 <div class="col-12 form-group fieldGroup${i}">

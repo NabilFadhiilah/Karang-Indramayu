@@ -37,6 +37,9 @@
                                     xoriginal="{{ asset('storage/' . $bawah->first()->image) }}" />
                                 <div class="xzoom-thumbs pt-3">
                                     @foreach ($bawah as $key => $gallery)
+                                        @if ($key == 1)
+                                            @continue
+                                        @endif
                                         <a href="{{ asset('storage/' . $gallery->image) }}"><img class="xzoom-gallery"
                                                 width="115" height="125"
                                                 src="{{ asset('storage/' . $gallery->image) }}"
@@ -64,27 +67,22 @@
                 <div class="bg-white rounded-top p-3 side-card">
                     <h3>Informasi Wisata</h3>
                     <table class="informasi-paket">
-                        <tr>
-                            <th width="50%">Durasi Wisata</th>
-                            <td width="50%" class="text-end">{{ $detailPaket->durasi_wisata }} Hari</td>
-                        </tr>
-                        {{-- <tr>
-                                <th width="50%">Tanggal Keberangkatan</th>
-                                <td width="50%" class="text-end">21-12-2021</td>
-                            </tr> --}}
-                        <tr>
-                            <th width="50%">Reservasi Awal</th>
-                            <td width="50%" class="text-end">{{ $detailPaket->tgl_reservasi_awal }}</td>
-                        </tr>
-                        <tr>
-                            <th width="50%">Reservasi Akhir</th>
-                            <td width="50%" class="text-end">{{ $detailPaket->tgl_reservasi_akhir }}</td>
-                        </tr>
-                        <tr>
-                            <th width="50%">Harga</th>
-                            <td width="50%" class="text-end">Rp.{{ number_format($detailPaket->harga) }} / orang
-                            </td>
-                        </tr>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="m-0">Durasi Wisata</h6>
+                            <p class="m-0">{{ $detailPaket->durasi_wisata }} Hari</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="m-0">Reservasi Awal</h6>
+                            <p class="m-0">{{ $detailPaket->tgl_reservasi_awal }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="m-0">Reservasi Akhir</h6>
+                            <p class="m-0">{{ $detailPaket->tgl_reservasi_akhir }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="m-0">Harga</h6>
+                            <p class="m-0">Rp.{{ number_format($detailPaket->harga) }} / orang</p>
+                        </div>
                     </table>
                 </div>
                 @guest
@@ -155,7 +153,7 @@
         freeMode: true,
         breakpoints: {
             786: {
-                slidesPerView: {{ $bawah->count() }},
+                slidesPerView: 4,
                 slidesPerGroup: 4,
             },
         },

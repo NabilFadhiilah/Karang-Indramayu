@@ -18,7 +18,7 @@ class PengembanganController extends Controller
     public function index()
     {
         //
-        $data = Pengembangan::leftJoin('pengembangan_wisata', 'pengembangan.id_pengembangan', '=', 'pengembangan_wisata.id')->leftJoin('wisata', 'pengembangan_wisata.id_wisata', '=', 'wisata.id')->select('pengembangan.*', 'wisata.nama_wisata')->get();
+        $data = Pengembangan::leftJoin('pengembangan_wisata', 'pengembangan.id_pengembangan', '=', 'pengembangan_wisata.id')->leftJoin('wisata', 'pengembangan_wisata.id_wisata', '=', 'wisata.id')->select('pengembangan.*', 'wisata.nama_wisata')->where('bukti_pembayaran', '!=', null)->get();
         // dd($data);
         return view('pages.admin.verifikasiPengembangan.index', ['pengembangan' => $data]);
     }
@@ -53,6 +53,9 @@ class PengembanganController extends Controller
     public function show(Pengembangan $verifikasi_pengembangan)
     {
         //
+        $verifikasi_pengembangan->load('relationToRekening', 'relationToUser');
+        // dd($verifikasi_pengembangan);
+        return view('pages.admin.verifikasiPengembangan.show', ['verifikasi' => $verifikasi_pengembangan]);
     }
 
     /**

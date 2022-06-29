@@ -29,10 +29,17 @@
                                 @endforeach
                                 <td>{{ $item->tgl_reservasi }}</td>
                                 <td><span class="badge bg-success">{{ $item->status_reservasi }}</span></td>
-                                <td class="d-flex justify-content-start">
-                                    <a href="{{ route('admin.verifikasi-paket.edit', $item->id) }}"
-                                        class="btn btn-success btn-sm mx-1">Verifikasi</a>
-                                </td>
+                                @if ($item->status_reservasi != 'TERIMA')
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.verifikasi-paket.edit', $item->id) }}"
+                                            class="btn btn-success btn-sm mx-1">Verifikasi</a>
+                                    </td>
+                                @else
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.verifikasi-paket.show', $item->id) }}"
+                                            class="btn btn-info btn-sm mx-1">Lihat</a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

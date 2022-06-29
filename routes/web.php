@@ -61,7 +61,7 @@ Route::controller(FrontendController::class)->middleware('User')->group(function
 
     // invest
     Route::post('/invest/{wisata:slug}/pembayaran', 'pembayaraninveststore')->name('pembayaran-invest');
-    Route::get('/invest/{wisata:slug}/pembayaran', 'pembayaraninvest')->name('payment-invest');
+    Route::get('/invest/{wisata:slug}/pembayaran/{pengembangan}', 'pembayaraninvest')->name('payment-invest');
     Route::post('/invest/{pengembangan}/upload', 'investUpload')->name('investUpload');
 
     // paket

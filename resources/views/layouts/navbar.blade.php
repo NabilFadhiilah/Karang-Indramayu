@@ -65,7 +65,8 @@
                           </li>
                           @if (Auth::user()->avatar)
                               <div class="avatar d-sm-none d-md-none d-lg-block">
-                                  <img src="{{ Auth::user()->avatar }}" alt="" srcset="">
+                                  <img src="{{ asset('storage/' . Auth::user()->avatar) }}"
+                                      style="object-fit:cover; width:45px; height:45px;" alt="" srcset="">
                               </div>
                           @else
                               <div class="avatar d-sm-none d-md-none d-lg-block">

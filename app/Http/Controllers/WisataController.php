@@ -61,16 +61,16 @@ class WisataController extends Controller
             }
         }
 
-        return redirect()->route('admin.wisata.index');
+        return redirect()->route('admin.wisata.index')->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Wisata  $wisata
+     * @param  \App\Models\Wisata  $wisatum
      * @return \Illuminate\Http\Response
      */
-    public function show(Wisata $wisata)
+    public function show(Wisata $wisatum)
     {
         //
     }
@@ -78,45 +78,44 @@ class WisataController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Wisata  $wisata
+     * @param  \App\Models\Wisata  $wisatum
      * @return \Illuminate\Http\Response
      */
-    public function edit(Wisata $wisata, $id)
+    public function edit(Wisata $wisatum)
     {
         //
-        $wisata = Wisata::find($id);
-        // dd($wisata);
-        return view('pages.admin.wisata.edit', ['item' => $wisata]);
+        // $wisatum = Wisata::find($id);
+        // dd($wisatum);
+        return view('pages.admin.wisata.edit', ['item' => $wisatum]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateWisataRequest  $request
-     * @param  \App\Models\Wisata  $wisata
+     * @param  \App\Models\Wisata  $wisatum
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateWisataRequest $request, Wisata $wisata, $id)
+    public function update(UpdateWisataRequest $request, Wisata $wisatum)
     {
         //
         $data = $request->all();
-        $wisata = Wisata::find($id);
-        $wisata->update($data);
-        return redirect()->route('admin.wisata.index');
+        // $wisatum = Wisata::find($id);
+        $wisatum->update($data);
+        return redirect()->route('admin.wisata.index')->with('sukses', 'Data Berhasil Diupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Wisata  $wisata
+     * @param  \App\Models\Wisata  $wisatum
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wisata $wisata, $id)
+    public function destroy(Wisata $wisatum)
     {
         //
-        $wisata = Wisata::find($id);
-        $wisata->delete();
-        return redirect()->route('admin.wisata.index');
+        $wisatum->delete();
+        return redirect()->route('admin.wisata.index')->with('sukses', 'Data Berhasil Dihapus');
     }
 
     public function checkSlug(Request $request)

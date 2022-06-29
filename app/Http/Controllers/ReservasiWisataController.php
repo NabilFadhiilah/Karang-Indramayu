@@ -17,7 +17,7 @@ class ReservasiWisataController extends Controller
     public function index()
     {
         //
-        $data = ReservasiWisata::with('relationToWisata')->get();
+        $data = ReservasiWisata::with('relationToWisata')->where('bukti_reservasi', '!=', null)->get();
         return view('pages.admin.verifikasiWisata.index', ['reservasi' => $data]);
     }
 
@@ -51,6 +51,9 @@ class ReservasiWisataController extends Controller
     public function show(ReservasiWisata $verifikasi_wisatum)
     {
         //
+        $verifikasi_wisatum->load('relationToWisata', 'relationToRekening', 'relationToUser');
+        // dd($verifikasi_wisatum);
+        return view('pages.admin.verifikasiWisata.show', ['reservasi' => $verifikasi_wisatum]);
     }
 
     /**

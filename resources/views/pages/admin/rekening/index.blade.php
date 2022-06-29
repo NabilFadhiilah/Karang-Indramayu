@@ -9,10 +9,18 @@
                 <div class="col-6">
                     <h2 class="m-0">Rekening</h2>
                 </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <a href="{{ route('admin.rekening.create') }}" class="btn btn-primary">+ Tambah Rekening</a>
-                </div>
+                @if ($rekening->count() < 3)
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="{{ route('admin.rekening.create') }}" class="btn btn-primary">+ Tambah Rekening</a>
+                    </div>
+                @endif
             </div>
+            @if (session()->has('sukses'))
+                <div class="mx-3 alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('sukses') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
@@ -38,7 +46,8 @@
                                     <form action="{{ route('admin.rekening.destroy', $item->id) }}" method="post">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn btn-danger btn-sm">Hapus</button>
+                                        <button class="btn btn-danger btn-sm"
+                                            onclick="return konfirmasiHapusKonten(event)">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
@@ -58,4 +67,5 @@
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
+    <script src="{{ url('Backend\assets\js\hapus.js') }}"></script>
 @endpush

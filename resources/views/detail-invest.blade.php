@@ -112,16 +112,24 @@
                             @csrf
                             <h4>Jumlah Investasi</h4>
                             <div class="input-group mb-3">
-                                <input type="number" min="{{ $pengembangan->min_investasi }}" class="form-control"
+                                <input type="number" min="{{ $pengembangan->min_investasi }}" id="pendanaan"
+                                    class="form-control @error('pendanaan') is-invalid @enderror"
                                     placeholder="Min Rp.{{ number_format($pengembangan->min_investasi) }}"
-                                    aria-label="Jumlah Investasi" name="pendanaan" aria-describedby="basic-addon1">
+                                    aria-label="Jumlah Investasi" name="pendanaan" aria-describedby="basic-addon1"
+                                    value="{{ old('pendanaan') }}">
+                                @error('pendanaan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                                 <input type="hidden" name="id_pengembangan" value="{{ $pengembangan->id }}">
                             </div>
                             <h4>Metode Pembayaran</h4>
                             @forelse ($rekening as $dataRekening)
                                 <div class="d-flex align-items-center mb-2">
-                                    <input class="form-check-input mt-0 mx-2" type="radio" name="id_rekening"
-                                        id="radioNoLabel1" value="{{ $dataRekening->id }}" aria-label="...">
+                                    <input class="form-check-input mt-0 mx-2 @error('id_rekening') is-invalid @enderror"
+                                        type="radio" name="id_rekening" id="radioNoLabel1"
+                                        value="{{ $dataRekening->id }}" aria-label="...">
                                     <p class="paragraph-2 justify-content-center d-flex mb-0 px-1">
                                         {{ $dataRekening->pemilik_rekening }} <br>
                                         {{ $dataRekening->no_rekening }} <br>
@@ -132,13 +140,15 @@
                             @endforelse
                     </div>
                     @auth
-                        @if (auth()->user()->roles == 'INVESTOR' && $rekening->isNotEmpty())
+                        @if (round(($data / $pengembangan->target_dana) * 100) >= 100)
+                            <button type="button" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Target
+                                Tercapai</button>
+                        @elseif (auth()->user()->roles == 'INVESTOR' && $rekening->isNotEmpty())
                             <button type="submit" name="payment"
                                 class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Invest
                                 Sekarang</button>
                             </form>
-                        @endif
-                        @if (auth()->user()->roles == 'WISATAWAN')
+                        @elseif (auth()->user()->roles == 'WISATAWAN')
                             {{-- <form action="{{ route('roles') }}" method="POST">
                                 @csrf --}}
                             <a class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Ubah Ke
@@ -146,9 +156,6 @@
                             {{-- </form> --}}
                         @endif
                     @endauth
-                    {{-- @if (!$rekening->isNotEmpty())
-                        <p class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Invest Belum Tersedia</p>
-                    @endif --}}
                     @guest
                         <a href="{{ route('login') }}"
                             class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Masuk/Daftar</a>

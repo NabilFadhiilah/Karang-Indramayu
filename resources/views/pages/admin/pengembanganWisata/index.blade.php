@@ -14,6 +14,12 @@
                         Pengembangan</a>
                 </div>
             </div>
+            @if (session()->has('sukses'))
+                <div class="mx-3 alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('sukses') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
@@ -40,7 +46,8 @@
                                         method="post">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn btn-danger btn-sm">Hapus</button>
+                                        <button
+                                            class="btn btn-danger btn-sm"onclick="return konfirmasiHapusKonten(event)">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
@@ -60,4 +67,5 @@
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
+    <script src="{{ url('Backend\assets\js\hapus.js') }}"></script>
 @endpush

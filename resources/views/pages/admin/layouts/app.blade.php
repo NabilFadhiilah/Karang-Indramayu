@@ -60,7 +60,6 @@
     <script src="{{ url('/Backend/assets/js/pages/dashboard.js') }}"></script>
 
     <script src="{{ url('/Backend/assets/js/mazer.js') }}"></script>
-
     @stack('script')
 </body>
 

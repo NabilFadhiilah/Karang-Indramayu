@@ -60,7 +60,8 @@ class PaketController extends Controller
             }
         }
         $data = Paket::with(['relationToWisata'])->get();
-        return view('pages.admin.paket.index', ['paket' => $data]);
+        // return view('pages.admin.paket.index', ['paket' => $data]);
+        return redirect()->route('admin.paket.index', ['paket' => $data])->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -109,6 +110,6 @@ class PaketController extends Controller
     {
         //
         $paket->delete();
-        return redirect()->route('admin.paket.index');
+        return redirect()->route('admin.paket.index')->with('sukses', 'Data Berhasil Dihapus');
     }
 }

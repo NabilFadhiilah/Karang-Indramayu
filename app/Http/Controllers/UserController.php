@@ -8,6 +8,28 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     //
+    // public function index()
+    // {
+    //     # code...
+    //     $User = User::all();
+    //     return view('pages.admin.users.index', ['data' => $User]);
+    // }
+
+    // public function edit(User $user)
+    // {
+    //     # code...
+    //     return view('pages.admin.users.edit', ['data' => $user]);
+    // }
+
+    // public function update(Request $request, User $user)
+    // {
+    //     # code...
+    //     $user->update([
+    //         'roles' => $request->roles
+    //     ]);
+    //     return redirect()->route('/admin/user');
+    // }
+
     public function changeRole(Request $request)
     {
         # code...

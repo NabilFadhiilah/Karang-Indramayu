@@ -17,7 +17,8 @@
                         <div class="bg-white rounded-top p-3 side-card">
                             @if (Auth::user()->avatar)
                                 <div class="avatar-circle text-center">
-                                    <img src="{{ Auth::user()->avatar }}" alt="" srcset="">
+                                    <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt=""
+                                        srcset="" style="object-fit:cover; width:125px; height:125px;">
                                     <h4 class="mt-2">{{ Auth::user()->nama }}</h4>
                                 </div>
                             @else

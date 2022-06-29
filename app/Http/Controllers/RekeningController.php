@@ -42,7 +42,7 @@ class RekeningController extends Controller
         //
         $data = $request->all();
         Rekening::create($data);
-        return redirect()->route('admin.rekening.index');
+        return redirect()->route('admin.rekening.index')->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -83,7 +83,7 @@ class RekeningController extends Controller
         $data = $request->all();
         $rekening->update($data);
 
-        return redirect()->route('admin.rekening.index');
+        return redirect()->route('admin.rekening.index')->with('sukses', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -96,6 +96,6 @@ class RekeningController extends Controller
     {
         //
         $rekening->delete();
-        return redirect()->route('admin.rekening.index');
+        return redirect()->route('admin.rekening.index')->with('sukses', 'Data Berhasil Dihapus');
     }
 }

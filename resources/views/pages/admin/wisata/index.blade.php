@@ -13,6 +13,13 @@
                     <a href="{{ route('admin.wisata.create') }}" class="btn btn-primary">+ Tambah Wisata</a>
                 </div>
             </div>
+            @if (session()->has('sukses'))
+                <div class="mx-3 alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('sukses') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
@@ -24,7 +31,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach ($wisata as $item)
                             <tr>
                                 <td>{{ $item->nama_wisata }}</td>
@@ -36,12 +42,12 @@
                                     <form action="{{ route('admin.wisata.destroy', $item->id) }}" method="post">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn btn-danger btn-sm">Hapus</button>
+                                        <button class="btn btn-danger btn-sm"
+                                            onclick="return konfirmasiHapusKonten(event)">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
@@ -51,6 +57,7 @@
 @endsection
 @push('script')
     <script src="{{ url('Backend/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="{{ url('Backend\assets\js\hapus.js') }}"></script>
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');

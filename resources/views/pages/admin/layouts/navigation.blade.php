@@ -86,6 +86,14 @@
                         <span>Kelola Rekening</span>
                     </a>
                 </li>
+                {{-- @if (auth()->user()->roles == 'SUPERUSER')
+                    <li class="sidebar-item {{ request()->is('admin/user*') ? 'active' : '' }}">
+                        <a href="/admin/users" class='sidebar-link'>
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Kelola User</span>
+                        </a>
+                    </li>
+                @endif --}}
                 <li class="sidebar-item">
                     <form action="/logout" method="POST">
                         @csrf

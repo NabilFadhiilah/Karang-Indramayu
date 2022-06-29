@@ -34,7 +34,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="no_rekening">No Rekening</label>
-                                                <input type="text" id="no_rekening" value="{{ old('no_rekening') }}"
+                                                <input type="number" id="no_rekening" value="{{ old('no_rekening') }}"
                                                     class="form-control @error('no_rekening') is-invalid @enderror"
                                                     name="no_rekening" placeholder="No Rekening">
                                                 @error('no_rekening')

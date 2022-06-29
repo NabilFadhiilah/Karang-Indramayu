@@ -10,6 +10,12 @@
                     <h2 class="m-0">Verifikasi Pengembangan</h2>
                 </div>
             </div>
+            @if (session()->has('sukses'))
+                <div class="mx-3 alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('sukses') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="card-body">
                 <table class="table table-striped" id="table1">
                     <thead>
@@ -27,11 +33,17 @@
                                 <td>{{ $pengembangan->nama_wisata }}</td>
                                 <td>Rp.{{ number_format($pengembangan->pendanaan) }}</td>
                                 <td>{{ $pengembangan->status }}</td>
-                                <td class="d-flex justify-content-start">
-                                    {{-- {{ $pengembangan->id }} --}}
-                                    <a href="{{ route('admin.verifikasi-pengembangan.edit', $pengembangan->id) }}"
-                                        class="btn btn-success btn-sm mx-1">Verifikasi</a>
-                                </td>
+                                @if ($pengembangan->status != 'TERIMA')
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.verifikasi-pengembangan.edit', $pengembangan->id) }}"
+                                            class="btn btn-success btn-sm mx-1">Verifikasi</a>
+                                    </td>
+                                @else
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.verifikasi-pengembangan.show', $pengembangan->id) }}"
+                                            class="btn btn-info btn-sm mx-1">Lihat</a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

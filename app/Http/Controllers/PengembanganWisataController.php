@@ -47,7 +47,7 @@ class PengembanganWisataController extends Controller
         //
         $data = $request->all();
         PengembanganWisata::create($data);
-        return redirect()->route('admin.pengembanganWisata.index');
+        return redirect()->route('admin.pengembanganWisata.index')->with('sukses', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -89,7 +89,7 @@ class PengembanganWisataController extends Controller
         $data = $request->all();
         $pengembanganWisata = PengembanganWisata::find($id);
         $pengembanganWisata->update($data);
-        return redirect()->route('admin.pengembanganWisata.index');
+        return redirect()->route('admin.pengembanganWisata.index')->with('sukses', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -103,6 +103,6 @@ class PengembanganWisataController extends Controller
         //
         $pengembanganWisata = PengembanganWisata::find($id);
         $pengembanganWisata->delete();
-        return redirect()->route('admin.pengembanganWisata.index');
+        return redirect()->route('admin.pengembanganWisata.index')->with('sukses', 'Data Berhasil Dihapus');
     }
 }
