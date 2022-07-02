@@ -62,12 +62,18 @@
                                 </div>
                                 <div class="tab-pane fade" id="nav-mengenai-investasi-ini" role="tabpanel"
                                     aria-labelledby="nav-mengenai-investasi-ini-tab">
-                                    @foreach ($wisata->relationToPengembangan as $pengembangan)
+                                    @foreach ($wisata->relationToPengembangan as $key => $pengembangan)
                                         <p>{!! $pengembangan->deskripsi !!}</p>
                                     @endforeach
                                 </div>
                                 <div class="tab-pane fade" id="nav-Update" role="tabpanel" aria-labelledby="nav-Update-tab">
-                                    <p>Belum Ada Update Pengembangan Untuk Wisata Ini</p>
+                                    @forelse ($wisata->relationToLaporan as $update)
+                                        <p class="mb-0">{{ $update->pengeluaran }}</p>
+                                        <p class="mb-0">Rp.{{ number_format($update->biaya_pengeluaran) }}</p>
+                                        <p class="mb-0">{{ $update->created_at }}</p>
+                                    @empty
+                                        <p>Belum Ada Update Pengembangan Untuk Wisata Ini</p>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>

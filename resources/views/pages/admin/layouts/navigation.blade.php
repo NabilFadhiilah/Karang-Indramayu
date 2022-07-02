@@ -69,13 +69,13 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="layout-default.html">Laporan Paket Wisata</a>
+                            <a href="{{ route('admin.laporan-paket-master') }}">Laporan Paket Wisata</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="layout-vertical-1-column.html">Laporan Wisata</a>
+                            <a href="{{ route('admin.laporan-wisata-master') }}">Laporan Wisata</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="layout-vertical-navbar.html">Laporan Pengembangan</a>
+                            <a href="{{ route('admin.laporan-pengembangan-master') }}">Laporan Pengembangan</a>
                         </li>
                     </ul>
                 </li>

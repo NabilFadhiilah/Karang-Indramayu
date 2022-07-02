@@ -234,7 +234,8 @@ class FrontendController extends Controller
     public function InvestWisata(Wisata $wisata)
     {
         # code...
-        $wisata->load('relationToGallery', 'relationToPengembangan');
+        $wisata->load('relationToGallery', 'relationToPengembangan', 'relationToLaporan');
+        // dd($wisata);
         $rekening = Rekening::all();
         $data = DB::table('pengembangan')->where('id_pengembangan', '=', $wisata->relationToPengembangan->first()->id)->where('status', 'like', 'TERIMA')->sum('pendanaan');
         return view('detail-invest', compact('wisata', 'rekening', 'data'));

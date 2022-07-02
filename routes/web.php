@@ -3,6 +3,10 @@
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\LaporanMasterController;
+use App\Http\Controllers\LaporanPaketController;
+use App\Http\Controllers\LaporanPengembanganController;
+use App\Http\Controllers\LaporanWisataController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\PengembanganController;
@@ -14,6 +18,9 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\WisataController;
+use App\Models\LaporanPaket;
+use App\Models\LaporanPengembangan;
+use App\Models\LaporanWisata;
 use App\Models\ReservasiPaketWisata;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -88,6 +95,10 @@ Route::middleware('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::controller(AdminDashboardController::class)->group(function () {
         Route::get('/', 'index');
     });
+
+    /* 
+    Crud
+    */
     Route::resource('rekening', RekeningController::class);
     Route::resource('wisata', WisataController::class);
     Route::resource('paket', PaketController::class);
@@ -96,6 +107,16 @@ Route::middleware('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('verifikasi-wisata', ReservasiWisataController::class);
     Route::resource('verifikasi-paket', ReservasiPaketWisataController::class);
     Route::resource('verifikasi-pengembangan', PengembanganController::class);
+
+    /* 
+    Laporan
+    */
+    Route::get('/laporan-paket-master', [LaporanMasterController::class, 'laporanPaket'])->name('laporan-paket-master');
+    Route::get('/laporan-wisata-master', [LaporanMasterController::class, 'laporanWisata'])->name('laporan-wisata-master');
+    Route::get('/laporan-pengembangan-master', [LaporanMasterController::class, 'laporanInvest'])->name('laporan-pengembangan-master');
+    Route::resource('reservasi-paket.laporan-paket', LaporanPaketController::class);
+    Route::resource('reservasi-wisata.laporan-wisata', LaporanWisataController::class);
+    Route::resource('reservasi-pengembangan.laporan-pengembangan', LaporanPengembanganController::class);
     // Route::get('/users', [UserController::class, 'index']);
     // Route::get('/users/edit/{user}', [UserController::class, 'edit']);
     // Route::put('/users/update/{user}', [UserController::class, 'update']);

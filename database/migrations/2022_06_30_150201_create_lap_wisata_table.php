@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLapPengembanganTable extends Migration
+class CreateLapWisataTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateLapPengembanganTable extends Migration
      */
     public function up()
     {
-        Schema::create('lap_pengembangan', function (Blueprint $table) {
+        Schema::create('lap_wisata', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_pengembangan')->unsigned();
+            $table->bigInteger('id_reservasi_wisata')->unsigned();
             $table->string('pengeluaran');
             $table->bigInteger('biaya_pengeluaran');
             $table->timestamps();
+            $table->foreign('id_reservasi_wisata')->references('id')->on('reservasi_wisata')->onDelete('cascade');
         });
     }
 
@@ -29,6 +30,6 @@ class CreateLapPengembanganTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lap_pengembangan');
+        Schema::dropIfExists('lap_wisata');
     }
 }
