@@ -60,6 +60,19 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="durasi_wisata">Durasi Wisata</label>
+                                                <small class="text-muted">Dalam Hari</small>
+                                                <input name="durasi_wisata" type="text" value="{{ old('durasi_wisata') }}" class="form-control @error('durasi_wisata') is-invalid @enderror" id="durasi_wisata">
+                                                @error('durasi_wisata')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="durasi_wisata">Durasi Wisata</label>
                                                 <small class="text-muted">Maksimal 7 Hari Dalam 1 Paket</small>
                                                 <div class="input-group mb-3 ">
                                                     <select class="form-select @error('durasi_wisata') is-invalid @enderror" id="durasi_wisata" name="durasi_wisata">
@@ -79,7 +92,7 @@
                                                 @enderror
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div id="durasi_paket">
 

@@ -84,8 +84,9 @@ class PaketController extends Controller
     public function edit(Paket $paket)
     {
         //
-        // $wisata = Paket::all();
-        // return view('pages.admin.paket.edit', ['item' => $paket, 'wisata' => $wisata]);
+        // dd($paket);
+        $wisata = Paket::all();
+        return view('pages.admin.paket.edit', ['item' => $paket, 'wisata' => $wisata]);
     }
 
     /**
@@ -98,6 +99,9 @@ class PaketController extends Controller
     public function update(UpdatePaketRequest $request, Paket $paket)
     {
         //
+        $data = $request->all();
+        $paket->update($data);
+        return redirect()->route('admin.paket.index')->with('sukses', 'Data Berhasil Diupdate');
     }
 
     /**

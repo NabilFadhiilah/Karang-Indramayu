@@ -46,6 +46,8 @@
                                 </td>
                                 <td>{{ $item->harga }}</td>
                                 <td class="d-flex justify-content-start align-items-center">
+                                    <a href="{{ route('admin.paket.edit', $item->id) }}"
+                                        class="btn btn-success btn-sm mx-1">Edit</a>
                                     <form action="{{ route('admin.paket.destroy', $item->id) }}" method="post">
                                         @method('delete')
                                         @csrf
