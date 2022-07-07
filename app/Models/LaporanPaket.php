@@ -14,6 +14,6 @@ class LaporanPaket extends Model
     public function relationToReservasi()
     {
         # code...
-        return $this->hasMany(ReservasiPaketWisata::class, 'id', 'id_reservasi');
+        return $this->hasMany(ReservasiPaketWisata::class, 'id', 'id_reservasi_paket');
     }
 }

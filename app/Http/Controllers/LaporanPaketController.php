@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Models\LaporanPaket;
 use Illuminate\Http\Request;
 use App\Models\ReservasiWisata;
@@ -10,7 +11,6 @@ use App\Models\ReservasiPaketWisata;
 use Illuminate\Foundation\Auth\User;
 use App\Http\Requests\StoreLaporanPaketRequest;
 use App\Http\Requests\UpdateLaporanPaketRequest;
-use Jimmyjs\ReportGenerator\ReportMedia\PdfReport;
 
 class LaporanPaketController extends Controller
 {
@@ -103,5 +103,17 @@ class LaporanPaketController extends Controller
         //
         $laporan_paket->delete();
         return redirect()->route('admin.reservasi-paket.laporan-paket.index', $reservasi_paket->id)->with('sukses', 'Data Berhasil Dihapus');
+    }
+
+    public function generatePDF(ReservasiPaketWisata $reservasi_paket)
+    {
+        # code...
+        # Query Data
+        $reservasi_paket->load('relationToPaket', 'relationToUser', 'relationToRekening', 'relationToLaporan')->get();
+
+        # Downloading Data
+        $pdf = PDF::loadView('template-laporan.laporan-paket', compact('reservasi_paket'))->setPaper('a4', 'potrait');
+        // return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $reservasi_paket->id . '.pdf');
+        return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $reservasi_paket->id . '.pdf');
     }
 }

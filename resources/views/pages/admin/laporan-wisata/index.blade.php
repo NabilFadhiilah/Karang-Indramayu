@@ -10,6 +10,8 @@
                     <h2 class="m-0">Laporan Reservasi ID #{{ $wisata->id }}</h2>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
+                    <a href="{{ route('admin.cetak-laporan-wisata-pdf', $wisata->id) }}" class="btn btn-primary mx-2">Cetak
+                        Laporan Ini</a>
                     <a href="{{ route('admin.reservasi-wisata.laporan-wisata.create', $wisata->id) }}"
                         class="btn btn-primary">+
                         Tambah

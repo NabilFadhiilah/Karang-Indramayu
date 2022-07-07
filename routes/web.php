@@ -109,14 +109,27 @@ Route::middleware('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('verifikasi-pengembangan', PengembanganController::class);
 
     /* 
-    Laporan
+    Laporan Master
     */
     Route::get('/laporan-paket-master', [LaporanMasterController::class, 'laporanPaket'])->name('laporan-paket-master');
+    Route::post('/laporan-paket-master/cetak-pdf', [LaporanMasterController::class, 'CetakPdfPaket'])->name('laporan-paket-master-pdf');
+
     Route::get('/laporan-wisata-master', [LaporanMasterController::class, 'laporanWisata'])->name('laporan-wisata-master');
+    Route::post('/laporan-wisata-master/cetak-pdf', [LaporanMasterController::class, 'CetakPdfWisata'])->name('laporan-wisata-master-pdf');
+
     Route::get('/laporan-pengembangan-master', [LaporanMasterController::class, 'laporanInvest'])->name('laporan-pengembangan-master');
+    Route::post('/laporan-pengembangan-master/cetak-pdf', [LaporanMasterController::class, 'CetakPdfPengembangan'])->name('laporan-pengembangan-master-pdf');
+    /* 
+    Laporan Pengeluaran
+    */
     Route::resource('reservasi-paket.laporan-paket', LaporanPaketController::class);
+    Route::get('/reservasi-paket/{reservasi_paket}/cetak-laporan-paket-pdf', [LaporanPaketController::class, 'generatePDF'])->name('cetak-laporan-paket-pdf');
+
     Route::resource('reservasi-wisata.laporan-wisata', LaporanWisataController::class);
+    Route::get('/reservasi-wisata/{reservasi_wisatum}/cetak-laporan-wisata-pdf', [LaporanWisataController::class, 'generatePDF'])->name('cetak-laporan-wisata-pdf');
+
     Route::resource('reservasi-pengembangan.laporan-pengembangan', LaporanPengembanganController::class);
+    Route::get('/reservasi-pengembangan/{reservasi_pengembangan}/cetak-laporan-pengembangan-pdf', [LaporanPengembanganController::class, 'generatePDF'])->name('cetak-laporan-pengembangan-pdf');
     // Route::get('/users', [UserController::class, 'index']);
     // Route::get('/users/edit/{user}', [UserController::class, 'edit']);
     // Route::put('/users/update/{user}', [UserController::class, 'update']);

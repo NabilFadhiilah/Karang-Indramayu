@@ -53,7 +53,7 @@
 
                     <a href="{{ route('dashboard-detail', $wisata->id) }}" class="btn btn-primary py-1">Lihat
                         Detail</a>
-                    <a href="#" class="px-3">Cetak Invoice</a>
+                    {{-- <a href="#" class="px-3">Cetak Invoice</a> --}}
                 </div>
             </div>
         @empty

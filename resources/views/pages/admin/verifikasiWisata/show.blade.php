@@ -68,12 +68,13 @@
                                             </div>
                                             <div class="tab-pane fade" id="user" role="tabpanel"
                                                 aria-labelledby="user-tab">
-                                                <p class="my-1">Nama Pemesan : {{ $reservasi->relationToUser->nama }}
+                                                <p class="my-1">Nama Pemesan : {{ $reservasi->relationToUserOne->nama }}
                                                 </p>
-                                                <p class="my-1">Email Pemesan : {{ $reservasi->relationToUser->email }}
+                                                <p class="my-1">Email Pemesan :
+                                                    {{ $reservasi->relationToUserOne->email }}
                                                 </p>
                                                 <p class="my-1">No Tlp Pemesan :
-                                                    {{ $reservasi->relationToUser->no_tlp }}</p>
+                                                    {{ $reservasi->relationToUserOne->no_tlp }}</p>
                                             </div>
                                         </div>
                                     </div>

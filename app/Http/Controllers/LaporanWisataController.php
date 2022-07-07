@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\LaporanWisata;
+use App\Models\ReservasiWisata;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Http\Requests\StoreLaporanWisataRequest;
 use App\Http\Requests\UpdateLaporanWisataRequest;
-use App\Models\ReservasiWisata;
 
 class LaporanWisataController extends Controller
 {
@@ -99,5 +101,15 @@ class LaporanWisataController extends Controller
         //
         $laporan_wisatum->delete();
         return redirect()->route('admin.reservasi-wisata.laporan-wisata.index', $reservasi_wisatum->id)->with('sukses', 'Data Berhasil Dihapus');
+    }
+    public function generatePDF(ReservasiWisata $reservasi_wisatum)
+    {
+        # code...
+        # Query Data
+        $reservasi_wisatum->load('relationToWisata', 'relationToUser', 'relationToRekening', 'relationToLaporan')->get();
+
+        # Downloading Data
+        $pdf = PDF::loadView('template-laporan.laporan-wisata', compact('reservasi_wisatum'));
+        return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Wisata_' . $reservasi_wisatum->id . '.pdf');
     }
 }

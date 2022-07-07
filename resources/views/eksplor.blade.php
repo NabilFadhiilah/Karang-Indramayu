@@ -36,7 +36,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="bg-white rounded-3 border p-3 mb-2 pb-md-3">
+                    {{-- <div class="bg-white rounded-3 border p-3 mb-2 pb-md-3">
                         <h3>Bedasarkan Harga</h3>
                         <div class="d-flex align-items-center mb-2">
                             <input class="form-check-input mt-0" type="radio" name="radioNoLabel" id="radioNoLabel1"
@@ -50,7 +50,7 @@
                             <p class="paragraph-2 justify-content-center d-flex mb-0 px-1">Harga (Termahal Lebih
                                 Dulu)</p>
                         </div>
-                    </div>
+                    </div> --}}
                     @if ($paket)
                         <div class="bg-white rounded-3 border p-3 mb-2 pb-md-3 d-flex flex-column">
                             <h4 class="align-self-center">Kami Menyediakan Paket Wisata</h4>

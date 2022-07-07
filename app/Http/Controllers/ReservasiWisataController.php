@@ -51,7 +51,7 @@ class ReservasiWisataController extends Controller
     public function show(ReservasiWisata $verifikasi_wisatum)
     {
         //
-        $verifikasi_wisatum->load('relationToWisata', 'relationToRekening', 'relationToUser');
+        $verifikasi_wisatum->load('relationToWisata', 'relationToRekening', 'relationToUserOne');
         // dd($verifikasi_wisatum);
         return view('pages.admin.verifikasiWisata.show', ['reservasi' => $verifikasi_wisatum]);
     }
@@ -65,7 +65,7 @@ class ReservasiWisataController extends Controller
     public function edit(ReservasiWisata $verifikasi_wisatum)
     {
         //
-        $verifikasi_wisatum->load('relationToWisata', 'relationToRekening', 'relationToUser');
+        $verifikasi_wisatum->load('relationToWisata', 'relationToRekening', 'relationToUserOne');
         // dd($verifikasi_wisatum);
         return view('pages.admin.verifikasiWisata.edit', ['reservasi' => $verifikasi_wisatum]);
     }

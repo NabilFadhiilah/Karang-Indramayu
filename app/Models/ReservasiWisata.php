@@ -34,6 +34,18 @@ class ReservasiWisata extends Model
     public function relationToUser()
     {
         # code...
+        return $this->hasMany(User::class, 'id', 'id_user');
+    }
+
+    public function relationToUserOne()
+    {
+        # code...
         return $this->hasOne(User::class, 'id', 'id_user');
+    }
+
+    public function relationToLaporan()
+    {
+        # code...
+        return $this->hasMany(LaporanWisata::class, 'id_reservasi_wisata', 'id');
     }
 }

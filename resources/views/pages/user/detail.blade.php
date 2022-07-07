@@ -5,7 +5,7 @@
         <div class=" main-card p-3 bg-white rounded-3 mb-2">
             <div class="col-lg-12 d-flex justify-content-between align-items-center">
                 <h4>Detail Transaksi ID #{{ $reservasiWisata->id }}</h4>
-                <a href="#" class="btn btn-outline-secondary">Cetak Invoice</a>
+                {{-- <a href="#" class="btn btn-outline-secondary">Cetak Invoice</a> --}}
             </div>
             <div class="row mb-1 mt-3">
                 <div class="col-lg-4 pb-2 pe-md-0 mb-md-2 checkout-image">

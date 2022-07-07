@@ -51,7 +51,7 @@ class ReservasiPaketWisataController extends Controller
     public function show(ReservasiPaketWisata $verifikasi_paket)
     {
         //
-        $verifikasi_paket->load('relationToPaket', 'relationToRekening', 'relationToUser');
+        $verifikasi_paket->load('relationToPaket', 'relationToRekening', 'relationToUserOne');
         // dd($verifikasi_paket);
         return view('pages.admin.verifikasiPaket.show', ['reservasi' => $verifikasi_paket]);
     }
@@ -65,7 +65,7 @@ class ReservasiPaketWisataController extends Controller
     public function edit(ReservasiPaketWisata $verifikasi_paket)
     {
         //
-        $verifikasi_paket->load('relationToPaket', 'relationToRekening', 'relationToUser');
+        $verifikasi_paket->load('relationToPaket', 'relationToRekening', 'relationToUserOne');
         // dd($verifikasi_paket);
         return view('pages.admin.verifikasiPaket.edit', ['reservasi' => $verifikasi_paket]);
     }

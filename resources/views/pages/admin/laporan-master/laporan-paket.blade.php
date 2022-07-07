@@ -9,13 +9,28 @@
                 <div class="col-6">
                     <h2 class="m-0">Laporan Reservasi Paket</h2>
                 </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <a href="#" class="btn btn-primary">Cetak Laporan</a>
+            </div>
+            <form action="{{ route('admin.laporan-paket-master-pdf') }}" method="POST">
+                @csrf
+                <div class="card-body d-flex col-12 justify-content-start">
+                    {{-- <h6 class="m-0 col-12">Buat Laporan Yang Sudah Diverifikasi Bedasarakan Tanggal Verifikasi</h6> --}}
+                    <div class="col-4 mx-2">
+                        <div class="form-group">
+                            <label for="roundText">Tanggal Awal</label>
+                            <input type="date" class="form-control round" name="tgl_awal" required>
+                        </div>
+                    </div>
+                    <div class="col-4 mx-2">
+                        <div class="form-group">
+                            <label for="squareText">Tanggal Akhir</label>
+                            <input type="date" class="form-control square" name="tgl_akhir" required>
+                        </div>
+                    </div>
+                    <div class="col-3 d-flex justify-content-end align-self-center">
+                        <button type="submit" class="btn btn-primary">Cetak Laporan
+                    </div>
                 </div>
-            </div>
-            <div class="card-body d-flex col-12">
-                <h6 class="m-0">Buat Laporan Yang Sudah Diverifikasi</h6>
-            </div>
+            </form>
             @if (session()->has('sukses'))
                 <div class="mx-3 alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('sukses') }}
@@ -28,8 +43,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Paket</th>
-                            <th>Total Reservasi</th>
-                            {{-- <th>Status</th> --}}
+                            <th>Tanggal Verifikasi</th>
+                            <th>Total Pemasukan</th>
+                            <th>Total Pengeluaran</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -41,12 +57,21 @@
                                 @foreach ($item->relationToPaket as $detailPaket)
                                     <td>{{ $detailPaket->nama_paket }}</td>
                                 @endforeach
+                                <td>{{ Carbon\Carbon::parse($item->tgl_verifikasi)->formatLocalized('%d %B %Y') }}
                                 <td>Rp.{{ number_format($item->total_reservasi) }}</td>
-                                {{-- <td><span class="badge bg-success">{{ $item->status_reservasi }}</span></td> --}}
-                                <td class="d-flex justify-content-start">
-                                    <a href="{{ route('admin.reservasi-paket.laporan-paket.index', $item->id) }}"
-                                        class="btn btn-secondary btn-sm mx-1">Buat Laporan</a>
+                                <td>Rp.{{ number_format($item->relation_to_laporan_sum_biaya_pengeluaran) }}</td>
                                 </td>
+                                @if ($item->relation_to_laporan_sum_biaya_pengeluaran == null)
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.reservasi-paket.laporan-paket.index', $item->id) }}"
+                                            class="btn btn-success btn-sm mx-1">Buat Laporan</a>
+                                    </td>
+                                @else
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.reservasi-paket.laporan-paket.index', $item->id) }}"
+                                            class="btn btn-secondary btn-sm mx-1">Edit Laporan</a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

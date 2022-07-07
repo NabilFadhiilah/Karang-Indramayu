@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Pengembangan;
 use App\Models\PengembanganWisata;
 use App\Models\LaporanPengembangan;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Http\Requests\StoreLaporanPengembanganRequest;
 use App\Http\Requests\UpdateLaporanPengembanganRequest;
 
@@ -100,5 +102,17 @@ class LaporanPengembanganController extends Controller
         //
         $laporan_pengembangan->delete();
         return redirect()->route('admin.reservasi-pengembangan.laporan-pengembangan.index', $reservasi_pengembangan->id)->with('sukses', 'Data Berhasil Dihapus');
+    }
+
+    public function generatePDF(PengembanganWisata $reservasi_pengembangan)
+    {
+        # code...
+        # Query Data
+        $reservasi_pengembangan->load('relationToWisata', 'relationToUser', 'relationToRekening', 'relationToLaporan')->get();
+
+        # Downloading Data
+        // dd($reservasi_pengembangan);
+        $pdf = PDF::loadView('template-laporan.laporan-pengembangan', compact('reservasi_wisatum'));
+        return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Wisata_' . $reservasi_pengembangan->id . '.pdf');
     }
 }

@@ -10,11 +10,12 @@
                     <h2 class="m-0">Laporan Reservasi ID #{{ $paket->id }}</h2>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
+                    <a href="{{ route('admin.cetak-laporan-paket-pdf', $paket->id) }}" class="btn btn-primary mx-2">Cetak
+                        Laporan Ini</a>
                     <a href="{{ route('admin.reservasi-paket.laporan-paket.create', $paket->id) }}"
                         class="btn btn-primary">+
                         Tambah
                         Pengeluaran</a>
-                    {{-- <a href="/admin/cetak-laporan-paket" class="btn btn-primary">Cetak Laporan Ini</a> --}}
                 </div>
             </div>
             @if (session()->has('sukses'))
