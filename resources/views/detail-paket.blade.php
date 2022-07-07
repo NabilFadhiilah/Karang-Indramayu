@@ -73,11 +73,15 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="m-0">Reservasi Awal</h6>
-                            <p class="m-0">{{ $detailPaket->tgl_reservasi_awal }}</p>
+                            <p class="m-0">
+                                {{ Carbon\Carbon::parse($detailPaket->tgl_reservasi_awal)->formatLocalized('%d %B %Y') }}
+                            </p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="m-0">Reservasi Akhir</h6>
-                            <p class="m-0">{{ $detailPaket->tgl_reservasi_akhir }}</p>
+                            <p class="m-0">
+                                {{ Carbon\Carbon::parse($detailPaket->tgl_reservasi_akhir)->formatLocalized('%d %B %Y') }}
+                            </p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="m-0">Harga</h6>
@@ -91,9 +95,13 @@
                 @endguest
                 @auth
                     @if (auth()->user()->roles == 'WISATAWAN')
-                        <a href="{{ route('checkout-paket', $detailPaket->slug) }}"
-                            class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
-                            Sekarang</a>
+                        @if ($detailPaket->tgl_reservasi_akhir <= \Carbon\Carbon::now())
+                            <a href="#" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi Ditutup</a>
+                        @else
+                            <a href="{{ route('checkout-paket', $detailPaket->slug) }}"
+                                class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
+                                Sekarang</a>
+                        @endif
                     @endif
                     @if (auth()->user()->roles == 'INVESTOR')
                         <form action="/roles" method="POST">

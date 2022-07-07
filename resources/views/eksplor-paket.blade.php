@@ -77,9 +77,13 @@
                                             {!! $dataPaket->deskripsi !!}</p>
                                     </div>
                                     <div class="">
-                                        <a href=" {{ route('checkout-paket', $dataPaket->slug) }}"
-                                            class="btn btn-primary m-1 py-1">Reservasi
-                                            Wisata</a>
+                                        @if ($dataPaket->tgl_reservasi_akhir <= \Carbon\Carbon::now())
+                                            <a href="#" class="btn btn-secondary m-1 py-1">Reservasi Ditutup</a>
+                                        @else
+                                            <a href=" {{ route('checkout-paket', $dataPaket->slug) }}"
+                                                class="btn btn-primary m-1 py-1">Reservasi
+                                                Wisata</a>
+                                        @endif
                                         <a href="{{ route('detail-paket', $dataPaket->slug) }}"
                                             class="btn btn-outline-primary m-1 py-1">Lihat
                                             Paket Wisata</a>

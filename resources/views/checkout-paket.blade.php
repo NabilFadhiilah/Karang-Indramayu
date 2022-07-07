@@ -57,7 +57,8 @@
                                         </label>
                                         <input type="date" name="tgl_reservasi" value="{{ old('tgl_reservasi') }}"
                                             class="form-control @error('tgl_reservasi') is-invalid @enderror"
-                                            id="keberangkatan">
+                                            id="keberangkatan" min="{{ $paket->tgl_reservasi_awal }}"
+                                            max="{{ $paket->tgl_reservasi_akhir }}">
                                         @error('tgl_reservasi')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

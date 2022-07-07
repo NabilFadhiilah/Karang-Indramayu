@@ -83,10 +83,18 @@
                                             <a href="{{ route('detail-wisata', $wisata->slug) }}"
                                                 class="d-flex align-items-center">Lihat
                                                 Wisata</a>
-                                            <button class=" btn btn-primary btn-wisata"><a
-                                                    href="{{ route('checkout', $wisata->slug) }}"
-                                                    class="text-white text-center">Pesan
-                                                    Wisata</a></button>
+                                            @if ($wisata->tgl_reservasi_akhir <= \Carbon\Carbon::now())
+                                                <button class=" btn btn-secondary"><a href="#"
+                                                        style="text-decoration:none;"
+                                                        class="text-white text-center">Reservasi
+                                                        Ditutup</a></button>
+                                            @else
+                                                <button class=" btn btn-primary btn-wisata"><a
+                                                        href="{{ route('checkout', $wisata->slug) }}"
+                                                        class="text-white text-center">Pesan
+                                                        Wisata</a></button>
+                                            @endif
+
                                         </div>
                                     </div>
                                 </div>

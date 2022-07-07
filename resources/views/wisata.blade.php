@@ -62,11 +62,15 @@
                             </tr> --}}
                             <tr>
                                 <th width="50%">Reservasi Awal</th>
-                                <td width="50%" class="text-end">{{ $wisata->tgl_reservasi_awal }}</td>
+                                <td width="50%" class="text-end">
+                                    {{ Carbon\Carbon::parse($wisata->tgl_reservasi_awal)->formatLocalized('%d %B %Y') }}
+                                </td>
                             </tr>
                             <tr>
                                 <th width="50%">Reservasi Akhir</th>
-                                <td width="50%" class="text-end">{{ $wisata->tgl_reservasi_akhir }}</td>
+                                <td width="50%" class="text-end">
+                                    {{ Carbon\Carbon::parse($wisata->tgl_reservasi_akhir)->formatLocalized('%d %B %Y') }}
+                                </td>
                             </tr>
                             <tr>
                                 <th width="50%">Harga</th>
@@ -81,9 +85,13 @@
                     @endguest
                     @auth
                         @if (auth()->user()->roles == 'WISATAWAN')
-                            <a href="{{ route('checkout', $wisata->slug) }}"
-                                class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
-                                Sekarang</a>
+                            @if ($wisata->tgl_reservasi_akhir <= \Carbon\Carbon::now())
+                                <a href="#" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi Ditutup</a>
+                            @else
+                                <a href="{{ route('checkout', $wisata->slug) }}"
+                                    class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
+                                    Sekarang</a>
+                            @endif
                         @endif
                         @if (auth()->user()->roles == 'INVESTOR')
                             <form action="/roles" method="POST">
