@@ -14,6 +14,7 @@
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
+                            <th>ID Transaksi</th>
                             <th>Wisata</th>
                             <th>Tanggal Keberangkatan</th>
                             <th>Status</th>
@@ -24,6 +25,7 @@
 
                         @foreach ($reservasi as $item)
                             <tr>
+                                <td>#{{ $item->id }}</td>
                                 @foreach ($item->relationToWisata as $wisata)
                                     <td>{{ $wisata->nama_wisata }}</td>
                                 @endforeach

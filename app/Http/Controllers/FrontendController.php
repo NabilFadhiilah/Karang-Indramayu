@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Admin\AfterPaymentPaket;
+use App\Mail\Admin\AfterPaymentWisata;
+use App\Mail\User\AfterCheckoutPaket;
 use Carbon\Carbon;
 use App\Models\Paket;
 use App\Models\Wisata;
@@ -12,10 +15,14 @@ use App\Models\Pengembangan;
 use Illuminate\Http\Request;
 use App\Models\ReservasiWisata;
 use Dflydev\DotAccessData\Data;
+use App\Mail\User\AfterPaidWisata;
 use App\Models\PengembanganWisata;
 use Illuminate\Support\Facades\DB;
 use App\Models\ReservasiPaketWisata;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\User\AfterCheckoutWisata;
+use App\Mail\User\AfterPaidPaket;
 
 class FrontendController extends Controller
 {
@@ -114,6 +121,7 @@ class FrontendController extends Controller
             'total_reservasi' => $data['total_reservasi'],
             'status_reservasi' => 'PENDING'
         ]);
+        Mail::to(Auth()->user()->email)->send(new AfterCheckoutPaket($reservasi, $paket));
         return redirect()->route('payment-paket', [$paket->slug, $reservasi->id]);
     }
 
@@ -133,6 +141,9 @@ class FrontendController extends Controller
                 'bukti_reservasi' => $data
             ]);
         }
+        $ReservasiPaketWisata->load('relationToPaketOne', 'relationToUserOne');
+        Mail::to(Auth()->user()->email)->send(new AfterPaidPaket($ReservasiPaketWisata));
+        Mail::to('Admin.Gokarang@gmail.com')->send(new AfterPaymentPaket($ReservasiPaketWisata));
         return redirect()->route('sukses');
     }
 
@@ -187,6 +198,8 @@ class FrontendController extends Controller
             'total_reservasi' => $data['total_reservasi'],
             'status_reservasi' => 'PENDING'
         ]);
+
+        Mail::to(Auth()->user()->email)->send(new AfterCheckoutWisata($reservasi, $wisata));
         return redirect()->route('payment-wisata', [$wisata->slug, $reservasi->id]);
     }
 
@@ -201,13 +214,15 @@ class FrontendController extends Controller
     public function wisataUpload(Request $request, ReservasiWisata $reservasiWisata)
     {
         # code...
-        // dd($request);
         if ($request->hasFile('bukti_pembayaran')) {
             $data = $request->file('bukti_pembayaran')->store('bukti_reservasi');
             $reservasiWisata->update([
                 'bukti_reservasi' => $data
             ]);
         }
+        $reservasiWisata->load('relationToWisataOne', 'relationToUserOne');
+        Mail::to(Auth()->user()->email)->send(new AfterPaidWisata($reservasiWisata));
+        Mail::to('Admin.Gokarang@gmail.com')->send(new AfterPaymentWisata($reservasiWisata));
         return redirect()->route('sukses');
     }
 

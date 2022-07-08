@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\ReservasiPaketWisata;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StoreReservasiPaketWisataRequest;
 use App\Http\Requests\UpdateReservasiPaketWisataRequest;
+use App\Mail\Admin\AfterVerifiedPaket;
+use App\Mail\Admin\SendTicketPaket;
 
 class ReservasiPaketWisataController extends Controller
 {
@@ -84,6 +87,11 @@ class ReservasiPaketWisataController extends Controller
             'status_reservasi' => $request->status_reservasi,
             'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
         ]);
+        $verifikasi_paket->load('relationToUserOne', 'relationToPaketOne');
+        Mail::to($verifikasi_paket->relationToUserOne->email)->send(new AfterVerifiedPaket($verifikasi_paket));
+        if ($request->status_reservasi == 'TERIMA') {
+            Mail::to($verifikasi_paket->relationToUserOne->email)->send(new SendTicketPaket($verifikasi_paket));
+        }
         return redirect()->route('admin.verifikasi-paket.index');
     }
 

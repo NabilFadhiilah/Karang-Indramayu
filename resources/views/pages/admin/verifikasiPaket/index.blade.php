@@ -14,6 +14,7 @@
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
+                            <th>ID Transaksi</th>
                             <th>Paket</th>
                             <th>Tanggal Keberangkatan</th>
                             <th>Status</th>
@@ -24,6 +25,7 @@
 
                         @foreach ($paket as $item)
                             <tr>
+                                <td>#{{ $item->id }}</td>
                                 @foreach ($item->relationToPaket as $datapaket)
                                     <td>{{ $datapaket->nama_paket }}</td>
                                 @endforeach

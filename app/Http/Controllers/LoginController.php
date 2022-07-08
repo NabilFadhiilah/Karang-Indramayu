@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Auth\Events\Registered;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\User\AfterRegister;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Events\Registered;
 
 class LoginController extends Controller
 {
@@ -57,8 +59,9 @@ class LoginController extends Controller
         ]);
         $data['password'] = Hash::make($data['password']);
         // dd($data);
-        User::create($data);
+        $user = User::create($data);
         event(new Registered($data));
+        Mail::to($user->email)->send(new AfterRegister($user));
         return redirect('login')->with('sukses', 'Registrasi Berhasil!');
     }
 

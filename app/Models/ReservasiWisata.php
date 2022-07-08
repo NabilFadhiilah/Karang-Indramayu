@@ -25,6 +25,12 @@ class ReservasiWisata extends Model
         return $this->hasMany(Wisata::class, 'id', 'id_wisata');
     }
 
+    public function relationToWisataOne()
+    {
+        # code...
+        return $this->hasOne(Wisata::class, 'id', 'id_wisata');
+    }
+
     public function relationToRekening()
     {
         # code...

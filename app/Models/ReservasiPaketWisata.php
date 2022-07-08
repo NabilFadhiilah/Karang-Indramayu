@@ -17,6 +17,11 @@ class ReservasiPaketWisata extends Model
         # code...
         return $this->hasMany(Paket::class, 'id', 'id_paket_wisata');
     }
+    public function relationToPaketOne()
+    {
+        # code...
+        return $this->hasOne(Paket::class, 'id', 'id_paket_wisata');
+    }
     public function relationToGallery()
     {
         # code...
