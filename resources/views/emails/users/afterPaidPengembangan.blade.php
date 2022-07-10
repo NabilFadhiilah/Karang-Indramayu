@@ -1,12 +1,16 @@
 @component('mail::message')
-# Introduction
 
-The body of your message.
+    # Hallo {{ $wisata->relationToUser->nama }}!
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+    Bukti Pembayaran Untuk Pengembangan Wisata {{ $wisata->relationToWisataOne->nama_wisata }} Sudah Kami Terima, Harap
+    Menunggu
+    Email Konfirmasi Pembayaran Dari Kami.
+    Anda Bisa Melihat Status Pembayaran Dengan Klik Tombol Dibawah Ini
 
-Thanks,<br>
-{{ config('app.name') }}
+    @component('mail::button', ['url' => route('dashboard-riwayat')])
+        Dashboard Saya
+    @endcomponent
+
+    Thanks,<br>
+    {{ config('app.name') }}
 @endcomponent

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AfterVerifiedPengembangan extends Mailable
+class SendPengembanganPromise extends Mailable
 {
     use Queueable, SerializesModels;
     private $verifikasi_pengembangan;
@@ -30,7 +30,7 @@ class AfterVerifiedPengembangan extends Mailable
      */
     public function build()
     {
-        return $this->subject("Verifikasi Pengembangan Wisata {$this->verifikasi_pengembangan->relationToPengembanganOne->nama_wisata}")->markdown('emails.admin.afterVerifiedPengembangan', [
+        return $this->subject("Bukti Pengembangan Wisata {$this->verifikasi_pengembangan->relationToPengembanganOne->nama_wisata}")->markdown('emails.admin.sendPengembanganPromise', [
             'pengembangan' => $this->verifikasi_pengembangan
         ]);
     }

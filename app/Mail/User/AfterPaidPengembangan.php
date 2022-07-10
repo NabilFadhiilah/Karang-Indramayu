@@ -10,15 +10,17 @@ use Illuminate\Queue\SerializesModels;
 class AfterPaidPengembangan extends Mailable
 {
     use Queueable, SerializesModels;
+    private $pengembangan;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($pengembangan)
     {
         //
+        $this->pengembangan = $pengembangan;
     }
 
     /**
@@ -28,6 +30,8 @@ class AfterPaidPengembangan extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.users.afterPaidPengembangan');
+        return $this->subject("Pengembangan Wisata {$this->pengembangan->relationToWisataOne->nama_wisata}")->markdown('emails.users.afterPaidPengembangan', [
+            'wisata' => $this->pengembangan
+        ]);
     }
 }

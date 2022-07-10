@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Wisata;
 use App\Models\Pengembangan;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StorePengembanganRequest;
 use App\Http\Requests\UpdatePengembanganRequest;
-use App\Models\Wisata;
+use App\Mail\Admin\AfterVerifiedPengembangan;
+use App\Mail\Admin\SendPengembanganPromise;
 
 class PengembanganController extends Controller
 {
@@ -82,11 +85,18 @@ class PengembanganController extends Controller
     public function update(UpdatePengembanganRequest $request, Pengembangan $verifikasi_pengembangan)
     {
         //
+        // dd($verifikasi_pengembangan);
         $verifikasi_pengembangan->update([
             'status' => $request->status_reservasi,
             'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
         ]);
-        // dd($verifikasi_pengembangan);
+        $verifikasi_pengembangan->load(['relationToUser', 'relationToPengembanganOne' => function ($query) {
+            $query->join('wisata', 'wisata.id', '=', 'pengembangan_wisata.id_wisata')->select('pengembangan_wisata.*', 'wisata.nama_wisata')->get();
+        }]);
+        Mail::to($verifikasi_pengembangan->relationToUser->email)->send(new AfterVerifiedPengembangan($verifikasi_pengembangan));
+        if ($request->status_reservasi == 'TERIMA') {
+            Mail::to($verifikasi_pengembangan->relationToUser->email)->send(new SendPengembanganPromise($verifikasi_pengembangan));
+        }
         return redirect()->route('admin.verifikasi-pengembangan.index');
     }
 

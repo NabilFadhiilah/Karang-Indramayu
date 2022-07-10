@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Admin\AfterPaymentPaket;
+use App\Mail\Admin\AfterPaymentPengembangan;
 use App\Mail\Admin\AfterPaymentWisata;
 use App\Mail\User\AfterCheckoutPaket;
+use App\Mail\User\AfterCheckoutPengembangan;
 use Carbon\Carbon;
 use App\Models\Paket;
 use App\Models\Wisata;
@@ -23,6 +25,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\User\AfterCheckoutWisata;
 use App\Mail\User\AfterPaidPaket;
+use App\Mail\User\AfterPaidPengembangan;
 
 class FrontendController extends Controller
 {
@@ -272,6 +275,7 @@ class FrontendController extends Controller
             'tgl_batas_pembayaran' => Carbon::now('Asia/Jakarta')->addDays(3),
             'status' => 'PENDING'
         ]);
+        Mail::to(Auth()->user()->email)->send(new AfterCheckoutPengembangan($investId, $wisata));
         return redirect()->route('payment-invest', [$wisata->slug, $investId->id]);
     }
 
@@ -293,6 +297,9 @@ class FrontendController extends Controller
                 'bukti_pembayaran' => $data
             ]);
         }
+        $pengembangan->load('relationToUser', 'relationToWisataOne');
+        Mail::to(Auth()->user()->email)->send(new AfterPaidPengembangan($pengembangan));
+        Mail::to('Admin.Gokarang@gmail.com')->send(new AfterPaymentPengembangan($pengembangan));
         return redirect()->route('sukses');
     }
 

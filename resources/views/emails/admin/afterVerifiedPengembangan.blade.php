@@ -1,12 +1,15 @@
 @component('mail::message')
-# Introduction
+    # Hallo {{ $pengembangan->relationToUser->nama }}!
 
-The body of your message.
+    Kami Informasikan Bahwa Pembayaran Pengembangan {{ $pengembangan->relationToPengembanganOne->nama_wisata }} Sebesar
+    Rp.{{ number_format($pengembangan->pendanaan) }}
+    Berubah Status Menjadi {{ $pengembangan->status }}, Anda Bisa Lihat Status Pembayaran Ini Melalui
+    Tombol Dibawah
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+    @component('mail::button', ['url' => route('dashboard-riwayat')])
+        Dashboard Saya
+    @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+    Thanks,<br>
+    {{ config('app.name') }}
 @endcomponent

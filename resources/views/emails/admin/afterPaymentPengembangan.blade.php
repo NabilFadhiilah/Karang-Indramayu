@@ -1,12 +1,16 @@
 @component('mail::message')
-# Introduction
+    # Hallo Admin!
 
-The body of your message.
+    Wisatawan {{ $wisata->relationToUser->nama }} Sudah Melakukan Pembayaran Untuk Pengembangan Wisata
+    {{ $wisata->relationToWisataOne->nama_wisata }} Sebesar Rp.{{ number_format($wisata->pendanaan) }}, Dengan ID
+    Transaksi #{{ $wisata->id }}.
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+    Harap Konfirmasi Pembayaran Dengan Klik Tombol Ini, Atau Akses Halaman Dashboard Admin
 
-Thanks,<br>
-{{ config('app.name') }}
+    @component('mail::button', ['url' => route('admin.verifikasi-pengembangan.index')])
+        Verifikasi Pembayaran
+    @endcomponent
+
+    Thanks,<br>
+    {{ config('app.name') }}
 @endcomponent

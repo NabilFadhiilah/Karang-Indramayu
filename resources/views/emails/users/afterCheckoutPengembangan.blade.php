@@ -1,12 +1,14 @@
 @component('mail::message')
-# Introduction
 
-The body of your message.
+    # Terimakasih Sudah Melakukan Pengembangan Wisata Di Gokarang!
+    Di Wisata {{ $wisata->nama_wisata }},
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+    Harap Segera Melakukan Upload Bukti Transfer Pada Aplikasi Sebesar Rp.{{ number_format($pengembangan->pendanaan) }}
+    Dengan Klik Tombol Dibawah Ini, Jika Sudah Upload Bukti Transfer Bisa Abaikan Email Ini
+    @component('mail::button', ['url' => route('payment-invest', [$wisata->slug, $pengembangan->id])])
+        Upload Bukti Pembayaran
+    @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+    Terimakasih,<br>
+    {{ config('app.name') }}
 @endcomponent
