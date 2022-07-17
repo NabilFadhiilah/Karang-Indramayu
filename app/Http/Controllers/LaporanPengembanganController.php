@@ -113,6 +113,7 @@ class LaporanPengembanganController extends Controller
         # Downloading Data
         // dd($reservasi_pengembangan);
         $pdf = PDF::loadView('template-laporan.laporan-pengembangan', compact('reservasi_wisatum'));
-        return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Wisata_' . $reservasi_pengembangan->id . '.pdf');
+        // return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Wisata_' . $reservasi_pengembangan->id . '.pdf');
+        return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Wisata_' . $reservasi_pengembangan->id . '.pdf');
     }
 }

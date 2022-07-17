@@ -113,7 +113,7 @@ class LaporanPaketController extends Controller
 
         # Downloading Data
         $pdf = PDF::loadView('template-laporan.laporan-paket', compact('reservasi_paket'))->setPaper('a4', 'potrait');
-        // return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $reservasi_paket->id . '.pdf');
-        return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $reservasi_paket->id . '.pdf');
+        return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $reservasi_paket->id . '.pdf');
+        // return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $reservasi_paket->id . '.pdf');
     }
 }

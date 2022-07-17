@@ -27,8 +27,8 @@ class LaporanMasterController extends Controller
         # code...
         $data = ReservasiWisata::withSum('relationToLaporan', 'biaya_pengeluaran')->with('relationToWisata', 'relationToUser')->where('tgl_verifikasi', '>=', $request->tgl_awal)->where('tgl_verifikasi', '<=', $request->tgl_akhir)->get();
         $pdf = PDF::loadView('template-laporan.laporan-wisata-master', compact('data', 'request'))->setPaper('a4', 'potrait');
-        // return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
-        return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
+        return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
+        // return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
     }
 
     public function laporanPaket()
@@ -43,8 +43,8 @@ class LaporanMasterController extends Controller
         # code...
         $data = ReservasiPaketWisata::withSum('relationToLaporan', 'biaya_pengeluaran')->with('relationToPaket', 'relationToUser')->where('tgl_verifikasi', '>=', $request->tgl_awal)->where('tgl_verifikasi', '<=', $request->tgl_akhir)->get();
         $pdf = PDF::loadView('template-laporan.laporan-paket-master', compact('data', 'request'))->setPaper('a4', 'potrait');
-        // return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
-        return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
+        return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
+        // return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
     }
 
     public function laporanInvest()
