@@ -34,4 +34,10 @@ class PengembanganWisata extends Model
         # code...
         return $this->hasMany(Pengembangan::class, 'id_pengembangan', 'id');
     }
+
+    public function relationToLaporan()
+    {
+        # code...
+        return $this->hasMany(LaporanPengembangan::class, 'id_pengembangan', 'id');
+    }
 }

@@ -69,7 +69,7 @@ class UserDashboardController extends Controller
             $query->leftJoin('gallery', 'wisata.id', '=', 'gallery.id_wisata')->select('wisata.*', 'gallery.image')->get();
         }])->where('id_user', Auth::user()->id)->where('bukti_reservasi', '!=', null)->latest()->get();
         $dataPaket = ReservasiPaketWisata::with('relationToPaket')->where('bukti_reservasi', '!=', null)->where('id_user', Auth::user()->id)->get();
-        $dataInvest = Pengembangan::join('pengembangan_wisata', 'pengembangan.id_pengembangan', '=', 'pengembangan_wisata.id')->leftJoin('wisata', 'pengembangan_wisata.id_wisata', '=', 'wisata.id')->select('pengembangan.*', 'wisata.nama_wisata')->where('bukti_pembayaran', '!=', null)->where('id_user', Auth::user()->id)->get();
+        $dataInvest = Pengembangan::join('pengembangan_wisata', 'pengembangan.id_pengembangan', '=', 'pengembangan_wisata.id')->leftJoin('wisata', 'pengembangan_wisata.id_wisata', '=', 'wisata.id')->select('pengembangan.*', 'wisata.nama_wisata', 'wisata.slug')->where('bukti_pembayaran', '!=', null)->where('id_user', Auth::user()->id)->get();
         // dd($dataPaket, $dataInvest);
         return view('pages.user.riwayat', ['riwayatWisata' => $dataWisata, 'riwayatPaket' => $dataPaket, 'riwayatInvest' => $dataInvest]);
     }

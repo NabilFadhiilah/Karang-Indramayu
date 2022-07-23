@@ -15,6 +15,11 @@
                         Tambah
                         Pengeluaran</a>
                     {{-- <a href="/admin/cetak-laporan-pengembangan" class="btn btn-primary">Cetak Laporan Ini</a> --}}
+                    <div class="col-3 d-flex justify-content-end">
+                        <a href="{{ route('admin.cetak-laporan-pengembangan-pdf', $pengembangan->id) }}"
+                            class="btn btn-primary">Cetak
+                            Laporan</a>
+                    </div>
                 </div>
             </div>
             @if (session()->has('sukses'))

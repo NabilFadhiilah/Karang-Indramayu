@@ -61,7 +61,7 @@
                                             <div class="form-group">
                                                 <label for="durasi_wisata">Durasi Wisata</label>
                                                 <small class="text-muted">Dalam Hari</small>
-                                                <input name="durasi_wisata" type="text" value="{{ old('durasi_wisata') }}" class="form-control @error('durasi_wisata') is-invalid @enderror" id="durasi_wisata">
+                                                <input name="durasi_wisata" type="number" value="{{ old('durasi_wisata') }}" class="form-control @error('durasi_wisata') is-invalid @enderror" id="durasi_wisata">
                                                 @error('durasi_wisata')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -264,6 +264,11 @@
             }
         });
     </script>
+        <script>
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementsByName("tgl_reservasi_awal")[0].setAttribute('max', today);
+            document.getElementsByName("tgl_reservasi_akhir")[0].setAttribute('min', today);
+        </script>
 
     {{-- Trix Editor --}}
     <script type="text/javascript" src="{{ url('Backend/assets/js/trix.js') }}"></script>

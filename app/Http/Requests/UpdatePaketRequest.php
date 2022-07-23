@@ -26,14 +26,14 @@ class UpdatePaketRequest extends FormRequest
     {
         return [
             //
-            'nama_paket' => 'required',
-            'slug' => 'required',
-            'deskripsi' => 'required',
-            'tgl_reservasi_awal' => 'required',
-            'tgl_reservasi_akhir' => 'required',
-            'durasi_wisata' => 'required',
-            'harga' => 'required',
-            'ketentuan' => 'required',
+            // 'nama_paket' => 'required',
+            // 'slug' => 'required',
+            // 'deskripsi' => 'required',
+            // 'tgl_reservasi_awal' => 'required',
+            // 'tgl_reservasi_akhir' => 'required',
+            // 'durasi_wisata' => 'required',
+            // 'harga' => 'required',
+            // 'ketentuan' => 'required'
         ];
     }
 }

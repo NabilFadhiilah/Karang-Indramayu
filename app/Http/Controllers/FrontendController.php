@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\Admin\AfterPaymentPaket;
-use App\Mail\Admin\AfterPaymentPengembangan;
-use App\Mail\Admin\AfterPaymentWisata;
-use App\Mail\User\AfterCheckoutPaket;
-use App\Mail\User\AfterCheckoutPengembangan;
 use Carbon\Carbon;
 use App\Models\Paket;
 use App\Models\Wisata;
@@ -17,15 +12,21 @@ use App\Models\Pengembangan;
 use Illuminate\Http\Request;
 use App\Models\ReservasiWisata;
 use Dflydev\DotAccessData\Data;
+use App\Mail\User\AfterPaidPaket;
 use App\Mail\User\AfterPaidWisata;
 use App\Models\PengembanganWisata;
 use Illuminate\Support\Facades\DB;
 use App\Models\ReservasiPaketWisata;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\Admin\AfterPaymentPaket;
+use App\Mail\User\AfterCheckoutPaket;
+use App\Mail\Admin\AfterPaymentWisata;
 use App\Mail\User\AfterCheckoutWisata;
-use App\Mail\User\AfterPaidPaket;
+use Illuminate\Support\Facades\Storage;
 use App\Mail\User\AfterPaidPengembangan;
+use App\Mail\Admin\AfterPaymentPengembangan;
+use App\Mail\User\AfterCheckoutPengembangan;
 
 class FrontendController extends Controller
 {
@@ -131,14 +132,25 @@ class FrontendController extends Controller
     public function pembayaranPaket(Paket $paket, ReservasiPaketWisata $ReservasiPaketWisata)
     {
         # code...
-        $data = $ReservasiPaketWisata->load('relationToRekening')->where('id', '=', $ReservasiPaketWisata->id)->where('id_user', Auth::user()->id)->where('bukti_reservasi', '=', null)->get();
+        // dd($paket, $ReservasiPaketWisata);
+        $data = $ReservasiPaketWisata->load('relationToRekening')->where('id', '=', $ReservasiPaketWisata->id)->where('id_user', Auth::user()->id)->where(function ($query) {
+            $query->where('bukti_reservasi', '=', null)->orWhere('bukti_reservasi', '!=', null);
+        })->get();
         return view('pembayaran-paket', ['pembayaran' => $data]);
     }
 
     public function paketUpload(Request $request, ReservasiPaketWisata $ReservasiPaketWisata)
     {
         # code...
+        if ($ReservasiPaketWisata->status_reservasi = 'TOLAK') {
+            $ReservasiPaketWisata->update([
+                'status_reservasi' => 'PENDING'
+            ]);
+        }
         if ($request->hasFile('bukti_pembayaran')) {
+            if ($ReservasiPaketWisata->bukti_reservasi != null) {
+                Storage::delete($ReservasiPaketWisata->bukti_reservasi);
+            }
             $data = $request->file('bukti_pembayaran')->store('bukti_reservasi_paket');
             $ReservasiPaketWisata->update([
                 'bukti_reservasi' => $data
@@ -210,14 +222,24 @@ class FrontendController extends Controller
     {
         # code...
         // dd($ReservasiWisata);
-        $data = $ReservasiWisata->load('relationToRekening')->where('id', '=', $ReservasiWisata->id)->where('id_user', Auth::user()->id)->where('bukti_reservasi', '=', null)->get();
+        $data = $ReservasiWisata->load('relationToRekening')->where('id', '=', $ReservasiWisata->id)->where('id_user', Auth::user()->id)->where(function ($query) {
+            $query->where('bukti_reservasi', '=', null)->orWhere('bukti_reservasi', '!=', null);
+        })->get();
         return view('pembayaran-wisata', ['pembayaran' => $data]);
     }
 
     public function wisataUpload(Request $request, ReservasiWisata $reservasiWisata)
     {
         # code...
+        if ($reservasiWisata->status_reservasi = 'TOLAK') {
+            $reservasiWisata->update([
+                'status_reservasi' => 'PENDING'
+            ]);
+        }
         if ($request->hasFile('bukti_pembayaran')) {
+            if ($reservasiWisata->bukti_reservasi != null) {
+                Storage::delete($reservasiWisata->bukti_reservasi);
+            }
             $data = $request->file('bukti_pembayaran')->store('bukti_reservasi');
             $reservasiWisata->update([
                 'bukti_reservasi' => $data
@@ -282,22 +304,31 @@ class FrontendController extends Controller
     public function pembayaraninvest(Wisata $wisata, Pengembangan $pengembangan)
     {
         # code...
-        // dd($pengembangan);
-        $data = $pengembangan->load('relationToRekening')->where('id', '=', $pengembangan->id)->where('id_user', Auth::user()->id)->where('bukti_pembayaran', '=', null)->get();
-        // dd($data);
+        $data = $pengembangan->load('relationToRekening')->where('id', '=', $pengembangan->id)->where('id_user', Auth::user()->id)->where('id_user', Auth::user()->id)->where(function ($query) {
+            $query->where('bukti_pembayaran', '=', null)->orWhere('bukti_pembayaran', '!=', null);
+        })->get();
         return view('pembayaran-invest', ['pembayaran' => $data]);
     }
 
     public function investUpload(Request $request, Pengembangan $pengembangan)
     {
         # code...
+        if ($pengembangan->status = 'TOLAK') {
+            $pengembangan->update([
+                'status' => 'PENDING'
+            ]);
+        }
         if ($request->hasFile('bukti_pembayaran')) {
+            if ($pengembangan->bukti_pembayaran != null) {
+                Storage::delete($pengembangan->bukti_pembayaran);
+            }
             $data = $request->file('bukti_pembayaran')->store('bukti_invest');
             $pengembangan->update([
                 'bukti_pembayaran' => $data
             ]);
         }
-        $pengembangan->load('relationToUser', 'relationToWisataOne');
+        $pengembangan->load('relationToUser');
+        // dd($pengembangan);
         Mail::to(Auth()->user()->email)->send(new AfterPaidPengembangan($pengembangan));
         Mail::to('Admin.Gokarang@gmail.com')->send(new AfterPaymentPengembangan($pengembangan));
         return redirect()->route('sukses');

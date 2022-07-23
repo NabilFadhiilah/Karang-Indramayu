@@ -30,7 +30,7 @@ class AfterPaymentPengembangan extends Mailable
      */
     public function build()
     {
-        return $this->subject("Verifikasi Pengembangan Wisata {$this->pengembangan->relationToWisataOne->nama_wisata}")->markdown('emails.admin.afterPaymentPengembangan', [
+        return $this->subject("Verifikasi Pengembangan Wisata")->markdown('emails.admin.afterPaymentPengembangan', [
             'wisata' => $this->pengembangan
         ]);
     }

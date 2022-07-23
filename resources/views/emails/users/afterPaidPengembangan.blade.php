@@ -2,7 +2,7 @@
 
     # Hallo {{ $wisata->relationToUser->nama }}!
 
-    Bukti Pembayaran Untuk Pengembangan Wisata {{ $wisata->relationToWisataOne->nama_wisata }} Sudah Kami Terima, Harap
+    Bukti Pembayaran Untuk Pengembangan Wisata Sudah Kami Terima, Harap
     Menunggu
     Email Konfirmasi Pembayaran Dari Kami.
     Anda Bisa Melihat Status Pembayaran Dengan Klik Tombol Dibawah Ini

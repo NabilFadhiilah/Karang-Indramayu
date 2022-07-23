@@ -27,15 +27,15 @@
                         <div class="card-body">
                             <form class="form form-vertical" method="POST"
                                 action="{{ route('admin.paket.update', $item->id) }}" enctype="multipart/form-data">
-                                @method('put')
                                 @csrf
+                                @method('put')
                                 <div class="form-body">
                                     <div class="row">
 
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="nama_paket">Nama Paket Wisata</label>
-                                                <input type="text" id="nama_paket"
+                                                <input required type="text" id="nama_paket"
                                                     class="form-control @error('nama_paket') is-invalid @enderror"
                                                     value="{{ $item->nama_paket }}" name="nama_paket"
                                                     placeholder="Nama Paket Wisata">
@@ -51,7 +51,7 @@
                                             <div class="form-group">
                                                 <label for="slug">Slug</label>
                                                 <small class="text-muted">Otomatis Terisi</small>
-                                                <input name="slug" type="text" value="{{ $item->slug }}"
+                                                <input required name="slug" type="text" value="{{ $item->slug }}"
                                                     class="form-control @error('slug') is-invalid @enderror" id="slug"
                                                     readonly>
                                                 @error('slug')
@@ -68,7 +68,7 @@
                                                 @error('deskripsi')
                                                     <p class="text-danger">{{ $message }}</p>
                                                 @enderror
-                                                <input id="deskripsi" type="hidden" name="deskripsi"
+                                                <input required id="deskripsi" type="hidden" name="deskripsi"
                                                     value="{{ $item->deskripsi }}">
                                                 <trix-editor input="deskripsi"></trix-editor>
                                             </div>
@@ -77,7 +77,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="tgl_reservasi_awal">Tanggal Reservasi Awal</label>
-                                                <input type="date" id="tgl_reservasi_awal"
+                                                <input required type="date" id="tgl_reservasi_awal"
                                                     class="form-control @error('tgl_reservasi_awal') is-invalid @enderror"
                                                     name="tgl_reservasi_awal" placeholder="Tanggal Reservasi Awal"
                                                     value="{{ $item->tgl_reservasi_awal }}">
@@ -91,7 +91,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="tgl_reservasi_akhir">Tanggal Reservasi Akhir</label>
-                                                <input type="date" id="tgl_reservasi_akhir"
+                                                <input required type="date" id="tgl_reservasi_akhir"
                                                     class="form-control @error('tgl_reservasi_akhir') is-invalid @enderror"
                                                     name="tgl_reservasi_akhir" placeholder="Tanggal Reservasi Akhir"
                                                     value="{{ $item->tgl_reservasi_akhir }}">
@@ -106,7 +106,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="harga">Harga</label>
-                                                <input type="number" id="harga"
+                                                <input required type="number" id="harga"
                                                     class="form-control  @error('harga') is-invalid @enderror"
                                                     name="harga" placeholder="Harga" value="{{ $item->harga }}">
                                                 @error('harga')
@@ -123,7 +123,7 @@
                                                 @error('ketentuan')
                                                     <p class="text-danger">{{ $message }}</p>
                                                 @enderror
-                                                <input id="ketentuan" type="hidden" name="ketentuan"
+                                                <input required id="ketentuan" type="hidden" name="ketentuan"
                                                     value="{{ $item->ketentuan }}">
                                                 <trix-editor input="ketentuan"></trix-editor>
                                             </div>
@@ -154,6 +154,11 @@
         document.addEventListener("trix-file-accept", function(event) {
             event.preventDefault();
         });
+    </script>
+    <script>
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("tgl_reservasi_awal")[0].setAttribute('max', today);
+        document.getElementsByName("tgl_reservasi_akhir")[0].setAttribute('min', today);
     </script>
 
     {{-- Slug --}}

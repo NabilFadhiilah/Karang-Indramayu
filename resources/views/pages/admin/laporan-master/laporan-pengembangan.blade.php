@@ -9,13 +9,13 @@
                 <div class="col-6">
                     <h2 class="m-0">Laporan Pengembangan Wisata</h2>
                 </div>
-                <div class="col-6 d-flex justify-content-end">
+                {{-- <div class="col-6 d-flex justify-content-end">
                     <a href="#" class="btn btn-primary">Cetak Laporan</a>
-                </div>
+                </div> --}}
             </div>
-            <div class="card-body d-flex col-12">
+            {{-- <div class="card-body d-flex col-12">
                 <h6 class="m-0">Buat Laporan Yang Sudah Diverifikasi</h6>
-            </div>
+            </div> --}}
             @if (session()->has('sukses'))
                 <div class="mx-3 alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('sukses') }}

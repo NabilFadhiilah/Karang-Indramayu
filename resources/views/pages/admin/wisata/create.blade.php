@@ -128,7 +128,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="tgl_reservasi_akhir">Tanggal Reservasi Akhir</label>
-                                                <input type="date" id="tgl_reservasi_akhir"
+                                                <input type="date" id="tgl_reservasi_akhir" min=""
                                                     class="form-control  @error('tgl_reservasi_akhir') is-invalid @enderror"
                                                     name="tgl_reservasi_akhir" placeholder="Tanggal Reservasi Akhir"
                                                     value="{{ old('tgl_reservasi_akhir') }}">
@@ -222,6 +222,12 @@
                 $(this).parents(".fieldGroup").remove();
             });
         });
+    </script>
+
+    <script>
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("tgl_reservasi_awal")[0].setAttribute('max', today);
+        document.getElementsByName("tgl_reservasi_akhir")[0].setAttribute('min', today);
     </script>
 
     {{-- Preview Image --}}

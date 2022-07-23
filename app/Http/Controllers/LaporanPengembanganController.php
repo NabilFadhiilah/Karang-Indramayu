@@ -108,12 +108,12 @@ class LaporanPengembanganController extends Controller
     {
         # code...
         # Query Data
-        $reservasi_pengembangan->load('relationToWisata', 'relationToUser', 'relationToRekening', 'relationToLaporan')->get();
+        $reservasi_pengembangan->load('relationToWisata', 'relationToLaporan')->loadSum('relationToPengembanganWisata', 'pendanaan');
 
         # Downloading Data
         // dd($reservasi_pengembangan);
-        $pdf = PDF::loadView('template-laporan.laporan-pengembangan', compact('reservasi_wisatum'));
+        $pdf = PDF::loadView('template-laporan.laporan-pengembangan', compact('reservasi_pengembangan'));
         // return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Wisata_' . $reservasi_pengembangan->id . '.pdf');
-        return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Wisata_' . $reservasi_pengembangan->id . '.pdf');
+        return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Pengembangan_' . $reservasi_pengembangan->id . '.pdf');
     }
 }

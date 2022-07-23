@@ -27,6 +27,20 @@ class Pengembangan extends Model
         return $this->hasMany(Wisata::class, 'id', 'id_wisata');
     }
 
+    public function relationToWisataOne()
+
+    {
+        # code...
+        return $this->hasOneThrough(
+            Wisata::class,
+            PengembanganWisata::class,
+            'id_wisata', // Foreign key on the cars table...
+            'id', // Foreign key on the owners table...
+            'id',
+            'id'
+        );
+    }
+
     public function relationToPengembangan()
     {
         # code...

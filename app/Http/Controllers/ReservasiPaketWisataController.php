@@ -20,7 +20,7 @@ class ReservasiPaketWisataController extends Controller
     public function index()
     {
         //
-        $data = ReservasiPaketWisata::with('relationToPaket')->where('bukti_reservasi', '!=', null)->get();
+        $data = ReservasiPaketWisata::with('relationToPaket')->where('bukti_reservasi', '!=', null)->latest()->get();
         return view('pages.admin.verifikasiPaket.index', ['paket' => $data]);
     }
 

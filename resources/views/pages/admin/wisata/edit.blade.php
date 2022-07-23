@@ -192,6 +192,11 @@
                     });
                 </script> --}}
     <script>
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("tgl_reservasi_awal")[0].setAttribute('max', today);
+        document.getElementsByName("tgl_reservasi_akhir")[0].setAttribute('min', today);
+    </script>
+    <script>
         const title = document.querySelector("#nama_wisata");
         const slug = document.querySelector("#slug");
 
