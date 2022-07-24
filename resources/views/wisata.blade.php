@@ -85,12 +85,18 @@
                     @endguest
                     @auth
                         @if (auth()->user()->roles == 'WISATAWAN')
-                            @if ($wisata->tgl_reservasi_akhir <= \Carbon\Carbon::now())
-                                <a href="#" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi Ditutup</a>
+                            @if (auth()->user()->email_verifed_at == null)
+                                <a href="#" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Harap Verifikasi
+                                    Email</a>
                             @else
-                                <a href="{{ route('checkout', $wisata->slug) }}"
-                                    class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
-                                    Sekarang</a>
+                                @if ($wisata->tgl_reservasi_akhir <= \Carbon\Carbon::now())
+                                    <a href="#" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
+                                        Ditutup</a>
+                                @else
+                                    <a href="{{ route('checkout', $wisata->slug) }}"
+                                        class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Reservasi
+                                        Sekarang</a>
+                                @endif
                             @endif
                         @endif
                         @if (auth()->user()->roles == 'INVESTOR')
