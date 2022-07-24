@@ -18,9 +18,9 @@ class CreatePaketTable extends Migration
             $table->string('nama_paket');
             $table->string('slug');
             $table->string('durasi_wisata');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
             $table->bigInteger('harga');
-            $table->string('ketentuan');
+            $table->text('ketentuan');
             $table->date('tgl_reservasi_awal');
             $table->date('tgl_reservasi_akhir');
             $table->boolean('status_wisata');

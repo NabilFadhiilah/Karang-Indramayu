@@ -17,10 +17,10 @@ class CreateWisataTable extends Migration
             $table->id();
             $table->string('nama_wisata');
             $table->string('slug');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
             $table->string('durasi_wisata');
             $table->bigInteger('harga');
-            $table->string('ketentuan');
+            $table->text('ketentuan');
             $table->date('tgl_reservasi_awal');
             $table->date('tgl_reservasi_akhir');
             $table->boolean('status_wisata');
