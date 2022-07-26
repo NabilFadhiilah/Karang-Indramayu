@@ -27,8 +27,8 @@
                                     <div class="row bg-white rounded-3 mb-2 border border-1 border-light">
                                         <div class="col-lg-3 p-0 m-0">
                                             <img src="{{ asset('storage/' . $relasiwisata->image) }}"
-                                                class="img-responsive rounded-start" width="100%" height="100%"
-                                                alt="">
+                                                class="img-responsive rounded-start" style="object-fit:cover;"
+                                                width="100%" height="150" alt="">
                                         </div>
                                         <div class="col-lg-9 py-3">
                                             <div class="d-flex justify-content-between">
