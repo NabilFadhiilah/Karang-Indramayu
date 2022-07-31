@@ -49,16 +49,6 @@ class LoginController extends Controller
         return view('register');
     }
 
-    public function verifikasi(User $user)
-    {
-        # code...
-        $verifikasi = Carbon::now('Asia/Jakarta');
-        $user->update([
-            'email_verified_at' => $verifikasi
-        ]);
-        return redirect('home');
-    }
-
     public function registerStore(Request $request)
     {
         # code...

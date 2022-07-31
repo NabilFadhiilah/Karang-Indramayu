@@ -88,18 +88,11 @@
                                     <div class="">
                                         @if ($item->tgl_reservasi_akhir <= \Carbon\Carbon::now())
                                             <a href="#" class="btn btn-secondary m-1 py-1">Reservasi Ditutup</a>
+                                        @else
+                                            <a href=" {{ route('checkout', $item->slug) }}"
+                                                class="btn btn-primary m-1 py-1">Reservasi
+                                                Wisata</a>
                                         @endif
-                                        @auth
-                                            @if (auth()->user()->email_verifed_at == null)
-                                                <a href="#" class="btn btn-secondary m-1 py-1">Harap
-                                                    Verifikasi
-                                                    Email</a>
-                                            @else
-                                                <a href=" {{ route('checkout', $item->slug) }}"
-                                                    class="btn btn-primary m-1 py-1">Reservasi
-                                                    Wisata</a>
-                                            @endif
-                                        @endauth
                                         <a href="{{ route('detail-wisata', $item->slug) }}"
                                             class="btn btn-outline-primary m-1 py-1">Lihat
                                             Detail Wisata</a>
