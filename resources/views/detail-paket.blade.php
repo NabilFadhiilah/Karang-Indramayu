@@ -131,7 +131,10 @@
                             <img src="{{ asset('storage/' . $wisata->image) }}" class="rounded-top" alt="">
                             <div class="p-2">
                                 <h3>{{ $wisata->nama_wisata }}</h3>
-                                <p class="paragraph-2">{!! substr(strip_tags($wisata->deskripsi), 0, 120) !!}</p>
+                                <p style="overflow-y:hidden;
+                                text-overflow:ellipsis;
+                                max-height:2.6em;"
+                                    class="paragraph-2">{!! $wisata->deskripsi !!}</p>
                             </div>
                             <a href="{{ route('detail-wisata', $wisata->slug) }}"
                                 class="btn btn-block btn-wisata-lainnya py-2 col-lg-12 col-12">Lihat

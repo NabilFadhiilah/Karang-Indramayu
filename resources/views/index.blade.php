@@ -21,6 +21,7 @@
         <section class="section-informasi" id="informasi">
             <div class="container">
                 <div class="row justify-content-center">
+
                     <div class="col-lg-12 py-2 text-center section-Wisata-Heading">
                         <h2>Mari Berwisata Di Kepulauan Biawak!</h2>
                         <p class="small">
@@ -28,7 +29,7 @@
                         </p>
                     </div>
                 </div>
-                {{-- <div class="row justify-content-center">
+                <div class="row justify-content-center">
                     <div class="col-lg-5 py-2 info-image">
                         <img src="{{ url('/Frontend/Asset/Images/card-wisata-1.png') }}" class="img-fluid rounded-3">
                     </div>
@@ -51,7 +52,7 @@
                         </div>
 
                     </div>
-                </div> --}}
+                </div>
             </div>
         </section>
 
@@ -77,7 +78,7 @@
                                     </div>
                                     <div class="p-3">
                                         <h2 class="overflow-ellipsis">{{ $wisata->nama_wisata }}</h2>
-                                        <p>{!! substr(strip_tags($wisata->deskripsi), 0, 90) !!}</p>
+                                        <p>{!! $wisata->deskripsi !!}</p>
                                         <div class="d-flex justify-content-between">
                                             <a href="{{ route('detail-wisata', $wisata->slug) }}"
                                                 class="d-flex align-items-center">Lihat
@@ -156,7 +157,7 @@
                                 <div class="card-body">
                                     @foreach ($pengembangan->relationToWisata as $wisata)
                                         <h5 class="card-title">{{ $wisata->nama_wisata }}</h5>
-                                        <p class="card-text">{!! substr(strip_tags($wisata->deskripsi), 0, 120) !!}</p>
+                                        <p class="card-text">{!! $wisata->deskripsi !!}</p>
                                     @endforeach
                                     <h6>Terkumpul :</h6>
                                     <div class="progress mb-3">

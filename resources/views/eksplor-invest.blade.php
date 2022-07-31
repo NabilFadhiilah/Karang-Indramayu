@@ -65,7 +65,7 @@
                                     <div class="card-body">
                                         @foreach ($pengembangan->relationToWisata as $wisata)
                                             <h5 class="card-title">{{ $wisata->nama_wisata }}</h5>
-                                            <p class="card-text">{!! substr(strip_tags($wisata->deskripsi), 0, 120) !!}</p>
+                                            <p class="card-text">{!! $wisata->deskripsi !!}</p>
                                         @endforeach
                                         <h6>Terkumpul :</h6>
                                         <div class="progress mb-3">
