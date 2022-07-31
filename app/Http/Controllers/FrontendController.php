@@ -158,7 +158,7 @@ class FrontendController extends Controller
         }
         $ReservasiPaketWisata->load('relationToPaketOne', 'relationToUserOne');
         Mail::to(Auth()->user()->email)->send(new AfterPaidPaket($ReservasiPaketWisata));
-        Mail::to('Admin.Gokarang@gmail.com')->send(new AfterPaymentPaket($ReservasiPaketWisata));
+        Mail::to('agokarangindramayu@gmail.com')->send(new AfterPaymentPaket($ReservasiPaketWisata));
         return redirect()->route('sukses');
     }
 
@@ -247,7 +247,7 @@ class FrontendController extends Controller
         }
         $reservasiWisata->load('relationToWisataOne', 'relationToUserOne');
         Mail::to(Auth()->user()->email)->send(new AfterPaidWisata($reservasiWisata));
-        Mail::to('Admin.Gokarang@gmail.com')->send(new AfterPaymentWisata($reservasiWisata));
+        Mail::to('agokarangindramayu@gmail.com')->send(new AfterPaymentWisata($reservasiWisata));
         return redirect()->route('sukses');
     }
 
@@ -330,7 +330,7 @@ class FrontendController extends Controller
         $pengembangan->load('relationToUser');
         // dd($pengembangan);
         Mail::to(Auth()->user()->email)->send(new AfterPaidPengembangan($pengembangan));
-        Mail::to('Admin.Gokarang@gmail.com')->send(new AfterPaymentPengembangan($pengembangan));
+        Mail::to('agokarangindramayu@gmail.com')->send(new AfterPaymentPengembangan($pengembangan));
         return redirect()->route('sukses');
     }
 
