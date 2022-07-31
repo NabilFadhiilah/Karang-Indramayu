@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="p-3">
                                         <h2 class="overflow-ellipsis">{{ $wisata->nama_wisata }}</h2>
-                                        <p>{!! $wisata->deskripsi !!}</p>
+                                        <p>{!! substr(strip_tags($wisata->deskripsi), 0, 90) !!}</p>
                                         <div class="d-flex justify-content-between">
                                             <a href="{{ route('detail-wisata', $wisata->slug) }}"
                                                 class="d-flex align-items-center">Lihat
@@ -157,7 +157,7 @@
                                 <div class="card-body">
                                     @foreach ($pengembangan->relationToWisata as $wisata)
                                         <h5 class="card-title">{{ $wisata->nama_wisata }}</h5>
-                                        <p class="card-text">{!! $wisata->deskripsi !!}</p>
+                                        <p class="card-text">{!! substr(strip_tags($wisata->deskripsi), 0, 90) !!}</p>
                                     @endforeach
                                     <h6>Terkumpul :</h6>
                                     <div class="progress mb-3">

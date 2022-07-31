@@ -74,7 +74,7 @@
                                 <div class="d-flex align-items-start flex-column" style="height: 80%;">
                                     <div class="mb-auto">
                                         <p class="parahraph-2">
-                                            {!! $dataPaket->deskripsi !!}</p>
+                                            {!! substr(strip_tags($dataPaket->deskripsi), 0, 90) !!}</p>
                                     </div>
                                     <div class="">
                                         @if ($dataPaket->tgl_reservasi_akhir <= \Carbon\Carbon::now())

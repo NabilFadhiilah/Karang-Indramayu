@@ -134,7 +134,7 @@
                                 <p style="overflow-y:hidden;
                                 text-overflow:ellipsis;
                                 max-height:2.6em;"
-                                    class="paragraph-2">{!! $wisata->deskripsi !!}</p>
+                                    class="paragraph-2">{!! substr(strip_tags($wisata->deskripsi), 0, 120) !!}</p>
                             </div>
                             <a href="{{ route('detail-wisata', $wisata->slug) }}"
                                 class="btn btn-block btn-wisata-lainnya py-2 col-lg-12 col-12">Lihat
