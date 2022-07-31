@@ -26,7 +26,8 @@
                             @endforeach
                             <div class="col-lg-8">
                                 <h3>{{ $wisata->nama_wisata }}</h3>
-                                {!! substr(strip_tags($wisata->deskripsi), 0, 250) !!}
+                                <p class="paragraph-2">{!! $wisata->deskripsi !!}
+                                </p>
                             </div>
                         </div>
                         <h3>Data Reservasi</h3>

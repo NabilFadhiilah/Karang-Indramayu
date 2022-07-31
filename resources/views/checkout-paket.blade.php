@@ -26,7 +26,7 @@
                             @endforeach
                             <div class="col-lg-8">
                                 <h3>{{ $paket->nama_paket }}</h3>
-                                <p class="paragraph-2">{!! substr(strip_tags($paket->deskripsi), 0, 250) !!}
+                                <p class="paragraph-2">{!! $paket->deskripsi !!}
                                 </p>
                             </div>
                         </div>

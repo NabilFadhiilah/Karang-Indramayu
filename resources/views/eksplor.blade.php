@@ -83,7 +83,7 @@
                                 <div class="d-flex align-items-start flex-column" style="height: 80%;">
                                     <div class="mb-auto">
                                         <p class="parahraph-2">
-                                            {!! substr(strip_tags($item->deskripsi), 0, 120) !!}</p>
+                                            {!! $item->deskripsi !!}</p>
                                     </div>
                                     <div class="">
                                         @if ($item->tgl_reservasi_akhir <= \Carbon\Carbon::now())
