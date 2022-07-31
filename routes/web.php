@@ -139,6 +139,7 @@ Route::middleware('Admin')->prefix('admin')->name('admin.')->group(function () {
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::post('/login', 'auth');
+    Route::post('/verifikasi', 'verifikasi')->name('verifikasi');
     Route::post('/logout', 'logout');
 
     Route::get('/register', 'register')->name('register')->middleware('guest');

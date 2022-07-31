@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\User\AfterRegister;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -46,6 +47,16 @@ class LoginController extends Controller
     {
         # code...
         return view('register');
+    }
+
+    public function verifikasi(User $user)
+    {
+        # code...
+        $verifikasi = Carbon::now('Asia/Jakarta');
+        $user->update([
+            'email_verified_at' => $verifikasi
+        ]);
+        return redirect('home');
     }
 
     public function registerStore(Request $request)

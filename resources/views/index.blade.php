@@ -87,13 +87,19 @@
                                                         style="text-decoration:none;"
                                                         class="text-white text-center">Reservasi
                                                         Ditutup</a></button>
-                                            @else
-                                                <button class=" btn btn-primary btn-wisata"><a
-                                                        href="{{ route('checkout', $wisata->slug) }}"
-                                                        class="text-white text-center">Pesan
-                                                        Wisata</a></button>
                                             @endif
-
+                                            @auth
+                                                @if (auth()->user()->email_verifed_at == null)
+                                                    <a href="#" class="btn btn-secondary m-1 py-1">Harap
+                                                        Verifikasi
+                                                        Email</a>
+                                                @else
+                                                    <button class=" btn btn-primary btn-wisata"><a
+                                                            href="{{ route('checkout', $wisata->slug) }}"
+                                                            class="text-white text-center">Pesan
+                                                            Wisata</a></button>
+                                                @endif
+                                            @endauth
                                         </div>
                                     </div>
                                 </div>
