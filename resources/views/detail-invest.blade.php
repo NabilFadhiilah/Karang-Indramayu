@@ -150,7 +150,7 @@
                             <button type="button" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Target
                                 Tercapai</button>
                         @elseif (auth()->user()->roles == 'INVESTOR' && $rekening->isNotEmpty())
-                            @if (auth()->user()->email_verifed_at == null)
+                            @if (auth()->user()->email_verified_at == null)
                                 <a href="#" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Harap
                                     Verifikasi
                                     Email</a>

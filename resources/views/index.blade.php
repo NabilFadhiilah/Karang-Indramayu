@@ -29,7 +29,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row justify-content-center">
+                {{-- <div class="row justify-content-center">
                     <div class="col-lg-5 py-2 info-image">
                         <img src="{{ url('/Frontend/Asset/Images/card-wisata-1.png') }}" class="img-fluid rounded-3">
                     </div>
@@ -52,7 +52,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> --}}
             </div>
         </section>
 
@@ -90,7 +90,7 @@
                                                         Ditutup</a></button>
                                             @endif
                                             @auth
-                                                @if (auth()->user()->email_verifed_at == null)
+                                                @if (auth()->user()->email_verified_at == null)
                                                     <a href="#" class="btn btn-secondary m-1 py-1">Harap
                                                         Verifikasi
                                                         Email</a>

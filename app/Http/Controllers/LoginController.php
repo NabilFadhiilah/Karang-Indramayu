@@ -56,7 +56,7 @@ class LoginController extends Controller
         $user->update([
             'email_verified_at' => $verifikasi
         ]);
-        return redirect('home');
+        return redirect('login')->with('sukses', 'Verifikasi Berhasil! Silahkan Login');
     }
 
     public function registerStore(Request $request)
@@ -73,7 +73,7 @@ class LoginController extends Controller
         $user = User::create($data);
         event(new Registered($data));
         Mail::to($user->email)->send(new AfterRegister($user));
-        return redirect('login')->with('sukses', 'Registrasi Berhasil!');
+        return redirect('login')->with('sukses', 'Registrasi Berhasil! Harap Cek Email Untuk Verifikasi');
     }
 
     public function forgot()

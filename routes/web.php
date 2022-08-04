@@ -18,10 +18,6 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\WisataController;
-use App\Models\LaporanPaket;
-use App\Models\LaporanPengembangan;
-use App\Models\LaporanWisata;
-use App\Models\ReservasiPaketWisata;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -139,31 +135,15 @@ Route::middleware('Admin')->prefix('admin')->name('admin.')->group(function () {
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::post('/login', 'auth');
-    Route::post('/verifikasi', 'verifikasi')->name('verifikasi');
+    Route::get('/verifikasi/{user:email}', 'verifikasi')->name('verifikasi');
     Route::post('/logout', 'logout');
 
     Route::get('/register', 'register')->name('register')->middleware('guest');
     Route::post('/register', 'registerStore');
 
-    Route::get('/forgot', 'forgot')->name('forgot')->middleware('guest');
+    // Route::get('/forgot', 'forgot')->name('forgot')->middleware('guest');
+    // Route::post('/forgot/sent', 'resetPassword')->name('reset-password')->middleware('guest');
 });
 
 // Route Change Role
 Route::post('/roles', [UserController::class, 'changeRole'])->middleware('User')->name('roles');
-
-// Route Email
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email');
-// })->middleware('auth')->name('verification.notice');
-
-// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-//     $request->fulfill();
-
-//     return redirect('home');
-// })->middleware(['auth', 'signed'])->name('verification.verify');
-
-// Route::post('/email/verification-notification', function (Request $request) {
-//     $request->user()->sendEmailVerificationNotification();
-
-//     return back()->with('message', 'Verification link sent!');
-// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');

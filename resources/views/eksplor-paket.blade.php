@@ -81,7 +81,7 @@
                                             <a href="#" class="btn btn-secondary m-1 py-1">Reservasi Ditutup</a>
                                         @endif
                                         @auth
-                                            @if (auth()->user()->email_verifed_at == null)
+                                            @if (auth()->user()->email_verified_at == null)
                                                 <a href="#" class="btn btn-secondary m-1 py-1">Harap
                                                     Verifikasi
                                                     Email</a>
