@@ -34,7 +34,7 @@
                         @foreach ($wisata as $item)
                             <tr>
                                 <td>{{ $item->nama_wisata }}</td>
-                                <td>{!! substr(strip_tags($item->deskripsi), 0, 120) !!}</td>
+                                <td>{!! substr(strip_tags($item->deskripsi), 0, 90) !!}</td>
                                 <td>Rp.{{ number_format($item->harga) }}</td>
                                 <td class="d-flex justify-content-start">
                                     <a href="{{ route('admin.wisata.edit', $item->id) }}"

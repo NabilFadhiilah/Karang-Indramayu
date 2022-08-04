@@ -150,10 +150,16 @@
                             <button type="button" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Target
                                 Tercapai</button>
                         @elseif (auth()->user()->roles == 'INVESTOR' && $rekening->isNotEmpty())
-                            <button type="submit" name="payment"
-                                class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Invest
-                                Sekarang</button>
-                            </form>
+                            @if (auth()->user()->email_verified_at == null)
+                                <a href="#" class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Harap
+                                    Verifikasi
+                                    Email</a>
+                            @else
+                                <button type="submit" name="payment"
+                                    class="btn btn-block btn-join-now py-2 col-lg-12 col-12">Invest
+                                    Sekarang</button>
+                                </form>
+                            @endif
                         @elseif (auth()->user()->roles == 'WISATAWAN')
                             {{-- <form action="{{ route('roles') }}" method="POST">
                                 @csrf --}}

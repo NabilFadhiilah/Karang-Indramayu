@@ -74,16 +74,25 @@
                                 <div class="d-flex align-items-start flex-column" style="height: 80%;">
                                     <div class="mb-auto">
                                         <p class="parahraph-2">
-                                            {!! substr(strip_tags($dataPaket->deskripsi), 0, 120) !!}</p>
+                                            {!! substr(strip_tags($dataPaket->deskripsi), 0, 90) !!}</p>
                                     </div>
                                     <div class="">
                                         @if ($dataPaket->tgl_reservasi_akhir <= \Carbon\Carbon::now())
                                             <a href="#" class="btn btn-secondary m-1 py-1">Reservasi Ditutup</a>
-                                        @else
-                                            <a href=" {{ route('checkout-paket', $dataPaket->slug) }}"
-                                                class="btn btn-primary m-1 py-1">Reservasi
-                                                Wisata</a>
                                         @endif
+                                        @auth
+                                            @if (auth()->user()->email_verified_at == null)
+                                                <a href="#" class="btn btn-secondary m-1 py-1">Harap
+                                                    Verifikasi
+                                                    Email</a>
+                                            @elseif ($dataPaket->tgl_reservasi_akhir <= \Carbon\Carbon::now())
+                                                <a href="#" class="btn btn-secondary m-1 py-1">Reservasi Ditutup</a>
+                                            @else
+                                                <a href=" {{ route('checkout-paket', $dataPaket->slug) }}"
+                                                    class="btn btn-primary m-1 py-1">Reservasi
+                                                    Wisata</a>
+                                            @endif
+                                        @endauth
                                         <a href="{{ route('detail-paket', $dataPaket->slug) }}"
                                             class="btn btn-outline-primary m-1 py-1">Lihat
                                             Paket Wisata</a>

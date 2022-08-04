@@ -49,6 +49,16 @@ class LoginController extends Controller
         return view('register');
     }
 
+    public function verifikasi(User $user)
+    {
+        # code...
+        $verifikasi = Carbon::now('Asia/Jakarta');
+        $user->update([
+            'email_verified_at' => $verifikasi
+        ]);
+        return redirect('login')->with('sukses', 'Verifikasi Berhasil! Silahkan Login');
+    }
+
     public function registerStore(Request $request)
     {
         # code...
@@ -63,7 +73,7 @@ class LoginController extends Controller
         $user = User::create($data);
         event(new Registered($data));
         Mail::to($user->email)->send(new AfterRegister($user));
-        return redirect('login')->with('sukses', 'Registrasi Berhasil!');
+        return redirect('login')->with('sukses', 'Registrasi Berhasil! Harap Cek Email Untuk Verifikasi');
     }
 
     public function forgot()

@@ -21,6 +21,7 @@
         <section class="section-informasi" id="informasi">
             <div class="container">
                 <div class="row justify-content-center">
+
                     <div class="col-lg-12 py-2 text-center section-Wisata-Heading">
                         <h2>Mari Berwisata Di Kepulauan Biawak!</h2>
                         <p class="small">
@@ -87,12 +88,24 @@
                                                         style="text-decoration:none;"
                                                         class="text-white text-center">Reservasi
                                                         Ditutup</a></button>
-                                            @else
-                                                <button class=" btn btn-primary btn-wisata"><a
-                                                        href="{{ route('checkout', $wisata->slug) }}"
-                                                        class="text-white text-center">Pesan
-                                                        Wisata</a></button>
                                             @endif
+                                            @auth
+                                                @if (auth()->user()->email_verified_at == null)
+                                                    <a href="#" class="btn btn-secondary m-1 py-1">Harap
+                                                        Verifikasi
+                                                        Email</a>
+                                                @elseif ($wisata->tgl_reservasi_akhir <= \Carbon\Carbon::now())
+                                                    <button class=" btn btn-secondary"><a href="#"
+                                                            style="text-decoration:none;"
+                                                            class="text-white text-center">Reservasi
+                                                            Ditutup</a></button>
+                                                @else
+                                                    <button class=" btn btn-primary btn-wisata"><a
+                                                            href="{{ route('checkout', $wisata->slug) }}"
+                                                            class="text-white text-center">Pesan
+                                                            Wisata</a></button>
+                                                @endif
+                                            @endauth
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +162,7 @@
                                 <div class="card-body">
                                     @foreach ($pengembangan->relationToWisata as $wisata)
                                         <h5 class="card-title">{{ $wisata->nama_wisata }}</h5>
-                                        <p class="card-text">{!! substr(strip_tags($wisata->deskripsi), 0, 120) !!}</p>
+                                        <p class="card-text">{!! substr(strip_tags($wisata->deskripsi), 0, 90) !!}</p>
                                     @endforeach
                                     <h6>Terkumpul :</h6>
                                     <div class="progress mb-3">

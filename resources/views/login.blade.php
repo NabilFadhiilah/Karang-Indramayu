@@ -29,8 +29,8 @@
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="email" name="email" required
-                                class="form-control form-control-xl @error('email') is-invalid @enderror" placeholder="Email"
-                                value="{{ old('email') }}">
+                                class="form-control form-control-xl @error('email') is-invalid @enderror"
+                                placeholder="Email" value="{{ old('email') }}">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
@@ -52,7 +52,7 @@
                     <div class="text-center mt-5 text-lg fs-4">
                         <p class="text-gray-600">Belum Punya Akun? <a href="{{ route('register') }}"
                                 class="font-bold">Daftar</a>.</p>
-                        <p><a class="font-bold" href="{{ route('forgot') }}">Lupa password?</a>.</p>
+                        {{-- <p><a class="font-bold" href="{{ route('forgot') }}">Lupa password?</a>.</p> --}}
                     </div>
                 </div>
             </div>
