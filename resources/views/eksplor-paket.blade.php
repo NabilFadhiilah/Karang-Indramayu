@@ -87,10 +87,11 @@
                                                     Email</a>
                                             @elseif ($dataPaket->tgl_reservasi_akhir <= \Carbon\Carbon::now())
                                                 <a href="#" class="btn btn-secondary m-1 py-1">Reservasi Ditutup</a>
-                                            @else
+                                            @elseif(auth()->user()->roles == 'WISATAWAN')
                                                 <a href=" {{ route('checkout-paket', $dataPaket->slug) }}"
                                                     class="btn btn-primary m-1 py-1">Reservasi
                                                     Wisata</a>
+                                            @else
                                             @endif
                                         @endauth
                                         <a href="{{ route('detail-paket', $dataPaket->slug) }}"

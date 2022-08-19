@@ -25,7 +25,8 @@ class LaporanMasterController extends Controller
     public function CetakPdfWisata(Request $request)
     {
         # code...
-        $data = ReservasiWisata::withSum('relationToLaporan', 'biaya_pengeluaran')->with('relationToWisata', 'relationToUser')->where('tgl_verifikasi', '>=', $request->tgl_awal)->where('tgl_verifikasi', '<=', $request->tgl_akhir)->get();
+        $data = ReservasiWisata::with('relationToWisata', 'relationToUser')->withSum('relationToLaporan', 'biaya_pengeluaran')->where('status_reservasi', '=', 'TERIMA')->where('tgl_verifikasi', '>=', $request->tgl_awal)->where('tgl_verifikasi', '<=', $request->tgl_akhir)->get();
+        // dd($data);
         $pdf = PDF::loadView('template-laporan.laporan-wisata-master', compact('data', 'request'))->setPaper('a4', 'potrait');
         return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
         // return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
@@ -41,7 +42,8 @@ class LaporanMasterController extends Controller
     public function CetakPdfPaket(Request $request)
     {
         # code...
-        $data = ReservasiPaketWisata::withSum('relationToLaporan', 'biaya_pengeluaran')->with('relationToPaket', 'relationToUser')->where('tgl_verifikasi', '>=', $request->tgl_awal)->where('tgl_verifikasi', '<=', $request->tgl_akhir)->get();
+        $data = ReservasiPaketWisata::with('relationToPaket', 'relationToUser')->withSum('relationToLaporan', 'biaya_pengeluaran')->where('status_reservasi', '=', 'TERIMA')->where('tgl_verifikasi', '>=', $request->tgl_awal)->where('tgl_verifikasi', '<=', $request->tgl_akhir)->get();
+        // dd($data);
         $pdf = PDF::loadView('template-laporan.laporan-paket-master', compact('data', 'request'))->setPaper('a4', 'potrait');
         return $pdf->stream(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');
         // return $pdf->download(Carbon::now('Asia/Jakarta') . '_Laporan_Paket_' . $request->tgl_awal . '-' . $request->tgl_akhir . '.pdf');

@@ -50,6 +50,9 @@
                                         data-bs-target="#nav-mengenai-investasi-ini" type="button" role="tab"
                                         aria-controls="nav-mengenai-investasi-ini" aria-selected="false">Mengenai Investasi
                                         Ini</button>
+                                    <button class="nav-link" id="nav-potensi-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-potensi" type="button" role="tab"
+                                        aria-controls="nav-potensi" aria-selected="false">Potensi Investasi</button>
                                     <button class="nav-link" id="nav-Update-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-Update" type="button" role="tab"
                                         aria-controls="nav-Update" aria-selected="false">Update</button>
@@ -66,21 +69,51 @@
                                         <p>{!! $pengembangan->deskripsi !!}</p>
                                     @endforeach
                                 </div>
+                                <div class="tab-pane fade" id="nav-potensi" role="tabpanel"
+                                    aria-labelledby="nav-potensi-tab">
+                                    <p>
+                                        Wisata Ini Telah Dipesan Sebanyak {{ $wisata->relationToTransaction->count() }} Kali
+                                        Dan
+                                        Telah Diikuti Oleh {{ $wisata->relationToTransaction->sum('partisipan_reservasi') }}
+                                        Orang
+                                    </p>
+                                    {{-- @foreach ($wisata->relationToTransaction as $key => $transaction)
+                                        <p>{{ $transaction-> }}</p>
+                                    @endforeach --}}
+                                </div>
                                 <div class="tab-pane fade" id="nav-Update" role="tabpanel" aria-labelledby="nav-Update-tab">
-                                    @forelse ($wisata->relationToLaporan as $update)
-                                        <p class="mb-0">{{ $update->pengeluaran }}</p>
-                                        <p class="mb-0">Rp.{{ number_format($update->biaya_pengeluaran) }}</p>
-                                        <p class="mb-0">{{ $update->created_at }}</p>
-                                    @empty
-                                        <p>Belum Ada Update Pengembangan Untuk Wisata Ini</p>
-                                    @endforelse
+                                    <p>
+                                        @forelse ($wisata->relationToLaporan as $update)
+                                            <p class="mb-0">{{ $update->pengeluaran }}</p>
+                                            <p class="mb-0">Sebesar : Rp.{{ number_format($update->biaya_pengeluaran) }}
+                                            </p>
+                                            <p class="mb-0">Dilakukan Pada Tanggal :
+                                                {{ Carbon\Carbon::parse($update->tgl_pengeluaran)->formatLocalized('%d %B %Y') }}
+                                            </p>
+                                        @empty
+                                            <p>Belum Ada Update Pengembangan Untuk Wisata Ini</p>
+                                        @endforelse
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="gallery main-card p-3 border bg-white rounded-3 mb-2">
+                        <h4>Informasi Perhitungan Investasi</h4>
+                        <p><b>Imbal Hasil</b> <br>
+                            Menggunakan Return ekspektasi (expected return) yang diharapkan akan
+                            diperoleh oleh investor di masa mendatang.
+                            Return ekspektasi dapat dihitung berdasarkan beberapa cara, yaitu: berdasarkan nilai ekspektasi
+                            masa depan, berdasarkan nilai-nilai return historis, dan berdasarkan model return ekspektasi
+                            yang ada.</p>
+                        <p><b>Rumus</b> <br>
+                            Keuntungan : Jumlah Investasi x Imbal Hasil <br>
+                            Proyeksi Total Hasil : Jumlah Investasi + Keuntungan
+                        </p>
+                    </div>
                 </div>
                 <div class="col-lg-3 px-1">
-                    <div class="bg-white rounded p-3 side-card border mb-3">
+                    <div class="bg-white rounded p-3 side-card border mb-2">
                         <h3>Informasi Pengembangan</h3>
                         <div class="informasi-paket">
                             @foreach ($wisata->relationToPengembangan as $pengembangan)
@@ -90,7 +123,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <h6 class="m-0">Imbal Hasil</h6>
-                                    <p class="m-0">{{ $pengembangan->imbal_hasil }}%p.a</p>
+                                    <p class="m-0" id="imbal_hasil">{{ $pengembangan->imbal_hasil }}% p.a</p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <h6 class="m-0">Minimal Invest</h6>
@@ -113,7 +146,7 @@
                         </div>
                     </div>
                     {{-- invest --}}
-                    <div class="bg-white rounded-top p-3 mt-3 border side-card">
+                    <div class="bg-white rounded-top p-3 mt-1 border side-card">
                         <form action={{ route('pembayaran-invest', $wisata->slug) }} method="POST">
                             @csrf
                             <h4>Jumlah Investasi</h4>
@@ -122,13 +155,20 @@
                                     class="form-control @error('pendanaan') is-invalid @enderror"
                                     placeholder="Min Rp.{{ number_format($pengembangan->min_investasi) }}"
                                     aria-label="Jumlah Investasi" name="pendanaan" aria-describedby="basic-addon1"
-                                    value="{{ old('pendanaan') }}">
+                                    value="{{ old('pendanaan') }}" onkeyup="proyeksi()">
                                 @error('pendanaan')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                                 <input type="hidden" name="id_pengembangan" value="{{ $pengembangan->id }}">
+                            </div>
+                            <h4>Proyeksi Total Hasil</h4>
+                            <div class="input-group mb-1">
+                                <h6 class="mb-0" id="total_proyeksi">Rp 0</h6>
+                            </div>
+                            <div class="input-group mb-2">
+                                <p class="mb-0 paragraph-2 text-success">Keuntungan : <span id="proyeksi">Rp 0</span></p>
                             </div>
                             <h4>Metode Pembayaran</h4>
                             @forelse ($rekening as $dataRekening)
@@ -189,5 +229,23 @@
                 Xoffset: 15
             });
         });
+    </script>
+    <script>
+        var formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+        });
+
+        function proyeksi() {
+            var pendanaan = document.getElementById('pendanaan').value;
+            var imbal_hasil = {{ $pengembangan->imbal_hasil }};
+            var proyeksi = (parseInt(imbal_hasil) / 100) * parseInt(pendanaan);
+            document.getElementById('proyeksi').innerHTML = formatter.format(proyeksi);
+            var total_proyeksi = parseInt(pendanaan) + parseInt(proyeksi);
+            document.getElementById('total_proyeksi').innerHTML =
+                formatter.format(total_proyeksi);
+        }
     </script>
 @endpush

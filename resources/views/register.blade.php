@@ -16,8 +16,8 @@
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" name="email"
-                                class="form-control form-control-xl @error('email') is-invalid @enderror" placeholder="Email"
-                                value="{{ old('email') }}">
+                                class="form-control form-control-xl @error('email') is-invalid @enderror"
+                                placeholder="Email" value="{{ old('email') }}">
                             @error('email')
                                 <div class="invalid-feedback">
                                     <i class="bx bx-radio-circle"></i>
@@ -70,17 +70,17 @@
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                        {{-- <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Confirm Password">
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
-                            </div>
-                        </div> --}}
+                        <div class="form-check form-check-lg d-flex align-items-end">
+                            <input class="form-check-input me-2" name="roles" type="checkbox" value="DINAS"
+                                id="is-dinas">
+                            <label class="form-check-label text-gray-600" for="is-dinas">
+                                Saya Adalah Dinas
+                            </label>
+                        </div>
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Daftar</button>
                     </form>
                     <div class="text-center mt-5 text-lg fs-4">
-                        <p class='text-gray-600'>Sudah Mempunyai Akun? <a href="{{ route('login') }}"
-                                class="font-bold">Log
+                        <p class='text-gray-600'>Sudah Mempunyai Akun? <a href="{{ route('login') }}" class="font-bold">Log
                                 in</a>.</p>
                     </div>
                 </div>

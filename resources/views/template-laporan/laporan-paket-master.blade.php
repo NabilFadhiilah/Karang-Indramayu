@@ -43,6 +43,7 @@
         <tbody>
             @php
                 $total = 0;
+                $pemasukan = 0;
             @endphp
             @foreach ($data as $key => $transaksi)
                 <tr>
@@ -63,12 +64,13 @@
                 </tr>
                 @php
                     $total += $transaksi->relation_to_laporan_sum_biaya_pengeluaran;
+                    $pemasukan += $transaksi->total_reservasi;
                 @endphp
             @endforeach
             <tr>
                 <th colspan="4" style="text-align: center;">Total Pemasukan</th>
                 <td colspan="2" style="text-align: center;">
-                    Rp.{{ number_format($transaksi->sum('total_reservasi')) }}
+                    Rp.{{ number_format($pemasukan) }}
                 </td>
             </tr>
             <tr>
@@ -78,17 +80,24 @@
                 </td>
             </tr>
             <tr>
-                <th colspan="4" style="text-align: center;">Laba</th>
+                @if ($pemasukan >= $total)
+                    <th colspan="4"style="text-align: center; font-weight:bold; color:green;">Keuntungan
+                        Diperoleh : </th>
+                @else
+                    <th colspan="4"style="text-align: center; font-weight:bold; color:red;">Kerugian
+                        Diperoleh : </th>
+                @endif
+                {{-- <th colspan="4" style="text-align: center;">Laba Keuntungan Diperoleh </th> --}}
                 <td colspan="2" style="text-align: center;">
-                    Rp.{{ number_format($transaksi->sum('total_reservasi') - $total) }}
+                    Rp.{{ number_format($pemasukan - $total) }}
                 </td>
             </tr>
-            @if ($transaksi->sum('total_reservasi') - $total < $transaksi->sum('total_reservasi'))
+            {{-- @if ($pemasukan - $total < $pemasukan)
                 <tr>
                     <td colspan="4"></td>
                     <th colspan="2" style="text-align: center; color:green;">Mengalami Keuntungan</th>
                 </tr>
-            @elseif ($transaksi->sum('total_reservasi') - $total > $transaksi->sum('total_reservasi'))
+            @elseif ($pemasukan - $total > $pemasukan)
                 <tr>
                     <td colspan="4"></td>
                     <th colspan="2" style="text-align: center; color:red;">Mengalami Kerugian</th>
@@ -98,7 +107,7 @@
                     <td colspan="4"></td>
                     <th colspan="2" style="text-align: center; color:grey;">Tidak Laba Tidak Rugi</th>
                 </tr>
-            @endif
+            @endif --}}
         </tbody>
     </table>
     <p style="font-size: 15px;">*Bedasarkan Tanggal Pembayaran Diverifikasi</p>

@@ -61,17 +61,20 @@ Route::controller(FrontendController::class)->middleware('User')->group(function
     Route::post('/eksplor/{wisata:slug}/pembayaran', 'pembayaranWisataStore')->name('pembayaran-wisata');
     Route::get('/eksplor/{wisata:slug}/pembayaran/{ReservasiWisata}', 'pembayaranWisata')->name('payment-wisata');
     Route::post('/eksplor/{reservasiWisata}/upload', 'wisataUpload')->name('wisataUpload');
+    Route::put('/eksplor/{reservasiWisata}/cancel', 'cancelWisata')->name('cancel-wisata');
 
     // invest
     Route::post('/invest/{wisata:slug}/pembayaran', 'pembayaraninveststore')->name('pembayaran-invest');
     Route::get('/invest/{wisata:slug}/pembayaran/{pengembangan}', 'pembayaraninvest')->name('payment-invest');
     Route::post('/invest/{pengembangan}/upload', 'investUpload')->name('investUpload');
+    Route::put('/invest/{pengembangan}/cancel', 'cancelInvest')->name('cancel-invest');
 
     // paket
     Route::get('/paket/{paket:slug}/checkout', 'checkoutPaket')->name('checkout-paket');
     Route::post('/paket/{paket:slug}/pembayaran', 'pembayaranPaketStore')->name('pembayaran-paket');
     Route::get('/paket/{paket:slug}/pembayaran/{ReservasiPaketWisata}', 'pembayaranPaket')->name('payment-paket');
     Route::post('/paket/{ReservasiPaketWisata}/upload', 'paketUpload')->name('paketUpload');
+    Route::put('/paket/{ReservasiPaketWisata}/cancel', 'cancelPaket')->name('cancel-paket');
 
     Route::get('/sukses', 'sukses')->name('sukses');
 });
@@ -147,3 +150,18 @@ Route::controller(LoginController::class)->group(function () {
 
 // Route Change Role
 Route::post('/roles', [UserController::class, 'changeRole'])->middleware('User')->name('roles');
+
+Route::get('/linkstorage', function () {
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    echo 'storage linked!';
+});
+
+Route::get('/clear-cache', function () {
+    \Illuminate\Support\Facades\Artisan::call('config:cache');
+    echo 'cache clear!';
+});
+
+Route::get('/clear-config', function () {
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
+    echo 'clear!';
+});

@@ -30,7 +30,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             # code...
             $request->session()->regenerate();
-            if (auth()->user()->roles == 'ADMIN' || auth()->user()->roles == 'SUPERUSER') {
+            if (auth()->user()->roles == 'ADMIN' || auth()->user()->roles == 'DINAS') {
                 return redirect()->intended('admin');
             } elseif (auth()->user()->roles == 'INVESTOR') {
                 return redirect()->intended('invest');
@@ -62,6 +62,7 @@ class LoginController extends Controller
     public function registerStore(Request $request)
     {
         # code...
+        dd($request->all());
         $data = $request->validate([
             'username' => 'required|max:255|min:3|unique:users',
             'nama' => 'required|max:255',
@@ -69,6 +70,9 @@ class LoginController extends Controller
             'password' => 'required|min:5|max:255'
         ]);
         $data['password'] = Hash::make($data['password']);
+        if ($request->roles == "DINAS") {
+            $data['roles'] = "DINAS";
+        }
         // dd($data);
         $user = User::create($data);
         event(new Registered($data));

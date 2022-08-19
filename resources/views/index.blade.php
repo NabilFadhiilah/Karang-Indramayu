@@ -99,11 +99,12 @@
                                                             style="text-decoration:none;"
                                                             class="text-white text-center">Reservasi
                                                             Ditutup</a></button>
-                                                @else
+                                                @elseif(auth()->user()->roles == 'WISATAWAN')
                                                     <button class=" btn btn-primary btn-wisata"><a
                                                             href="{{ route('checkout', $wisata->slug) }}"
                                                             class="text-white text-center">Pesan
                                                             Wisata</a></button>
+                                                @else
                                                 @endif
                                             @endauth
                                         </div>

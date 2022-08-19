@@ -71,7 +71,8 @@
                                                 <div class="card-content fieldGroup">
                                                     <div class="card-body p-0 mb-2">
                                                         <input id="gambar" type="file" class="form-control"
-                                                            accept="image/*" name="gambar[]" onchange="previewImage()">
+                                                            accept="image/*" name="gambar[]" onchange="previewImage()"
+                                                            required>
                                                         <div class="my-2 d-flex justify-content-center col-12">
                                                             <img class="img-preview" style="width: 250px;">
                                                         </div>

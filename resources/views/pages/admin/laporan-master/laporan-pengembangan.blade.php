@@ -45,14 +45,21 @@
                                 <td><span
                                         class="badge bg-success">{{ round(($item->relation_to_pengembangan_wisata_sum_pendanaan / $item->target_dana) * 100) }}%</span>
                                 </td>
-                                @if (round(($item->relation_to_pengembangan_wisata_sum_pendanaan / $item->target_dana) * 100) >= 100)
+                                @if (round(($item->relation_to_pengembangan_wisata_sum_pendanaan / $item->target_dana) * 100) >= 100 &&
+                                    auth()->user()->roles == 'ADMIN')
                                     <td class="d-flex justify-content-start">
                                         <a href="{{ route('admin.reservasi-pengembangan.laporan-pengembangan.index', $item->id) }}"
-                                            class="btn btn-secondary btn-sm mx-1">Buat Laporan</a>
+                                            class="btn btn-primary btn-sm mx-1">Buat Laporan</a>
+                                    </td>
+                                @elseif(round(($item->relation_to_pengembangan_wisata_sum_pendanaan / $item->target_dana) * 100) >= 100 &&
+                                    auth()->user()->roles == 'DINAS')
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.reservasi-pengembangan.laporan-pengembangan.index', $item->id) }}"
+                                            class="btn btn-info btn-sm mx-1">Lihat Laporan</a>
                                     </td>
                                 @else
                                     <td class="d-flex justify-content-start">
-                                        <a href="#" class="btn btn-info btn-sm mx-1">Progress Belum Tercapai</a>
+                                        <a href="#" class="btn btn-secondary btn-sm mx-1">Progress Belum Tercapai</a>
                                     </td>
                                 @endif
                             </tr>

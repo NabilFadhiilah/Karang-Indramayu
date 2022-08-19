@@ -54,10 +54,17 @@
                                         <h4 class="mt-2">Total Transaksi</h4>
                                         <h4>Rp.{{ number_format($dataPending->total_reservasi) }}</h4>
                                         @foreach ($dataPending->relationToWisata as $wisata)
-                                            <a href="{{ route('payment-wisata', [$wisata->slug, $dataPending->id]) }}"
-                                                class="btn btn-primary mt-3">
-                                                Upload Bukti Pembayaran
-                                            </a>
+                                            @if ($dataPending->tgl_batas_pembayaran <= Carbon\Carbon::now())
+                                                <a href="{{ route('payment-wisata', [$wisata->slug, $dataPending->id]) }}"
+                                                    class="btn btn-danger mt-3">
+                                                    Batalkan Pemesanan
+                                                </a>
+                                            @else
+                                                <a href="{{ route('payment-wisata', [$wisata->slug, $dataPending->id]) }}"
+                                                    class="btn btn-primary mt-3">
+                                                    Upload Bukti Pembayaran
+                                                </a>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>
@@ -103,10 +110,17 @@
                                     <h4 class="mt-2">Total Transaksi</h4>
                                     <h4>Rp.{{ number_format($Paket->total_reservasi) }}</h4>
                                     @foreach ($Paket->relationToPaket as $wisataa)
-                                        <a href="{{ route('payment-paket', [$wisataa->slug, $Paket->id]) }}"
-                                            class="btn btn-primary mt-3">
-                                            Upload Bukti Pembayaran
-                                        </a>
+                                        @if ($Paket->tgl_batas_pembayaran <= Carbon\Carbon::now())
+                                            <a href="{{ route('payment-paket', [$wisataa->slug, $Paket->id]) }}"
+                                                class="btn btn-danger mt-3">
+                                                Batalkan Pemesanan
+                                            </a>
+                                        @else
+                                            <a href="{{ route('payment-paket', [$wisataa->slug, $Paket->id]) }}"
+                                                class="btn btn-primary mt-3">
+                                                Upload Bukti Pembayaran
+                                            </a>
+                                        @endif
                                     @endforeach
                                 </div>
                             @empty

@@ -14,8 +14,8 @@
                                 <div class="row">
                                     <h4 class="m-0">Bukti Pembayaran</h4>
                                     <div class="my-2 d-flex justify-content-center col-12">
-                                        <img src="{{ asset('storage/' . $reservasi->bukti_reservasi) }}"
-                                            class="img-preview" style="width: 30%;">
+                                        <img src="{{ asset('storage/' . $reservasi->bukti_reservasi) }}" class="img-preview"
+                                            style="width: 30%;">
                                     </div>
                                     <h5>Informasi Reservasi Lebih Lanjut</h5>
                                     <div class="col-12 form-group fieldGroup">
@@ -44,6 +44,8 @@
                                                         {{ $paket->nama_paket }}</p>
                                                     <p class='my-1'>Partisipan : {{ $reservasi->partisipan_reservasi }}
                                                         Orang</p>
+                                                    <p class='my-1'>Nama Partisipan :
+                                                        {{ $reservasi->nama_partisipan }}</p>
                                                     <p class='my-1'>Tanggal Keberangkatan :
                                                         {{ $reservasi->tgl_reservasi }}
                                                     </p>

@@ -264,11 +264,11 @@
             }
         });
     </script>
-        <script>
-            var today = new Date().toISOString().split('T')[0];
-            document.getElementsByName("tgl_reservasi_awal")[0].setAttribute('max', today);
-            document.getElementsByName("tgl_reservasi_akhir")[0].setAttribute('min', today);
-        </script>
+    <script>
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("tgl_reservasi_awal")[0].setAttribute('max', today);
+        document.getElementsByName("tgl_reservasi_akhir")[0].setAttribute('min', today);
+    </script>
 
     {{-- Trix Editor --}}
     <script type="text/javascript" src="{{ url('Backend/assets/js/trix.js') }}"></script>

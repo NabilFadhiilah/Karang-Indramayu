@@ -9,7 +9,7 @@
                 <div class="col-6">
                     <h2 class="m-0">Rekening</h2>
                 </div>
-                @if ($rekening->count() < 3)
+                @if ($rekening->count() < 3 && auth()->user()->roles == 'ADMIN')
                     <div class="col-6 d-flex justify-content-end">
                         <a href="{{ route('admin.rekening.create') }}" class="btn btn-primary">+ Tambah Rekening</a>
                     </div>
@@ -28,7 +28,9 @@
                             <th>Nama Pemilik</th>
                             <th>Rekening</th>
                             <th>Bank</th>
-                            <th>Aksi</th>
+                            @if (auth()->user()->roles == 'ADMIN')
+                                <th>Aksi</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -40,16 +42,18 @@
                                 </td>
                                 <td>{{ $item->no_rekening }}</td>
                                 <td>{{ $item->bank_rekening }}</td>
-                                <td class="d-flex justify-content-start">
-                                    <a href="{{ route('admin.rekening.edit', $item->id) }}"
-                                        class="btn btn-success btn-sm mx-1">Edit</a>
-                                    <form action="{{ route('admin.rekening.destroy', $item->id) }}" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm"
-                                            onclick="return konfirmasiHapusKonten(event)">Hapus</button>
-                                    </form>
-                                </td>
+                                @if (auth()->user()->roles == 'ADMIN')
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.rekening.edit', $item->id) }}"
+                                            class="btn btn-success btn-sm mx-1">Edit</a>
+                                        <form action="{{ route('admin.rekening.destroy', $item->id) }}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-danger btn-sm"
+                                                onclick="return konfirmasiHapusKonten(event)">Hapus</button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

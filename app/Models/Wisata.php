@@ -41,6 +41,12 @@ class Wisata extends Model
         return $this->hasManyThrough(Pengembangan::class, PengembanganWisata::class, 'id_wisata', 'id_pengembangan');
     }
 
+    public function relationToTransaction()
+    {
+        # code...
+        return $this->hasMany(ReservasiWisata::class, 'id_wisata', 'id');
+    }
+
     public function relationToLaporan()
     {
         # code...

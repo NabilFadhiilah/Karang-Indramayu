@@ -31,7 +31,7 @@
                                 @endforeach
                                 <td>{{ $item->tgl_reservasi }}</td>
                                 <td><span class="badge bg-success">{{ $item->status_reservasi }}</span></td>
-                                @if ($item->status_reservasi != 'TERIMA')
+                                @if ($item->status_reservasi != 'TERIMA' && auth()->user()->roles == 'ADMIN')
                                     <td class="d-flex justify-content-start">
                                         <a href="{{ route('admin.verifikasi-paket.edit', $item->id) }}"
                                             class="btn btn-success btn-sm mx-1">Verifikasi</a>

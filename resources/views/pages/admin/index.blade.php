@@ -1,7 +1,11 @@
 @extends('pages.admin.layouts.app')
 @section('content')
     <div class="page-heading">
-        <h3>Hallo Admin!</h3>
+        @if (auth()->user()->roles == 'DINAS')
+            <h3>Hallo {{ auth()->user()->nama }}!
+            @else
+                <h3>Hallo Admin!</h3>
+        @endif
     </div>
     <div class="page-content">
         <section class="row">
@@ -86,5 +90,8 @@
                 </div>
             </div>
         </section>
+        @if (auth()->user()->roles == 'DINAS')
+            <p>Anda Adalah Dinas, Tugas Anda Hanya Memantau Perkembangan</p>
+        @endif
     </div>
 @endsection

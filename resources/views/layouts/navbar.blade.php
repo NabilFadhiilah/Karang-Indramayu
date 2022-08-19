@@ -32,7 +32,7 @@
                                   role="button" data-bs-toggle="dropdown"
                                   aria-expanded="false">{{ auth()->user()->nama }}</a>
                               <ul class="dropdown-menu" aria-labelledby="user-logged-in">
-                                  @if (auth()->user()->roles == 'ADMIN')
+                                  @if (auth()->user()->roles == 'ADMIN' || auth()->user()->roles == 'DINAS')
                                       <li>
                                           <a class="dropdown-item" href="{{ route('admin.') }}">Dashboard Saya</a>
                                       </li>
@@ -42,7 +42,8 @@
                                           <a class="dropdown-item" href="{{ route('dashboard-user') }}">Dashboard Saya</a>
                                       </li>
                                   @endif
-                                  <li class="{{ auth()->user()->roles == 'ADMIN' ? 'd-none' : '' }}">
+                                  <li
+                                      class="{{ (auth()->user()->roles == 'ADMIN' ? 'd-none' : auth()->user()->roles == 'DINAS') ? 'd-none' : '' }}">
                                       <form action="/roles" method="POST">
                                           @csrf
                                           <button type="submit" class="dropdown-item">Ubah Role</button>

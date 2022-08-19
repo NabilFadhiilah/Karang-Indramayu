@@ -9,33 +9,36 @@
                                 <h5>Akun</h5>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <a href="#">Login</a>
+                                        <a href="{{ route('login') }}">Login</a>
                                     </li>
                                     <li>
-                                        <a href="#">Daftar Akun</a>
+                                        <a href="{{ route('register') }}">Daftar Akun</a>
                                     </li>
-                                    <li>
-                                        <a href="#">Dashboard</a>
-                                    </li>
+                                    @auth
+                                        <li>
+                                            <a href="{{ route('dashboard-user') }}">Dashboard</a>
+                                        </li>
+                                    @endauth
                                 </ul>
                             </div>
                             <div class="col-12 col-lg-3">
                                 <h5>Eksplorasi</h5>
                                 <ul class="list-unstyled">
-                                    <li><a href="#">Wisata</a></li>
-                                    <li><a href="#">Terumbu Karang</a></li>
+                                    <li><a href="{{ route('eksplor') }}">Wisata</a></li>
+                                    <li><a href="{{ route('invest') }}">Pengembangan Wisata</a></li>
                                 </ul>
                             </div>
                             <div class="col-12 col-lg-3">
-                                <h5>Kenali Lebih Jauh</h5>
+                                {{-- <h5>Kenali Lebih Jauh</h5>
                                 <ul class="list-unstyled">
                                     <li><a href="#">Berita Kegiatan</a></li>
                                     <li><a href="#">Sistem Donasi</a></li>
                                     <li><a href="#">Sistem Wisata</a></li>
-                                </ul>
+                                </ul> --}}
                             </div>
                             <div class="col-12 col-lg-3 d-flex align-items-center">
-                                <img src="{{ url('Frontend/Asset/Images/Logo-Gokarang.png') }}" alt="" width="200">
+                                <img src="{{ url('Frontend/Asset/Images/Logo-Gokarang.png') }}" alt=""
+                                    width="200">
                             </div>
                         </div>
                     </div>

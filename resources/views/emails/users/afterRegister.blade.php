@@ -3,11 +3,11 @@
 
     Hallo {{ $user->nama }}!,
     Selamat Datang Di Gokarang!
-    Terimakasih Sudah Melakukan Registrasi, Akun Anda Sudah Aktif Dan Anda Bisa Melakukan Pemesanan Wisata Dan Invest Wisata
+    Terimakasih Sudah Melakukan Registrasi, Akun Anda Sudah Aktif Harap Verifikasi Email Anda Di Tombol Berikut
 
 
-    @component('mail::button', ['url' => route('login')])
-        Login Disini
+    @component('mail::button', ['url' => route('verifikasi', $user->email)])
+        Verifikasi Email Anda
     @endcomponent
 
     Terimakasih,<br>

@@ -43,10 +43,13 @@
                                 </div>
                             </div>
                         @endif
-                        <h3>Tentang Wisata Ini</h3>
-                        <p>{!! $wisata->deskripsi !!}
-                        </p>
                     </div>
+                    <h3>Tentang Wisata Ini</h3>
+                    <p>{!! $wisata->deskripsi !!}
+                    </p>
+                    <h3>Ketentuan Wisata Ini</h3>
+                    <p>{!! $wisata->ketentuan !!}
+                    </p>
                 </div>
                 <div class="col-lg-3 px-1">
                     <div class="bg-white rounded-top p-3 side-card">

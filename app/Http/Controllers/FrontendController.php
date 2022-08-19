@@ -112,13 +112,16 @@ class FrontendController extends Controller
             'id_rekening' => 'required',
             'partisipan_reservasi' => 'required',
             'tgl_reservasi' => 'required',
-            'total_reservasi' => 'required'
+            'total_reservasi' => 'required',
+            'nama_partisipan.*' => 'required'
         ]);
+        $nama_partisipan = json_encode($data['nama_partisipan']);
         $reservasi = ReservasiPaketWisata::create([
             'id_user' => Auth::user()->id,
             'id_paket_wisata' => $paket->id,
             'id_rekening' => $data['id_rekening'],
             'partisipan_reservasi' => $data['partisipan_reservasi'],
+            'nama_partisipan' => $nama_partisipan,
             'tgl_reservasi' => $data['tgl_reservasi'],
             'tgl_pesan_reservasi' => Carbon::now('Asia/Jakarta'),
             'tgl_batas_pembayaran' => Carbon::now('Asia/Jakarta')->addDays(3),
@@ -162,6 +165,24 @@ class FrontendController extends Controller
         return redirect()->route('sukses');
     }
 
+    public function cancelPaket(Request $request, ReservasiPaketWisata $ReservasiPaketWisata)
+    {
+        # code...
+        if ($ReservasiPaketWisata->bukti_reservasi != null) {
+            $ReservasiPaketWisata->update([
+                'status_reservasi' => 'BATAL',
+                'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
+            ]);
+        } else {
+            $ReservasiPaketWisata->update([
+                'status_reservasi' => 'BATAL',
+                'bukti_reservasi' => 'A',
+                'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
+            ]);
+        }
+        return redirect()->route('dashboard-riwayat');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Wisata Function
@@ -196,17 +217,21 @@ class FrontendController extends Controller
     public function pembayaranWisataStore(Request $request, Wisata $wisata)
     {
         # code...
+        // dd($request->all());
         $data = $request->validate([
             'id_rekening' => 'required',
             'partisipan_reservasi' => 'required',
             'tgl_reservasi' => 'required',
-            'total_reservasi' => 'required'
+            'total_reservasi' => 'required',
+            'nama_partisipan.*' => 'required'
         ]);
+        $nama_partisipan = json_encode($data['nama_partisipan']);
         $reservasi = ReservasiWisata::create([
             'id_user' => Auth::user()->id,
             'id_wisata' => $wisata->id,
             'id_rekening' => $data['id_rekening'],
             'partisipan_reservasi' => $data['partisipan_reservasi'],
+            'nama_partisipan' => $nama_partisipan,
             'tgl_reservasi' => $data['tgl_reservasi'],
             'tgl_pesan_reservasi' => Carbon::now('Asia/Jakarta'),
             'tgl_batas_pembayaran' => Carbon::now('Asia/Jakarta')->addDays(3),
@@ -251,6 +276,24 @@ class FrontendController extends Controller
         return redirect()->route('sukses');
     }
 
+    public function cancelWisata(Request $request, ReservasiWisata $reservasiWisata)
+    {
+        # code...
+        if ($reservasiWisata->bukti_reservasi != null) {
+            $reservasiWisata->update([
+                'status_reservasi' => 'BATAL',
+                'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
+            ]);
+        } else {
+            $reservasiWisata->update([
+                'status_reservasi' => 'BATAL',
+                'bukti_reservasi' => 'A',
+                'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
+            ]);
+        }
+        return redirect()->route('dashboard-riwayat');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Invest Function
@@ -274,7 +317,7 @@ class FrontendController extends Controller
     public function InvestWisata(Wisata $wisata)
     {
         # code...
-        $wisata->load('relationToGallery', 'relationToPengembangan', 'relationToLaporan');
+        $wisata->load('relationToGallery', 'relationToPengembangan', 'relationToLaporan')->loadCount('relationToTransaction');
         // dd($wisata);
         $rekening = Rekening::all();
         $data = DB::table('pengembangan')->where('id_pengembangan', '=', $wisata->relationToPengembangan->first()->id)->where('status', 'like', 'TERIMA')->sum('pendanaan');
@@ -334,6 +377,23 @@ class FrontendController extends Controller
         return redirect()->route('sukses');
     }
 
+    public function cancelInvest(Request $request, Pengembangan $pengembangan)
+    {
+        # code...
+        if ($pengembangan->bukti_pembayaran != null) {
+            $pengembangan->update([
+                'status_reservasi' => 'BATAL',
+                'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
+            ]);
+        } else {
+            $pengembangan->update([
+                'status_reservasi' => 'BATAL',
+                'bukti_reservasi' => 'A',
+                'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
+            ]);
+        }
+        return redirect()->route('dashboard-riwayat');
+    }
 
 
     /* Payment Success */

@@ -9,9 +9,11 @@
                 <div class="col-6">
                     <h2 class="m-0">Paket Wisata</h2>
                 </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <a href="{{ route('admin.paket.create') }}" class="btn btn-primary">+ Tambah Paket</a>
-                </div>
+                @if (auth()->user()->roles == 'ADMIN')
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="{{ route('admin.paket.create') }}" class="btn btn-primary">+ Tambah Paket</a>
+                    </div>
+                @endif
             </div>
             @if (session()->has('sukses'))
                 <div class="mx-3 alert alert-success alert-dismissible fade show" role="alert">
@@ -26,7 +28,9 @@
                             <th>Paket</th>
                             <th>Wisata</th>
                             <th>Harga</th>
-                            <th>Aksi</th>
+                            @if (auth()->user()->roles == 'ADMIN')
+                                <th>Aksi</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -44,17 +48,19 @@
                                     </ul>
 
                                 </td>
-                                <td>{{ $item->harga }}</td>
-                                <td class="d-flex justify-content-start align-items-center">
-                                    <a href="{{ route('admin.paket.edit', $item->id) }}"
-                                        class="btn btn-success btn-sm mx-1">Edit</a>
-                                    <form action="{{ route('admin.paket.destroy', $item->id) }}" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm"
-                                            onclick="return konfirmasiHapusKonten(event)">Hapus</button>
-                                    </form>
-                                </td>
+                                <td>Rp.{{ number_format($item->harga) }}</td>
+                                @if (auth()->user()->roles == 'ADMIN')
+                                    <td class="d-flex justify-content-start align-items-center">
+                                        <a href="{{ route('admin.paket.edit', $item->id) }}"
+                                            class="btn btn-success btn-sm mx-1">Edit</a>
+                                        <form action="{{ route('admin.paket.destroy', $item->id) }}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-danger btn-sm"
+                                                onclick="return konfirmasiHapusKonten(event)">Hapus</button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

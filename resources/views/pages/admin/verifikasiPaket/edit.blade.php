@@ -13,8 +13,8 @@
                             <div class="form-body">
                                 <div class="row">
                                     <div class="my-2 d-flex justify-content-center col-12">
-                                        <img src="{{ asset('storage/' . $reservasi->bukti_reservasi) }}"
-                                            class="img-preview" style="width: 50%;">
+                                        <img src="{{ asset('storage/' . $reservasi->bukti_reservasi) }}" class="img-preview"
+                                            style="width: 50%;">
                                     </div>
                                     <form class="form form-vertical" method="POST"
                                         action="{{ route('admin.verifikasi-paket.update', $reservasi->id) }}"
@@ -65,6 +65,8 @@
                                                         {{ $paket->nama_paket }}</p>
                                                     <p class='my-1'>Partisipan : {{ $reservasi->partisipan_reservasi }}
                                                         Orang</p>
+                                                    <p class='my-1'>Nama Partisipan :
+                                                        {{ $reservasi->nama_partisipan }}</p>
                                                     <p class='my-1'>Tanggal Keberangkatan :
                                                         {{ $reservasi->tgl_reservasi }}
                                                     </p>

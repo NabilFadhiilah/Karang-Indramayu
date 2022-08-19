@@ -52,15 +52,21 @@
                         </div>
                     </div>
 
-                    @if ($wisata->status_reservasi == 'TOLAK')
+                    @if ($wisata->status_reservasi == 'TOLAK' && $wisata->tgl_batas_pembayaran <= Carbon\Carbon::now())
+                        <a href="{{ route('payment-wisata', [$relasiwisata->slug, $wisata->id]) }}"
+                            class="btn btn-danger mt-3">
+                            Batalkan Pemesanan
+                        </a>
+                    @elseif ($wisata->status_reservasi == 'TOLAK')
                         <a href="{{ route('payment-wisata', [$relasiwisata->slug, $wisata->id]) }}"
                             class="btn btn-primary mt-3">
                             Upload Bukti Pembayaran
                         </a>
-                    @else
+                    @elseif ($wisata->status_reservasi != 'BATAL')
                         <a href="{{ route('dashboard-detail', $wisata->id) }}" class="btn btn-primary py-1">Lihat
                             Detail</a>
                         {{-- <a href="#" class="px-3">Cetak Invoice</a> --}}
+                    @else
                     @endif
                 </div>
             </div>
@@ -89,12 +95,25 @@
                                 <p class="m-0">Tanggal Keberangkatan : {{ $Paket->tgl_reservasi }}</p>
                                 <p class="m-0">Tanggal Pemesanan : {{ $Paket->tgl_pesan_reservasi }}</p>
                                 <p class="m-0">Total : Rp.{{ number_format($Paket->total_reservasi) }}</p>
+                                @if ($Paket->status_reservasi == 'TERIMA')
+                                    <p class="m-0"> Harap Datang Ke Pantai Karangsong Pada Tanggal Keberangkatan <br>
+                                        Jika
+                                        Ada Pertanyaan Lebih Lanjut
+                                        Harap
+                                        Email Ke : agokarangindramayu@gmail.com</p>
+                                @endif
                             </div>
-                            @if ($Paket->status_reservasi == 'TOLAK')
+                            @if ($Paket->status_reservasi == 'TOLAK' && $Paket->tgl_batas_pembayaran >= Carbon\Carbon::now())
                                 <a href="{{ route('payment-paket', [$detailPaket->slug, $Paket->id]) }}"
                                     class="btn btn-primary mt-3">
                                     Upload Bukti Pembayaran
                                 </a>
+                            @elseif($Paket->tgl_batas_pembayaran <= Carbon\Carbon::now())
+                                <a href="{{ route('payment-paket', [$detailPaket->slug, $Paket->id]) }}"
+                                    class="btn btn-danger mt-3">
+                                    Batalkan Pemesanan
+                                </a>
+                            @else
                             @endif
                         @endforeach
                     </div>
@@ -112,7 +131,7 @@
         <div class="tab-pane fade p-1" id="invest" role="tabpanel" aria-labelledby="nav-invest-tab">
             <div class="card row">
                 @forelse ($riwayatInvest as $invest)
-                    {{-- {{ dd($invest) }} --}}
+                    {{ dd($invest) }}
                     <div class="col-lg-12 py-3">
                         <div class="d-flex justify-content-between">
                             <h4 class="mb-0">Pengembangan Wisata : {{ $invest->nama_wisata }}</h4>
@@ -123,6 +142,11 @@
                         <p class="m-0">Total Pengembangan : Rp.{{ number_format($invest->pendanaan) }}</p>
                     </div>
                     @if ($invest->status == 'TOLAK')
+                        <a href="{{ route('payment-invest', [$invest->slug, $invest->id]) }}"
+                            class="btn btn-primary mt-3">
+                            Upload Bukti Pembayaran
+                        </a>
+                    @elseif ($invest->status == 'TOLAK')
                         <a href="{{ route('payment-invest', [$invest->slug, $invest->id]) }}"
                             class="btn btn-primary mt-3">
                             Upload Bukti Pembayaran

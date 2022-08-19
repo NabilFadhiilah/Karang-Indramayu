@@ -42,13 +42,15 @@
                                         <input type="number" name="partisipan_reservasi"
                                             class="form-control @error('partisipan_reservasi') is-invalid @enderror"
                                             id="jumlah-partisipan" value="{{ old('partisipan_reservasi') }}"
-                                            placeholder="Minimal 1 Orang" min="1" onchange="calculate()">
+                                            placeholder="Minimal 1 Orang" min="1" max="20"
+                                            onchange="calculate()">
                                         @error('partisipan_reservasi')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
+                                    <div id="nama-partisipan"></div>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="mb-3">
@@ -57,9 +59,13 @@
                                         </label>
                                         <input type="date" name="tgl_reservasi" value="{{ old('tgl_reservasi') }}"
                                             class="form-control @error('tgl_reservasi') is-invalid @enderror"
-                                            id="keberangkatan" min="{{ $paket->tgl_reservasi_awal }}"
-                                            max="{{ $paket->tgl_reservasi_akhir }}">
+                                            id="keberangkatan" max="{{ $paket->tgl_reservasi_akhir }}">
                                         @error('tgl_reservasi')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                        @error('nama_partisipan.*')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -152,5 +158,28 @@
             document.getElementById('total_pembayaran').innerHTML = formatter.format(tambah);
             total.value = tambah;
         }
+    </script>
+    <script>
+        $('#jumlah-partisipan').change(function() {
+            const jumlahValue = parseInt($('#jumlah-partisipan').val());
+            $('#nama-partisipan').children("div").remove();
+            for (let i = 0; i < jumlahValue; i++) {
+                $('#nama-partisipan').append(`
+                    <div class="col-12 form-group fieldGroup${i}">
+                        <label for="nama-partisipan" class="form-label">
+                            <p class="paragraph-2 m-0 fw-bold">Nama Partisipan Ke ${i+1}</p>
+                            </label>
+                        <input type="text" name="nama_partisipan[]" class="form-control" id="nama-partisipan">
+                        <p class="small text-danger">Wajib diisikan</p>
+                    </div>
+                `);
+            }
+        });
+    </script>
+    <script>
+        var today = new Date();
+        today.setDate(today.getDate() + 3);
+        today = today.toISOString().split('T')[0];
+        document.getElementsByName("tgl_reservasi")[0].setAttribute('min', today);
     </script>
 @endpush

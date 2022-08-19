@@ -12,10 +12,12 @@
                 <div class="col-6 d-flex justify-content-end">
                     <a href="{{ route('admin.cetak-laporan-paket-pdf', $paket->id) }}" class="btn btn-primary mx-2">Cetak
                         Laporan Ini</a>
-                    <a href="{{ route('admin.reservasi-paket.laporan-paket.create', $paket->id) }}"
-                        class="btn btn-primary">+
-                        Tambah
-                        Pengeluaran</a>
+                    @if (auth()->user()->roles == 'ADMIN')
+                        <a href="{{ route('admin.reservasi-paket.laporan-paket.create', $paket->id) }}"
+                            class="btn btn-primary">+
+                            Tambah
+                            Pengeluaran</a>
+                    @endif
                 </div>
             </div>
             @if (session()->has('sukses'))
@@ -29,29 +31,36 @@
                     <thead>
                         <tr>
                             <th>Pengeluaran</th>
+                            <th>Tanggal Pengeluaran</th>
                             <th>Biaya Pengeluaran</th>
-                            <th>Aksi</th>
+                            <th>Keterangan Pengeluaran</th>
+                            @if (auth()->user()->roles == 'ADMIN')
+                                <th>Aksi</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach ($pengeluaran as $item)
                             <tr>
-                                <td>{{ $item->pengeluaran }}
-                                </td>
+                                <td>{{ $item->pengeluaran }}</td>
+                                <td>{{ Carbon\Carbon::parse($item->tgl_pengeluaran)->formatLocalized('%d %B %Y') }}</td>
                                 <td>Rp.{{ number_format($item->biaya_pengeluaran) }}</td>
-                                <td class="d-flex justify-content-start">
-                                    <a href="{{ route('admin.reservasi-paket.laporan-paket.edit', [$paket->id, $item->id]) }}"
-                                        class="btn btn-success btn-sm mx-1">Edit</a>
-                                    <form
-                                        action="{{ route('admin.reservasi-paket.laporan-paket.destroy', [$paket->id, $item->id]) }}"
-                                        method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button
-                                            class="btn btn-danger btn-sm"onclick="return konfirmasiHapusKonten(event)">Hapus</button>
-                                    </form>
-                                </td>
+                                <td>{{ $item->ket_pengeluaran }}</td>
+                                @if (auth()->user()->roles == 'ADMIN')
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.reservasi-paket.laporan-paket.edit', [$paket->id, $item->id]) }}"
+                                            class="btn btn-success btn-sm mx-1">Edit</a>
+                                        <form
+                                            action="{{ route('admin.reservasi-paket.laporan-paket.destroy', [$paket->id, $item->id]) }}"
+                                            method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <button
+                                                class="btn btn-danger btn-sm"onclick="return konfirmasiHapusKonten(event)">Hapus</button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

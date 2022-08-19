@@ -33,7 +33,7 @@
                                 <td>{{ $pengembangan->nama_wisata }}</td>
                                 <td>Rp.{{ number_format($pengembangan->pendanaan) }}</td>
                                 <td>{{ $pengembangan->status }}</td>
-                                @if ($pengembangan->status != 'TERIMA')
+                                @if ($pengembangan->status != 'TERIMA' && auth()->user()->roles == 'ADMIN')
                                     <td class="d-flex justify-content-start">
                                         <a href="{{ route('admin.verifikasi-pengembangan.edit', $pengembangan->id) }}"
                                             class="btn btn-success btn-sm mx-1">Verifikasi</a>

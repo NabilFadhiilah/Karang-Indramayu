@@ -18,7 +18,7 @@
                 <div class="col-lg-8">
                     @foreach ($reservasiWisata->relationToWisata as $wisata)
                         <h3>{{ $wisata->nama_wisata }}</h3>
-                        <p class="paragraph-2">{!! $wisata->deskripsi !!}
+                        <p class="paragraph-2">{!! substr(strip_tags($wisata->deskripsi), 0, 90) !!}
                         </p>
                     @endforeach
                 </div>
@@ -97,9 +97,10 @@
                 </div>
                 <div class="col-lg-6">
                     <h3>Kami Tunggu Kedatangan Anda</h3>
-                    <p class="paragraph-2">Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis
-                        ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt
-                        reprehenderit elit laborum.
+                    <p class="paragraph-2">
+                        Harap Datang Ke Pantai Karangsong Pada Tanggal Keberangkatan <br> Jika Ada Pertanyaan Lebih Lanjut
+                        Harap
+                        Email Ke : agokarangindramayu@gmail.com
                     </p>
                 </div>
             </div>

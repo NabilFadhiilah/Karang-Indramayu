@@ -63,50 +63,74 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Pengeluaran</th>
+                <th scope="col">Tanggal Pengeluaran</th>
+                <th scope="col">Keterangan Pengeluaran</th>
                 <th scope="col">Biaya Pengeluaran</th>
             </tr>
         </thead>
         <tbody>
+            @php
+                $total = 0;
+            @endphp
             @forelse ($reservasi_paket->relationToLaporan as $key => $laporan)
                 <tr>
                     <th>{{ $key + 1 }}</th>
                     <td>{{ $laporan->pengeluaran }}</td>
+                    <td style="text-align: center;">
+                        {{ Carbon\Carbon::parse($laporan->tgl_pengeluaran)->formatLocalized('%d %B %Y') }}</td>
+                    <td style="text-align: center;">{{ $laporan->ket_pengeluaran }}</td>
                     <td style="text-align: center;">Rp.{{ number_format($laporan->biaya_pengeluaran) }}</td>
                 </tr>
+                @php
+                    $total += $laporan->biaya_pengeluaran;
+                @endphp
             @empty
                 <tr>
-                    <td colspan="3" style="text-align: center;">Pengeluaran Belum Dibuat</td>
+                    <td colspan="4" style="text-align: center;">Pengeluaran Belum Dibuat</td>
                 </tr>
             @endforelse
-            @foreach ($reservasi_paket->relationToLaporan as $key => $laporan)
-                @if ($key == 0)
-                    <tr>
-                        <th colspan="2">Total Pengeluaran : </th>
-                        <td style="text-align: center;">Rp.{{ number_format($laporan->sum('biaya_pengeluaran')) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th colspan="2">Total Pemasukan : </th>
-                        <td style="text-align: center;">Rp.{{ number_format($reservasi_paket->total_reservasi) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th colspan="2">Laba : </th>
+            {{-- @foreach ($reservasi_paket->relationToLaporan as $key => $laporan)
+                @if ($key == 0) --}}
+            <tr>
+                <th colspan="4">Total Pengeluaran : </th>
+                <td style="text-align: center;">Rp.{{ number_format($total) }}
+                </td>
+            </tr>
+            <tr>
+                <th colspan="4">Total Pemasukan : </th>
+                <td style="text-align: center;">Rp.{{ number_format($reservasi_paket->total_reservasi) }}
+                </td>
+            </tr>
+            <tr>
+                @if ($reservasi_paket->total_reservasi > $total)
+                    <th colspan="4"style="text-align: center; font-weight:bold; color:green;">Keuntungan
+                        Diperoleh : </th>
+                @else
+                    <th colspan="4"style="text-align: center; font-weight:bold; color:red;">Kerugian
+                        Diperoleh : </th>
+                @endif
+                <td style="text-align: center;">
+                    Rp.{{ number_format($reservasi_paket->total_reservasi - $total) }}
+                </td>
+            </tr>
+            {{-- <tr>
+                        
+                        <th colspan="3">Laba Keuntungan Diperoleh : </th>
                         <td style="text-align: center;">
                             Rp.{{ number_format($reservasi_paket->total_reservasi - $laporan->sum('biaya_pengeluaran')) }}
                         </td>
                     </tr>
                     <tr>
                         @if ($reservasi_paket->total_reservasi - $laporan->sum('biaya_pengeluaran') < $reservasi_paket->total_reservasi)
-                            <td colspan="2"></td>
+                            <td colspan="3"></td>
                             <td style="text-align: center; font-weight:bold; color:green;">Mendapatkan Keuntungan</td>
                         @else
-                            <td colspan="2"></td>
+                            <td colspan="3"></td>
                             <td style="text-align: center; font-weight:bold; color:red;">Mendapatkan Kerugian</td>
                         @endif
-                    </tr>
-                @endif
-            @endforeach
+                    </tr> --}}
+            {{-- @endif
+            @endforeach --}}
         </tbody>
     </table>
 </body>

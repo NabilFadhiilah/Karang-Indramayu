@@ -9,5 +9,5 @@ class LaporanWisata extends Model
 {
     use HasFactory;
     protected $table = 'lap_wisata';
-    protected $fillable = ['id_reservasi_wisata', 'pengeluaran', 'biaya_pengeluaran'];
+    protected $fillable = ['id_reservasi_wisata', 'pengeluaran', 'biaya_pengeluaran', 'tgl_pengeluaran', 'ket_pengeluaran'];
 }

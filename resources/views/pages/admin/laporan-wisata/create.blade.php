@@ -58,6 +58,37 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="tgl_pengeluaran">Tanggal Pengeluaran</label>
+                                                <input type="date" id="tgl_pengeluaran"
+                                                    class="form-control  @error('tgl_pengeluaran') is-invalid @enderror"
+                                                    name="tgl_pengeluaran" placeholder="Tanggal Pengeluaran"
+                                                    value="{{ old('tgl_pengeluaran') }}">
+                                                @error('tgl_pengeluaran')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="ket_pengeluaran">Keterangan Pengeluaran</label>
+                                                <small class="text-muted">Keterangan Pengeluaran Untuk Wisata</small>
+                                                <input type="text" id="ket_pengeluaran"
+                                                    class="form-control  @error('ket_pengeluaran') is-invalid @enderror"
+                                                    name="ket_pengeluaran" placeholder="Cth: Bensin Untuk Kapal PP 3 Kali"
+                                                    value="{{ old('ket_pengeluaran') }}">
+                                                @error('ket_pengeluaran')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

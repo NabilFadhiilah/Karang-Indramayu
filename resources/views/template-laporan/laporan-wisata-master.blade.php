@@ -43,6 +43,7 @@
         <tbody>
             @php
                 $total = 0;
+                $pemasukan = 0;
             @endphp
             @foreach ($data as $key => $transaksi)
                 <tr>
@@ -62,47 +63,54 @@
                     </td>
                 </tr>
                 @php
+                    $pemasukan += $transaksi->total_reservasi;
                     $total += $transaksi->relation_to_laporan_sum_biaya_pengeluaran;
                 @endphp
             @endforeach
-            @foreach ($data as $key => $transaksi)
-                @if ($key == 0)
-                    <tr>
-                        <th colspan="4" style="text-align: center;">Total Pemasukan</th>
-                        <td colspan="2" style="text-align: center;">
-                            Rp.{{ number_format($transaksi->sum('total_reservasi')) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th colspan="4" style="text-align: center;">Total Pengeluaran</th>
-                        <td colspan="2" style="text-align: center;">
-                            Rp.{{ number_format($total) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th colspan="4" style="text-align: center;">Laba</th>
-                        <td colspan="2" style="text-align: center;">
-                            Rp.{{ number_format($transaksi->sum('total_reservasi') - $total) }}
-                        </td>
-                    </tr>
-                    @if ($transaksi->sum('total_reservasi') - $total < $transaksi->sum('total_reservasi'))
-                        <tr>
-                            <td colspan="4"></td>
-                            <th colspan="2" style="text-align: center; color:green;">Mengalami Keuntungan</th>
-                        </tr>
-                    @elseif ($transaksi->sum('total_reservasi') - $total > $transaksi->sum('total_reservasi'))
-                        <tr>
-                            <td colspan="4"></td>
-                            <th colspan="2" style="text-align: center; color:red;">Mengalami Kerugian</th>
-                        </tr>
-                    @else
-                        <tr>
-                            <td colspan="4"></td>
-                            <th colspan="2" style="text-align: center; color:grey;">Tidak Laba Tidak Rugi</th>
-                        </tr>
-                    @endif
+            {{-- @foreach ($data as $key => $transaksi)
+                @if ($key == 0) --}}
+            <tr>
+                <th colspan="4" style="text-align: center;">Total Pemasukan</th>
+                <td colspan="2" style="text-align: center;">
+                    Rp.{{ number_format($pemasukan) }}
+                </td>
+            </tr>
+            <tr>
+                <th colspan="4" style="text-align: center;">Total Pengeluaran</th>
+                <td colspan="2" style="text-align: center;">
+                    Rp.{{ number_format($total) }}
+                </td>
+            </tr>
+            <tr>
+                @if ($pemasukan >= $total)
+                    <th colspan="4"style="text-align: center; font-weight:bold; color:green;">Keuntungan
+                        Diperoleh : </th>
+                @else
+                    <th colspan="4"style="text-align: center; font-weight:bold; color:red;">Kerugian
+                        Diperoleh : </th>
                 @endif
-            @endforeach
+                <td colspan="2" style="text-align: center;">
+                    Rp.{{ number_format($pemasukan - $total) }}
+                </td>
+            </tr>
+            {{-- @if ($pemasukan - $total < $pemasukan)
+                <tr>
+                    <td colspan="4"></td>
+                    <th colspan="2" style="text-align: center; color:green;">Mengalami Keuntungan</th>
+                </tr>
+            @elseif ($pemasukan - $total > $pemasukan)
+                <tr>
+                    <td colspan="4"></td>
+                    <th colspan="2" style="text-align: center; color:red;">Mengalami Kerugian</th>
+                </tr>
+            @else
+                <tr>
+                    <td colspan="4"></td>
+                    <th colspan="2" style="text-align: center; color:grey;">Tidak Laba Tidak Rugi</th>
+                </tr>
+            @endif --}}
+            {{-- @endif
+            @endforeach --}}
         </tbody>
     </table>
     <p style="font-size: 15px;">*Bedasarkan Tanggal Pembayaran Diverifikasi</p>

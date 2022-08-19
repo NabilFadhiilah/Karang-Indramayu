@@ -38,7 +38,9 @@
             <tr>
                 <th scope="col">No</th>
                 <th scope="col">Pengeluaran</th>
+                <th scope="col">Tanggal Pengeluaran</th>
                 <th scope="col">Biaya Pengeluaran</th>
+                <th scope="col">Keterangan Pengeluaran</th>
             </tr>
         </thead>
         <tbody>
@@ -46,23 +48,26 @@
                 <tr>
                     <th scope="row">{{ $key + 1 }}</th>
                     <td>{{ $laporan->pengeluaran }}</td>
-                    <td>Rp.{{ number_format($laporan->biaya_pengeluaran) }}</td>
+                    <td style="text-align: center;">
+                        {{ Carbon\Carbon::parse($laporan->tgl_pengeluaran)->formatLocalized('%d %B %Y') }}</td>
+                    <td style="text-align: center;">Rp.{{ number_format($laporan->biaya_pengeluaran) }}</td>
+                    <td>{{ $laporan->ket_pengeluaran }}</td>
                 </tr>
             @endforeach
             <tr>
-                <th colspan="2" style="text-align: center;">Total Pemasukan</th>
+                <th colspan="3" style="text-align: center;">Total Pemasukan</th>
                 <td colspan="1" style="text-align: center;">
                     Rp.{{ number_format($reservasi_pengembangan->relation_to_pengembangan_wisata_sum_pendanaan) }}
                 </td>
             </tr>
             <tr>
-                <th colspan="2" style="text-align: center;">Total Pengeluaran</th>
+                <th colspan="3" style="text-align: center;">Total Pengeluaran</th>
                 <td colspan="1" style="text-align: center;">
                     Rp.{{ number_format($laporan->sum('biaya_pengeluaran')) }}
                 </td>
             </tr>
             <tr>
-                <th colspan="2" style="text-align: center;">Sisa Dana</th>
+                <th colspan="3" style="text-align: center;">Sisa Dana</th>
                 <td colspan="1" style="text-align: center;">
                     Rp.{{ number_format($reservasi_pengembangan->relation_to_pengembangan_wisata_sum_pendanaan - $laporan->sum('biaya_pengeluaran')) }}
                 </td>

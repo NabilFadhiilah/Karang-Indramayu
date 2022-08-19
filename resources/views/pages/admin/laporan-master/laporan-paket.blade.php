@@ -61,10 +61,15 @@
                                 <td>Rp.{{ number_format($item->total_reservasi) }}</td>
                                 <td>Rp.{{ number_format($item->relation_to_laporan_sum_biaya_pengeluaran) }}</td>
                                 </td>
-                                @if ($item->relation_to_laporan_sum_biaya_pengeluaran == null)
+                                @if ($item->relation_to_laporan_sum_biaya_pengeluaran == null && auth()->user()->roles == 'ADMIN')
                                     <td class="d-flex justify-content-start">
                                         <a href="{{ route('admin.reservasi-paket.laporan-paket.index', $item->id) }}"
                                             class="btn btn-success btn-sm mx-1">Buat Laporan</a>
+                                    </td>
+                                @elseif(auth()->user()->roles == 'DINAS')
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.reservasi-paket.laporan-paket.index', $item->id) }}"
+                                            class="btn btn-info btn-sm mx-1">Lihat Laporan</a>
                                     </td>
                                 @else
                                     <td class="d-flex justify-content-start">
@@ -90,4 +95,9 @@
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
     <script src="{{ url('Backend\assets\js\hapus.js') }}"></script>
+    <script>
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("tgl_awal")[0].setAttribute('max', today);
+        document.getElementsByName("tgl_akhir")[0].setAttribute('min', today);
+    </script>
 @endpush

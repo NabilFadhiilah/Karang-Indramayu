@@ -33,21 +33,29 @@
                 <div class="text-center col-8">
                     <p class="mb-3 paragraph-2">Pastikan Pembayaran Anda Berhasil Dan Segera Unggah
                         Bukti Pembayaran Untuk Mempercepat Verifikasi Pembayaran</p>
-                    <form action="{{ route('paketUpload', $item->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <label class="mb-1 col-8 btn btn-primary">Upload Bukti Pembayaran
-                            <input type="file" id="bukti_pembayaran" accept="image/*" name="bukti_pembayaran"
-                                onchange="previewImage()">
-                        </label>
-                        <div class="d-flex justify-content-center col-12">
-                            <img class="img-preview mt-2" style="width: 250px; display: none;">
-                        </div>
-                        <div class="d-flex justify-content-center col-12">
-                            <button type="submit" id="show_button" style="display: none;"
-                                class="mt-2 col-8 btn btn-primary">Kirim Bukti
-                                Pembayaran</button>
-                        </div>
-                    </form>
+                    @if ($item->tgl_batas_pembayaran <= Carbon\Carbon::now())
+                        <form action="{{ route('cancel-paket', $item->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="mb-1 col-8 btn btn-danger">Batalkan Pemesanan</button>
+                        </form>
+                    @else
+                        <form action="{{ route('paketUpload', $item->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <label class="mb-1 col-8 btn btn-primary">Upload Bukti Pembayaran
+                                <input type="file" id="bukti_pembayaran" accept="image/*" name="bukti_pembayaran"
+                                    onchange="previewImage()">
+                            </label>
+                            <div class="d-flex justify-content-center col-12">
+                                <img class="img-preview mt-2" style="width: 250px; display: none;">
+                            </div>
+                            <div class="d-flex justify-content-center col-12">
+                                <button type="submit" id="show_button" style="display: none;"
+                                    class="mt-2 col-8 btn btn-primary">Kirim Bukti
+                                    Pembayaran</button>
+                            </div>
+                        </form>
+                    @endif
                     <br>
                     <a href="{{ route('dashboard-pending') }}">Saya Bayar Nanti</a>
                 </div>

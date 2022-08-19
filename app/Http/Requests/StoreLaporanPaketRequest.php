@@ -28,6 +28,7 @@ class StoreLaporanPaketRequest extends FormRequest
             //
             'pengeluaran' => 'required',
             'biaya_pengeluaran' => 'required',
+            'tgl_pengeluaran' => 'required'
         ];
     }
 }

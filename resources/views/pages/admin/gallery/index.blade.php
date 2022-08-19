@@ -22,7 +22,9 @@
                         <tr>
                             <th>Wisata</th>
                             <th>Gambar</th>
-                            <th>Aksi</th>
+                            @if (auth()->user()->roles == 'ADMIN')
+                                <th>Aksi</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -32,10 +34,12 @@
                                 <td>{{ $item->relationToWisata->nama_wisata }}</td>
                                 <td><img src="{{ asset('storage/' . $item->image) }}" style="width: 75px;" alt="">
                                 </td>
-                                <td class="d-flex justify-content-start">
-                                    <a href="{{ route('admin.gallery.edit', $item->id) }}"
-                                        class="btn btn-success btn-sm mx-1">Edit</a>
-                                </td>
+                                @if (auth()->user()->roles == 'ADMIN')
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.gallery.edit', $item->id) }}"
+                                            class="btn btn-success btn-sm mx-1">Edit</a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

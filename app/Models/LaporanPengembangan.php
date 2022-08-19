@@ -9,5 +9,5 @@ class LaporanPengembangan extends Model
 {
     use HasFactory;
     protected $table = 'lap_pengembangan';
-    protected $fillable = ['id_pengembangan', 'pengeluaran', 'biaya_pengeluaran'];
+    protected $fillable = ['id_pengembangan', 'pengeluaran', 'biaya_pengeluaran', 'tgl_pengeluaran', 'ket_pengeluaran'];
 }

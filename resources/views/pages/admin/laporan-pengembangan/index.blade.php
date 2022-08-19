@@ -10,16 +10,16 @@
                     <h2 class="m-0">Laporan Pengembangan ID #{{ $pengembangan->id }}</h2>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
-                    <a href="{{ route('admin.reservasi-pengembangan.laporan-pengembangan.create', $pengembangan->id) }}"
-                        class="btn btn-primary">+
-                        Tambah
-                        Pengeluaran</a>
+                    @if (auth()->user()->roles == 'ADMIN')
+                        <a href="{{ route('admin.reservasi-pengembangan.laporan-pengembangan.create', $pengembangan->id) }}"
+                            class="btn btn-primary mx-2">+
+                            Tambah
+                            Pengeluaran</a>
+                    @endif
                     {{-- <a href="/admin/cetak-laporan-pengembangan" class="btn btn-primary">Cetak Laporan Ini</a> --}}
-                    <div class="col-3 d-flex justify-content-end">
-                        <a href="{{ route('admin.cetak-laporan-pengembangan-pdf', $pengembangan->id) }}"
-                            class="btn btn-primary">Cetak
-                            Laporan</a>
-                    </div>
+                    <a href="{{ route('admin.cetak-laporan-pengembangan-pdf', $pengembangan->id) }}"
+                        class="btn btn-primary">Cetak
+                        Laporan</a>
                 </div>
             </div>
             @if (session()->has('sukses'))
@@ -33,8 +33,12 @@
                     <thead>
                         <tr>
                             <th>Pengeluaran</th>
+                            <th>Tanggal Pengeluaran</th>
                             <th>Biaya Pengeluaran</th>
-                            <th>Aksi</th>
+                            <th>Keterangan Pengeluaran</th>
+                            @if (auth()->user()->roles == 'ADMIN')
+                                <th>Aksi</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -43,19 +47,23 @@
                             <tr>
                                 <td>{{ $item->pengeluaran }}
                                 </td>
+                                <td>{{ Carbon\Carbon::parse($item->tgl_pengeluaran)->formatLocalized('%d %B %Y') }}</td>
                                 <td>Rp.{{ number_format($item->biaya_pengeluaran) }}</td>
-                                <td class="d-flex justify-content-start">
-                                    <a href="{{ route('admin.reservasi-pengembangan.laporan-pengembangan.edit', [$pengembangan->id, $item->id]) }}"
-                                        class="btn btn-success btn-sm mx-1">Edit</a>
-                                    <form
-                                        action="{{ route('admin.reservasi-pengembangan.laporan-pengembangan.destroy', [$pengembangan->id, $item->id]) }}"
-                                        method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button
-                                            class="btn btn-danger btn-sm"onclick="return konfirmasiHapusKonten(event)">Hapus</button>
-                                    </form>
-                                </td>
+                                <td>{{ $item->ket_pengeluaran }}</td>
+                                @if (auth()->user()->roles == 'ADMIN')
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('admin.reservasi-pengembangan.laporan-pengembangan.edit', [$pengembangan->id, $item->id]) }}"
+                                            class="btn btn-success btn-sm mx-1">Edit</a>
+                                        <form
+                                            action="{{ route('admin.reservasi-pengembangan.laporan-pengembangan.destroy', [$pengembangan->id, $item->id]) }}"
+                                            method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <button
+                                                class="btn btn-danger btn-sm"onclick="return konfirmasiHapusKonten(event)">Hapus</button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

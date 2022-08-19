@@ -9,7 +9,7 @@ class LaporanPaket extends Model
 {
     use HasFactory;
     protected $table = 'lap_paket_wisata';
-    protected $fillable = ['id_reservasi_paket', 'pengeluaran', 'biaya_pengeluaran'];
+    protected $fillable = ['id_reservasi_paket', 'pengeluaran', 'biaya_pengeluaran', 'tgl_pengeluaran', 'ket_pengeluaran'];
 
     public function relationToReservasi()
     {

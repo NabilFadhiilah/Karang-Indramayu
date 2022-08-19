@@ -51,17 +51,20 @@
                             </div>
                         </div>
                     @endif
-                    <h3>Tentang Wisata Ini</h3>
-                    <p>{!! $detailPaket->deskripsi !!}
-                    </p>
-                    <h5>Detail Perjalanan Paket :</h5>
-                    @foreach ($detailWisata as $key => $item)
-                        <h6>{{ $key }}</h6>
-                        @foreach ($item as $wisata)
-                            <p class="m-0">{{ $wisata }}</p>
-                        @endforeach
-                    @endforeach
                 </div>
+                <h3>Tentang Wisata Ini</h3>
+                <p>{!! $detailPaket->deskripsi !!}
+                </p>
+                <h5>Detail Perjalanan Paket :</h5>
+                @foreach ($detailWisata as $key => $item)
+                    <h6>{{ $key }}</h6>
+                    @foreach ($item as $wisata)
+                        <p class="m-0">{{ $wisata }}</p>
+                    @endforeach
+                @endforeach
+                <h3 class="mt-3">Ketentuan Wisata Ini</h3>
+                <p>{!! $detailPaket->ketentuan !!}
+                </p>
             </div>
             <div class="col-lg-3 px-1">
                 <div class="bg-white rounded-top p-3 side-card">
