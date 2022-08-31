@@ -33,6 +33,19 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-12 form-group fieldGroup">
+                                            <div class="form-group mb-3">
+                                                <label for="keterangan" class="form-label">Keterangan</label>
+                                                <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan"
+                                                    rows="3"></textarea>
+                                                @error('keterangan')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

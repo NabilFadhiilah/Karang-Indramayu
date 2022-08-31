@@ -9,6 +9,7 @@
 
     Detail Pemesan:
     Nama Pemesan {{ $paket->relationToUserOne->nama }}
+    Nama Partisipan {{ $paket->nama_partisipan }}
     E-mail Pemesan {{ $paket->relationToUserOne->email }}
 
     Harap Simpan E-Tiket Ini Hingga Tanggal Keberangkatan

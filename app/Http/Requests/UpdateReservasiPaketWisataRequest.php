@@ -26,6 +26,7 @@ class UpdateReservasiPaketWisataRequest extends FormRequest
     {
         return [
             //
+            'keterangan' => 'required',
         ];
     }
 }

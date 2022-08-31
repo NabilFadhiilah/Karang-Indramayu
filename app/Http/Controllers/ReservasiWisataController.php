@@ -85,7 +85,8 @@ class ReservasiWisataController extends Controller
         //
         $verifikasi_wisatum->update([
             'status_reservasi' => $request->status_reservasi,
-            'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
+            'tgl_verifikasi' => Carbon::now('Asia/Jakarta'),
+            'keterangan' => $request->keterangan,
         ]);
         $verifikasi_wisatum->load('relationToUserOne', 'relationToWisataOne');
         Mail::to($verifikasi_wisatum->relationToUserOne->email)->send(new AfterVerifiedWisata($verifikasi_wisatum));

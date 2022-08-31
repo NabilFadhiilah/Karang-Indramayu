@@ -3,7 +3,8 @@
 
     Kami Informasikan Bahwa Pembayaran Wisata {{ $wisata->relationToWisataOne->nama_wisata }} Sebesar
     Rp.{{ number_format($wisata->total_reservasi) }}
-    Berubah Status Menjadi {{ $wisata->status_reservasi }}, Anda Bisa Lihat Status Pembayaran Ini Melalui
+    Berubah Status Menjadi {{ $wisata->status_reservasi }}, Dengan Keterangan {{ $wisata->keterangan }}
+    Anda Bisa Lihat Status Pembayaran Ini Melalui
     Tombol Dibawah
 
     @component('mail::button', ['url' => route('dashboard-riwayat')])

@@ -10,6 +10,7 @@
     Detail Pemesan:
     Nama Pemesan {{ $wisata->relationToUserOne->nama }}
     E-mail Pemesan {{ $wisata->relationToUserOne->email }}
+    Nama Partisipan {{ $wisata->nama_partisipan }}
 
     Harap Simpan E-Tiket Ini Hingga Tanggal Keberangkatan
     *Email E-Tiket Ini Adalah Tiket Sah Untuk Wisata {{ $wisata->relationToWisataOne->nama_wisata }}

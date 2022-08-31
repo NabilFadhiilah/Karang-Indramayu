@@ -49,7 +49,9 @@ class LaporanPaketController extends Controller
         LaporanPaket::create([
             'id_reservasi_paket' => $reservasi_paket->id,
             'pengeluaran' => $request->pengeluaran,
-            'biaya_pengeluaran' => $request->biaya_pengeluaran
+            'biaya_pengeluaran' => $request->biaya_pengeluaran,
+            'tgl_pengeluaran' => $request->tgl_pengeluaran,
+            'ket_pengeluaran' => $request->ket_pengeluaran
         ]);
         return redirect()->route('admin.reservasi-paket.laporan-paket.index', $reservasi_paket->id)->with('sukses', 'Data Berhasil Ditambahkan');
     }

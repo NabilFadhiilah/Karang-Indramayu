@@ -12,7 +12,7 @@ class Pengembangan extends Model
 
     protected $table = 'pengembangan';
     protected $fillable = [
-        'id_pengembangan', 'id_user', 'id_rekening', 'pendanaan', 'bukti_pembayaran', 'tgl_investasi', 'tgl_batas_pembayaran', 'status', 'tgl_verifikasi'
+        'id_pengembangan', 'id_user', 'id_rekening', 'pendanaan', 'bukti_pembayaran', 'tgl_investasi', 'tgl_batas_pembayaran', 'status', 'tgl_verifikasi', 'keterangan'
     ];
 
     public function relationToRekening()

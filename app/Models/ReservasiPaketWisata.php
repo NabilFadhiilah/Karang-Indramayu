@@ -10,7 +10,7 @@ class ReservasiPaketWisata extends Model
     use HasFactory;
     protected $table = 'reservasi_paket_wisata';
     protected $fillable = [
-        'id_user', 'id_paket_wisata', 'id_rekening', 'partisipan_reservasi', 'nama_partisipan', 'tgl_reservasi', 'tgl_pesan_reservasi', 'tgl_batas_pembayaran', 'bukti_reservasi', 'tgl_verifikasi', 'status_reservasi', 'total_reservasi'
+        'id_user', 'id_paket_wisata', 'id_rekening', 'partisipan_reservasi', 'nama_partisipan', 'tgl_reservasi', 'tgl_pesan_reservasi', 'tgl_batas_pembayaran', 'bukti_reservasi', 'tgl_verifikasi', 'keterangan', 'status_reservasi', 'total_reservasi'
     ];
     public function relationToPaket()
     {

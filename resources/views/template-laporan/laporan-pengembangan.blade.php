@@ -39,12 +39,15 @@
                 <th scope="col">No</th>
                 <th scope="col">Pengeluaran</th>
                 <th scope="col">Tanggal Pengeluaran</th>
-                <th scope="col">Biaya Pengeluaran</th>
                 <th scope="col">Keterangan Pengeluaran</th>
+                <th scope="col">Biaya Pengeluaran</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($reservasi_pengembangan->relationToLaporan as $key => $laporan)
+            @php
+                $total = 0;
+            @endphp
+            @forelse ($reservasi_pengembangan->relationToLaporan as $key => $laporan)
                 <tr>
                     <th scope="row">{{ $key + 1 }}</th>
                     <td>{{ $laporan->pengeluaran }}</td>
@@ -53,23 +56,30 @@
                     <td style="text-align: center;">Rp.{{ number_format($laporan->biaya_pengeluaran) }}</td>
                     <td>{{ $laporan->ket_pengeluaran }}</td>
                 </tr>
-            @endforeach
+                @php
+                    $total += $laporan->biaya_pengeluaran;
+                @endphp
+            @empty
+                <tr>
+                    <td colspan="5" style="text-align: center;">Laporan Belum Dibuat</td>
+                </tr>
+            @endforelse
             <tr>
-                <th colspan="3" style="text-align: center;">Total Pemasukan</th>
+                <th colspan="4" style="text-align: center;">Total Pemasukan</th>
                 <td colspan="1" style="text-align: center;">
                     Rp.{{ number_format($reservasi_pengembangan->relation_to_pengembangan_wisata_sum_pendanaan) }}
                 </td>
             </tr>
             <tr>
-                <th colspan="3" style="text-align: center;">Total Pengeluaran</th>
+                <th colspan="4" style="text-align: center;">Total Pengeluaran</th>
                 <td colspan="1" style="text-align: center;">
-                    Rp.{{ number_format($laporan->sum('biaya_pengeluaran')) }}
+                    Rp.{{ number_format($total) }}
                 </td>
             </tr>
             <tr>
-                <th colspan="3" style="text-align: center;">Sisa Dana</th>
+                <th colspan="4" style="text-align: center;">Sisa Dana</th>
                 <td colspan="1" style="text-align: center;">
-                    Rp.{{ number_format($reservasi_pengembangan->relation_to_pengembangan_wisata_sum_pendanaan - $laporan->sum('biaya_pengeluaran')) }}
+                    Rp.{{ number_format($reservasi_pengembangan->relation_to_pengembangan_wisata_sum_pendanaan - $total) }}
                 </td>
             </tr>
         </tbody>
