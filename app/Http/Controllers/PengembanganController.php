@@ -88,7 +88,8 @@ class PengembanganController extends Controller
         // dd($verifikasi_pengembangan);
         $verifikasi_pengembangan->update([
             'status' => $request->status_reservasi,
-            'tgl_verifikasi' => Carbon::now('Asia/Jakarta')
+            'tgl_verifikasi' => Carbon::now('Asia/Jakarta'),
+            'keterangan' => $request->keterangan
         ]);
         $verifikasi_pengembangan->load(['relationToUser', 'relationToPengembanganOne' => function ($query) {
             $query->join('wisata', 'wisata.id', '=', 'pengembangan_wisata.id_wisata')->select('pengembangan_wisata.*', 'wisata.nama_wisata')->get();

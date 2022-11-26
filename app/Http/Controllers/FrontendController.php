@@ -23,6 +23,7 @@ use App\Mail\Admin\AfterPaymentPaket;
 use App\Mail\User\AfterCheckoutPaket;
 use App\Mail\Admin\AfterPaymentWisata;
 use App\Mail\User\AfterCheckoutWisata;
+use App\Mail\Admin\SendCronEmailInvest;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\User\AfterPaidPengembangan;
 use App\Mail\Admin\AfterPaymentPengembangan;
@@ -33,6 +34,16 @@ class FrontendController extends Controller
     //
     public function index()
     {
+        $pengembangan = Pengembangan::leftJoin('users', 'pengembangan.id_user', '=', 'users.id')
+            ->leftJoin('pengembangan_wisata', 'pengembangan.id_pengembangan', '=', 'pengembangan_wisata.id')
+            ->leftJoin('wisata', 'pengembangan_wisata.id_wisata', '=', 'wisata.id')
+            ->select('pengembangan.*', 'users.email', 'users.nama', 'pengembangan_wisata.imbal_hasil', 'wisata.nama_wisata')
+            ->where('status', '=', 'TERIMA')
+            ->get();
+        // dd($pengembangan);
+        foreach ($pengembangan as $invest) {
+            Mail::to($invest->email)->send(new SendCronEmailInvest($invest));
+        }
         /* 
         eager relation withsum and using where
         $sumpengembangan = PengembanganWisata::withSum(['relationToPengembanganWisata' => function ($query) {

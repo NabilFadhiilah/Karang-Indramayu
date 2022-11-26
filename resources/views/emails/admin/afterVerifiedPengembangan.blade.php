@@ -3,8 +3,8 @@
 
     Kami Informasikan Bahwa Pembayaran Pengembangan {{ $pengembangan->relationToPengembanganOne->nama_wisata }} Sebesar
     Rp.{{ number_format($pengembangan->pendanaan) }}
-    Berubah Status Menjadi {{ $pengembangan->status }}, Anda Bisa Lihat Status Pembayaran Ini Melalui
-    Tombol Dibawah
+    Berubah Status Menjadi {{ $pengembangan->status }}, Dengan Keterangan {{ $pengembangan->keterangan }}
+    Anda Bisa Lihat Status Pembayaran Ini Melalui Tombol Dibawah
 
     @component('mail::button', ['url' => route('dashboard-riwayat')])
         Dashboard Saya

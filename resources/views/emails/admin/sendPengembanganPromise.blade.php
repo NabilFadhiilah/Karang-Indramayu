@@ -13,6 +13,12 @@
     Total Pendanaan + Imbal Balik :
     Rp.{{ number_format($pengembangan->pendanaan + $pengembangan->pendanaan * ($pengembangan->relationToPengembanganOne->imbal_hasil / 100)) }}
 
+
+    Dengan Rincian Keuntungan Setiap Bulan:
+    @for ($i = 1; $i <= 12; $i++)
+        Bulan Ke {{ $i }}:
+        Rp.{{ number_format(($pengembangan->pendanaan * ($pengembangan->relationToPengembanganOne->imbal_hasil / 100)) / 12) }}
+    @endfor
     Thanks,<br>
     {{ config('app.name') }}
 @endcomponent
